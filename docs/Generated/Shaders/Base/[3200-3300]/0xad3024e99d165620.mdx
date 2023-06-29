@@ -1,0 +1,134 @@
+---
+id: 0xad3024e99d165620
+title: "Generic Default"
+---
+
+# Generic Default
+(`generic:default`, `0xad3024e99d165620`)
+
+### Technique `deferred_ambient`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 1,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 2,
+	D3DRS_COLORWRITEENABLE = 15,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+### Shaders
+#### Vertex Shader
+```hlsl
+float camera_near_range : register(vs_3_0, c7);
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+column_major float4x4 world_matrix : register(vs_3_0, c4);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 normal : NORMAL;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float texcoord1 : TEXCOORD1;
+    float3 texcoord2 : TEXCOORD2;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float3 temp0;
+    // def c8, 2, -1, 0, 0
+    // dcl_position v0
+    // dcl_normal v1
+    // dcl_position o0
+    // dcl_texcoord1 o1.x
+    // dcl_texcoord2 o2.xyz
+    // dp4 o0.x, v0, c0
+    o.position.x = dot(i.position, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, v0, c1
+    o.position.y = dot(i.position, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, v0, c3
+    o.position.w = dot(i.position, (view_proj_matrix._m03_m13_m23_m33));
+    // dp4 r0.x, v0, c2
+    temp0.x = dot(i.position, (view_proj_matrix._m02_m12_m22_m32));
+    // add o1.x, r0.x, c7.x
+    o.texcoord1 = temp0.x + camera_near_range.x;
+    // mov o0.z, r0.x
+    o.position.z = temp0.x;
+    // mad r0.xyz, v1, c8.x, c8.y
+    temp0.xyz = i.normal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o2.x, r0, c4
+    o.texcoord2.x = dot(temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o2.y, r0, c5
+    o.texcoord2.y = dot(temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o2.z, r0, c6
+    o.texcoord2.z = dot(temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+struct PixelMain_Input
+{
+    float texcoord1 : TEXCOORD1;
+    float3 texcoord2 : TEXCOORD2;
+};
+
+struct PixelMain_Output
+{
+    float4 color1 : COLOR1;
+    float4 color : COLOR;
+    float4 color2 : COLOR2;
+};
+
+PixelMain_Output PixelMain(PixelMain_Input i)
+{
+    PixelMain_Output o;
+    float3 temp0;
+    // def c0, 0.5, 1, 0.4, 0
+    // dcl_texcoord1 v0.x
+    // dcl_texcoord2_pp v1.xyz
+    // nrm_pp r0.xyz, v1
+    temp0.xyz = /* not implemented _pp modifier */ normalize(i.texcoord2.xyz).xyz;
+    // mad_pp oC1.xyz, r0, c0.x, c0.x
+    o.color1.xyz = /* not implemented _pp modifier */ temp0.xyz * float3(0.5, 0.5, 0.5) + float3(0.5, 0.5, 0.5);
+    // mov oC0, c0.yyyz
+    o.color = float4(1, 1, 1, 0.4);
+    // mov_pp oC1.w, c0.y
+    o.color1.w = /* not implemented _pp modifier */ float1(1);
+    // mov oC2, v0.x
+    o.color2 = i.texcoord1.x;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.

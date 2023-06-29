@@ -1,0 +1,158 @@
+---
+id: 0xaf4dde069738e038
+title: "Generic Shadow Caster Axis Aligned Billboard Billboard Center Offset Billboard Up Axis Diffuse Texture Double Sided Nvidia"
+---
+
+# Generic Shadow Caster Axis Aligned Billboard Billboard Center Offset Billboard Up Axis Diffuse Texture Double Sided Nvidia
+(`generic:shadow_caster:AXIS_ALIGNED_BILLBOARD:BILLBOARD_CENTER_OFFSET:BILLBOARD_UP_AXIS:DIFFUSE_TEXTURE:DOUBLE_SIDED:NVIDIA`, `0xaf4dde069738e038`)
+
+### Technique `ambient`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 1,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 1,
+	D3DRS_COLORWRITEENABLE = 0,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 961656599,
+	D3DRS_SLOPESCALEDEPTHBIAS = 1075838976,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+### Shaders
+#### Vertex Shader
+```hlsl
+column_major float4x4 camera_proj_matrix : register(vs_3_0, c4);
+column_major float4x4 camera_view_matrix : register(vs_3_0, c0);
+column_major float4x4 camera_world_matrix : register(vs_3_0, c8);
+float3 ref_billboard_center_offset : register(vs_3_0, c15);
+float3 ref_billboard_up_axis : register(vs_3_0, c14) = { 0, 1, 0 };
+float3 ref_global_axis : register(vs_3_0, c16) = { 0, 0, 1 };
+column_major float4x4 world_matrix : register(vs_3_0, c11);
+struct VertexMain_Input
+{
+    float4 texcoord6 : TEXCOORD6;
+    float4 texcoord7 : TEXCOORD7;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float texcoord1 : TEXCOORD1;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0, temp1;
+    float3 temp2, temp3, temp4;
+    // def c17, 1, 0, 0, 0
+    // dcl_texcoord6 v0
+    // dcl_texcoord7 v1
+    // dcl_position o0
+    // dcl_texcoord1 o1.x
+    // mul r0.xy, c14, c14
+    temp0.xy = ref_billboard_up_axis.xy * ref_billboard_up_axis.xy;
+    // add r0.x, r0.y, r0.x
+    temp0.x = temp0.y + temp0.x;
+    // rsq r0.x, r0.x
+    temp0.x = 1 / sqrt(temp0.x);
+    // mul r0.xyz, r0.x, c14.yxyw
+    temp0.xyz = temp0.xxx * ref_billboard_up_axis.yxy;
+    // add r1.xyz, c15.xxyw, v1.xxyw
+    temp1.xyz = ref_billboard_center_offset.xxy + i.texcoord7.xxy;
+    // mul r0.xzw, r0.xyyz, r1.xyyz
+    temp0.xzw = temp0.xyz * temp1.xyz;
+    // mad r0.x, r1.z, -r0.y, r0.x
+    temp0.x = temp1.z * -temp0.y + temp0.x;
+    // add r0.y, r0.w, r0.z
+    temp0.y = temp0.w + temp0.z;
+    // mov r1.z, c9.y
+    temp1.z = (camera_world_matrix._m01_m11_m21_m31).y;
+    // mov r1.x, c10.y
+    temp1.x = (camera_world_matrix._m02_m12_m22_m32).y;
+    // mov r1.y, c8.y
+    temp1.y = (camera_world_matrix._m00_m10_m20_m30).y;
+    // nrm r2.xyz, c16
+    temp2.xyz = normalize(ref_global_axis.xyz).xyz;
+    // mul r3.xyz, r1, r2.yzxw
+    temp3.xyz = temp1.xyz * temp2.yzx;
+    // mad r1.xyz, r1.zxyw, r2.zxyw, -r3
+    temp1.xyz = temp1.zxy * temp2.zxy + -temp3.xyz;
+    // nrm r3.xyz, r1
+    temp3.xyz = normalize(temp1.xyz).xyz;
+    // mad r1, v0.xyzx, c17.xxxy, c17.yyyx
+    temp1 = i.texcoord6.xyzx * float4(1, 1, 1, 0) + float4(0, 0, 0, 1);
+    // dp4 r4.x, r1, c11
+    temp4.x = dot(temp1, (world_matrix._m00_m10_m20_m30));
+    // dp4 r4.y, r1, c12
+    temp4.y = dot(temp1, (world_matrix._m01_m11_m21_m31));
+    // dp4 r4.z, r1, c13
+    temp4.z = dot(temp1, (world_matrix._m02_m12_m22_m32));
+    // mad r0.xzw, r3.xyyz, r0.x, r4.xyyz
+    temp0.xzw = temp3.xyz * temp0.xxx + temp4.xyz;
+    // mad r0.xyz, r2, r0.y, r0.xzww
+    temp0.xyz = temp2.xyz * temp0.yyy + temp0.xzw;
+    // mov r0.w, c17.x
+    temp0.w = float1(1);
+    // dp4 r1.x, r0, c0
+    temp1.x = dot(temp0, (camera_view_matrix._m00_m10_m20_m30));
+    // dp4 r1.y, r0, c1
+    temp1.y = dot(temp0, (camera_view_matrix._m01_m11_m21_m31));
+    // dp4 r1.z, r0, c2
+    temp1.z = dot(temp0, (camera_view_matrix._m02_m12_m22_m32));
+    // dp4 r1.w, r0, c3
+    temp1.w = dot(temp0, (camera_view_matrix._m03_m13_m23_m33));
+    // dp4 o0.x, r1, c4
+    o.position.x = dot(temp1, (camera_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, r1, c5
+    o.position.y = dot(temp1, (camera_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, r1, c7
+    o.position.w = dot(temp1, (camera_proj_matrix._m03_m13_m23_m33));
+    // dp4 r0.x, r1, c6
+    temp0.x = dot(temp1, (camera_proj_matrix._m02_m12_m22_m32));
+    // mov o0.z, r0.x
+    o.position.z = temp0.x;
+    // mov o1.x, r0.x
+    o.texcoord1 = temp0.x;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+float4 PixelMain(float texcoord1 : TEXCOORD1) : COLOR
+{
+    float4 out_color;
+    // def c0, 1, 0, 0, 0
+    // dcl_texcoord1 v0.x
+    // mul oC0, c0.xyyy, v0.x
+    out_color = float4(1, 0, 0, 0) * texcoord1.x;
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

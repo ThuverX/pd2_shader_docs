@@ -1,0 +1,447 @@
+---
+id: 0x69514e13b5966c7a
+title: "Opacity Default Cube Environment Mapping Cube Fresnel Diffuse Texture Double Sided Normalmap Opacity Fade Take Global Light"
+---
+
+# Opacity Default Cube Environment Mapping Cube Fresnel Diffuse Texture Double Sided Normalmap Opacity Fade Take Global Light
+(`opacity:default:CUBE_ENVIRONMENT_MAPPING:CUBE_FRESNEL:DIFFUSE_TEXTURE:DOUBLE_SIDED:NORMALMAP:OPACITY_FADE:TAKE_GLOBAL_LIGHT`, `0x69514e13b5966c7a`)
+
+### Technique `transparent`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 1,
+	D3DRS_CULLMODE = 1,
+	D3DRS_COLORWRITEENABLE = 7,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 1,
+	D3DRS_STENCILFUNC = 6,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 5,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 4,
+	D3DRS_STENCILWRITEMASK = 5,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+	D3DRS_BLENDOP = 1,
+	D3DRS_DESTBLEND = 6,
+	D3DRS_SRCBLEND = 5,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 1
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 2
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+#### Sampler 3
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 4
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float camera_near_range : register(vs_3_0, c12);
+column_major float4x4 proj_matrix : register(vs_3_0, c8);
+float3 ref_opacity_fade : register(vs_3_0, c13);
+column_major float4x4 view_matrix : register(vs_3_0, c4);
+column_major float4x4 world_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 normal : NORMAL;
+    float4 texcoord1 : TEXCOORD1;
+    float4 texcoord4 : TEXCOORD4;
+    float4 texcoord : TEXCOORD;
+    float4 tangent : TANGENT;
+    float4 binormal : BINORMAL;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float4 texcoord5 : TEXCOORD5;
+    float texcoord7 : TEXCOORD7;
+    float2 texcoord1 : TEXCOORD1;
+    float3 texcoord4 : TEXCOORD4;
+    float4 texcoord : TEXCOORD;
+    float3 texcoord2 : TEXCOORD2;
+    float3 texcoord3 : TEXCOORD3;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0, temp1;
+    // def c14, 2, -1, 1, 0
+    // dcl_position v0
+    // dcl_normal v1
+    // dcl_texcoord1 v2
+    // dcl_texcoord4 v3
+    // dcl_texcoord v4
+    // dcl_tangent v5
+    // dcl_binormal v6
+    // dcl_position o0
+    // dcl_texcoord5 o1
+    // dcl_texcoord7 o2.x
+    // dcl_texcoord1 o3.xy
+    // dcl_texcoord4 o4.xyz
+    // dcl_texcoord o5
+    // dcl_texcoord2 o6.xyz
+    // dcl_texcoord3 o7.xyz
+    // dp4 r0.w, v0, c3
+    temp0.w = dot(i.position, (world_matrix._m03_m13_m23_m33));
+    // dp4 r0.x, v0, c0
+    temp0.x = dot(i.position, (world_matrix._m00_m10_m20_m30));
+    // dp4 r0.y, v0, c1
+    temp0.y = dot(i.position, (world_matrix._m01_m11_m21_m31));
+    // dp4 r0.z, v0, c2
+    temp0.z = dot(i.position, (world_matrix._m02_m12_m22_m32));
+    // dp4 r1.x, r0, c4
+    temp1.x = dot(temp0, (view_matrix._m00_m10_m20_m30));
+    // dp4 r1.y, r0, c5
+    temp1.y = dot(temp0, (view_matrix._m01_m11_m21_m31));
+    // dp4 r1.z, r0, c6
+    temp1.z = dot(temp0, (view_matrix._m02_m12_m22_m32));
+    // dp4 r1.w, r0, c7
+    temp1.w = dot(temp0, (view_matrix._m03_m13_m23_m33));
+    // mov o1.xyz, r0
+    o.texcoord5.xyz = temp0.xyz;
+    // dp4 o0.x, r1, c8
+    o.position.x = dot(temp1, (proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, r1, c9
+    o.position.y = dot(temp1, (proj_matrix._m01_m11_m21_m31));
+    // dp4 r0.w, r1, c11
+    temp0.w = dot(temp1, (proj_matrix._m03_m13_m23_m33));
+    // dp4 r0.z, r1, c10
+    temp0.z = dot(temp1, (proj_matrix._m02_m12_m22_m32));
+    // add r0.x, r0.w, -c13.x
+    temp0.x = temp0.w + -ref_opacity_fade.x;
+    // mov o0.zw, r0
+    o.position.zw = temp0.zw;
+    // add o1.w, r0.z, c12.x
+    o.texcoord5.w = temp0.z + camera_near_range.x;
+    // rcp r0.y, c13.y
+    temp0.y = 1.0f / ref_opacity_fade.y;
+    // mul_sat r0.x, r0.y, r0.x
+    temp0.x = saturate(temp0.y * temp0.x);
+    // add o2.x, -r0.x, c14.z
+    o.texcoord7 = -temp0.x + float4(1, 1, 1, 1);
+    // mad r0.xyz, v5, c14.x, c14.y
+    temp0.xyz = i.tangent.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o6.x, r0, c0
+    o.texcoord2.x = dot(temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o7.x, r0, c1
+    o.texcoord3.x = dot(temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o4.x, r0, c2
+    o.texcoord4.x = dot(temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mad r0.xyz, v6, c14.x, c14.y
+    temp0.xyz = i.binormal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o6.y, -r0, c0
+    o.texcoord2.y = dot(-temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o7.y, -r0, c1
+    o.texcoord3.y = dot(-temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o4.y, -r0, c2
+    o.texcoord4.y = dot(-temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mad r0.xyz, v1, c14.x, c14.y
+    temp0.xyz = i.normal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o6.z, r0, c0
+    o.texcoord2.z = dot(temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o7.z, r0, c1
+    o.texcoord3.z = dot(temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o4.z, r0, c2
+    o.texcoord4.z = dot(temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mov o3.xy, v3
+    o.texcoord1 = i.texcoord4;
+    // mov o5.xy, v4
+    o.texcoord.xy = i.texcoord.xy;
+    // mov o5.zw, v2.xyxy
+    o.texcoord.zw = i.texcoord1.xy;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+float3 GLOBAL_ambient_color : register(ps_3_0, c18);
+float3 GLOBAL_shadow_slice_depths : register(ps_3_0, c16);
+sampler2D bump_normal_texture : register(ps_3_0, s4);
+column_major float4x4 camera_world_matrix : register(ps_3_0, c12);
+sampler2D diffuse_texture : register(ps_3_0, s3);
+float3 global_light_col : register(ps_3_0, c19);
+float3 global_light_dir : register(ps_3_0, c15);
+column_major float4x4 global_shadow_projection[3] : register(ps_3_0, c0);
+sampler2D opacity_texture : register(ps_3_0, s1);
+float3 ref_fresnel_settings : register(ps_3_0, c17);
+samplerCUBE reflection_texture : register(ps_3_0, s0);
+sampler2D shadow_depth : register(ps_3_0, s2);
+struct PixelMain_Input
+{
+    float4 texcoord5 : TEXCOORD5;
+    float texcoord7 : TEXCOORD7;
+    float3 texcoord4 : TEXCOORD4;
+    float4 texcoord : TEXCOORD;
+    float3 texcoord2 : TEXCOORD2;
+    float3 texcoord3 : TEXCOORD3;
+};
+
+float4 PixelMain(PixelMain_Input i) : COLOR
+{
+    float4 out_color;
+    float4 temp0, temp1, temp2, temp3, temp4, temp5, temp6;
+    // def c20, -0.5, 1, -1, 0.5773672
+    // def c21, 0.9, 511.5, 0.3, 0
+    // def c22, 0, 1, 2, 3
+    // dcl_texcoord5 v0
+    // dcl_texcoord7 v1.x
+    // dcl_texcoord4 v2.xyz
+    // dcl_texcoord v3
+    // dcl_texcoord2 v4.xyz
+    // dcl_texcoord3 v5.xyz
+    // dcl_cube s0
+    // dcl_2d s1
+    // dcl_2d s2
+    // dcl_2d s3
+    // dcl_2d s4
+    // mov r0.x, -v0.w
+    temp0.x = -i.texcoord5.w;
+    // add r0.yzw, c16.xxyz, -v0.w
+    temp0.yzw = GLOBAL_shadow_slice_depths.xyz + -i.texcoord5.www;
+    // cmp r0, r0, c22.x, c22.y
+    temp0 = (temp0 >= 0) ? float4(0, 0, 0, 0) : float4(1, 1, 1, 1);
+    // dp4 r0.x, r0, c20.y
+    temp0.x = dot(temp0, float4(1, 1, 1, 1));
+    // add r0.xyz, r0.x, -c22.yzww
+    temp0.xyz = temp0.xxx + float3(-1, -2, -3);
+    // mov r1.x, c22.x
+    temp1.x = float1(0);
+    // cmp r2, -r0_abs.x, c0, r1.x
+    temp2 = (-abs(temp0).x >= 0) ? (global_shadow_projection[0]._m00_m10_m20_m30) : temp1.x;
+    // cmp r2, -r0_abs.y, c4, r2
+    temp2 = (-abs(temp0).y >= 0) ? (global_shadow_projection[1]._m00_m10_m20_m30) : temp2;
+    // cmp r2, -r0_abs.z, c8, r2
+    temp2 = (-abs(temp0).z >= 0) ? (global_shadow_projection[2]._m00_m10_m20_m30) : temp2;
+    // mad r3, v0.xyzx, c22.yyyx, c22.xxxy
+    temp3 = i.texcoord5.xyzx * float4(1, 1, 1, 0) + float4(0, 0, 0, 1);
+    // dp4 r2.x, r3, r2
+    temp2.x = dot(temp3, temp2);
+    // cmp r4, -r0_abs.x, c1, r1.x
+    temp4 = (-abs(temp0).x >= 0) ? (global_shadow_projection[0]._m01_m11_m21_m31) : temp1.x;
+    // cmp r4, -r0_abs.y, c5, r4
+    temp4 = (-abs(temp0).y >= 0) ? (global_shadow_projection[1]._m01_m11_m21_m31) : temp4;
+    // cmp r4, -r0_abs.z, c9, r4
+    temp4 = (-abs(temp0).z >= 0) ? (global_shadow_projection[2]._m01_m11_m21_m31) : temp4;
+    // dp4 r2.y, r3, r4
+    temp2.y = dot(temp3, temp4);
+    // cmp r4, -r0_abs.x, c2, r1.x
+    temp4 = (-abs(temp0).x >= 0) ? (global_shadow_projection[0]._m02_m12_m22_m32) : temp1.x;
+    // cmp r4, -r0_abs.y, c6, r4
+    temp4 = (-abs(temp0).y >= 0) ? (global_shadow_projection[1]._m02_m12_m22_m32) : temp4;
+    // cmp r4, -r0_abs.z, c10, r4
+    temp4 = (-abs(temp0).z >= 0) ? (global_shadow_projection[2]._m02_m12_m22_m32) : temp4;
+    // dp4 r2.z, r3, r4
+    temp2.z = dot(temp3, temp4);
+    // cmp r1, -r0_abs.x, c3, r1.x
+    temp1 = (-abs(temp0).x >= 0) ? (global_shadow_projection[0]._m03_m13_m23_m33) : temp1.x;
+    // cmp r1, -r0_abs.y, c7, r1
+    temp1 = (-abs(temp0).y >= 0) ? (global_shadow_projection[1]._m03_m13_m23_m33) : temp1;
+    // cmp r0, -r0_abs.z, c11, r1
+    temp0 = (-abs(temp0).z >= 0) ? (global_shadow_projection[2]._m03_m13_m23_m33) : temp1;
+    // dp4 r2.w, r3, r0
+    temp2.w = dot(temp3, temp0);
+    // texld r0, r2, s2
+    temp0 = tex2D(shadow_depth, temp2.xy);
+    // mul r0.yzw, r0.x, c19.xxyz
+    temp0.yzw = temp0.xxx * global_light_col.xyz;
+    // mul r0.yzw, r0, c21.x
+    temp0.yzw = temp0.yzw * float3(0.9, 0.9, 0.9);
+    // texld_pp r1, v3.zwzw, s4
+    temp1 = /* not implemented _pp modifier */ tex2D(bump_normal_texture, i.texcoord.zw);
+    // add_pp r1.xy, r1.wyzw, c20.x
+    temp1.xy = /* not implemented _pp modifier */ temp1.wy + float2(-0.5, -0.5);
+    // add_pp r1.xy, r1, r1
+    temp1.xy = /* not implemented _pp modifier */ temp1.xy + temp1.xy;
+    // mul_pp r1.w, r1.x, r1.x
+    temp1.w = /* not implemented _pp modifier */ temp1.x * temp1.x;
+    // mad_pp r1.w, r1.y, r1.y, -r1.w
+    temp1.w = /* not implemented _pp modifier */ temp1.y * temp1.y + -temp1.w;
+    // add_pp r1.w, -r1.w, c20.y
+    temp1.w = /* not implemented _pp modifier */ -temp1.w + float1(1);
+    // rsq_pp r1.w, r1.w
+    temp1.w = /* not implemented _pp modifier */ 1 / sqrt(temp1.w);
+    // rcp_pp r1.z, r1.w
+    temp1.z = /* not implemented _pp modifier */ 1.0f / temp1.w;
+    // dp3 r2.x, r1, v4
+    temp2.x = dot(temp1.xyz, i.texcoord2.xyz);
+    // dp3 r2.y, r1, v5
+    temp2.y = dot(temp1.xyz, i.texcoord3.xyz);
+    // dp3 r2.z, r1, v2
+    temp2.z = dot(temp1.xyz, i.texcoord4.xyz);
+    // nrm_pp r1.xyz, r2
+    temp1.xyz = /* not implemented _pp modifier */ normalize(temp2.xyz).xyz;
+    // mov r2.x, -c12.w
+    temp2.x = -(camera_world_matrix._m00_m10_m20_m30).w;
+    // mov r2.y, -c13.w
+    temp2.y = -(camera_world_matrix._m01_m11_m21_m31).w;
+    // mov r2.z, -c14.w
+    temp2.z = -(camera_world_matrix._m02_m12_m22_m32).w;
+    // add r2.xyz, r2, v0
+    temp2.xyz = temp2.xyz + i.texcoord5.xyz;
+    // dp3 r1.w, r2, r2
+    temp1.w = dot(temp2.xyz, temp2.xyz);
+    // rsq r1.w, r1.w
+    temp1.w = 1 / sqrt(temp1.w);
+    // mad r3.xyz, r2, -r1.w, -c15
+    temp3.xyz = temp2.xyz * -temp1.www + -global_light_dir.xyz;
+    // mul r2.xyz, r1.w, r2
+    temp2.xyz = temp1.www * temp2.xyz;
+    // nrm r4.xyz, r3
+    temp4.xyz = normalize(temp3.xyz).xyz;
+    // dp3_sat r1.w, r4, r1
+    temp1.w = saturate(dot(temp4.xyz, temp1.xyz));
+    // pow r2.w, r1.w, c21.y
+    temp2.w = pow(temp1.w, float1(511.5));
+    // mul r3.xyz, r0.yzww, r2.w
+    temp3.xyz = temp0.yzw * temp2.www;
+    // mul r3.xyz, r0.x, r3
+    temp3.xyz = temp0.xxx * temp3.xyz;
+    // dp3_sat r1.w, -c15, r1
+    temp1.w = saturate(dot(-global_light_dir.xyz, temp1.xyz));
+    // cmp r3.xyz, -r1.w, c22.x, r3
+    temp3.xyz = (-temp1.www >= 0) ? float3(0, 0, 0) : temp3.xyz;
+    // dp3 r3.w, r2, c15
+    temp3.w = dot(temp2.xyz, global_light_dir.xyz);
+    // mad_sat r3.w, r3.w, -c20.x, -c20.x
+    temp3.w = saturate(temp3.w * float1(0.5) + float1(0.5));
+    // mul r3.w, r1.w, r3.w
+    temp3.w = temp1.w * temp3.w;
+    // mul r4.xyz, r3.w, c19
+    temp4.xyz = temp3.www * global_light_col.xyz;
+    // mad r4.xyz, c19, r1.w, r4
+    temp4.xyz = global_light_col.xyz * temp1.www + temp4.xyz;
+    // mad r4.xyz, r0.x, r4, c18
+    temp4.xyz = temp0.xxx * temp4.xyz + GLOBAL_ambient_color.xyz;
+    // add_sat r4.xyz, r4, c21.z
+    temp4.xyz = saturate(temp4.xyz + float3(0.3, 0.3, 0.3));
+    // dp3 r0.x, r1, -r2
+    temp0.x = dot(temp1.xyz, -temp2.xyz);
+    // add r1.w, r0.x, r0.x
+    temp1.w = temp0.x + temp0.x;
+    // mov_sat r0.x, r0.x
+    temp0.x = saturate(temp0.x);
+    // add r0.x, -r0.x, c20.y
+    temp0.x = -temp0.x + float1(1);
+    // mad_pp r1.xyz, r1.w, -r1, -r2
+    temp1.xyz = /* not implemented _pp modifier */ temp1.www * -temp1.xyz + -temp2.xyz;
+    // texld_pp r1, r1, s0
+    temp1 = /* not implemented _pp modifier */ texCUBE(reflection_texture, temp1.xyz);
+    // texld_pp r5, v3, s3
+    temp5 = /* not implemented _pp modifier */ tex2D(diffuse_texture, i.texcoord.xy);
+    // texld_pp r6, v3, s1
+    temp6 = /* not implemented _pp modifier */ tex2D(opacity_texture, i.texcoord.xy);
+    // mad_pp r2.xyz, r1, r6.z, r5
+    temp2.xyz = /* not implemented _pp modifier */ temp1.xyz * temp6.zzz + temp5.xyz;
+    // dp3 r1.x, r1, r1
+    temp1.x = dot(temp1.xyz, temp1.xyz);
+    // rsq r1.x, r1.x
+    temp1.x = 1 / sqrt(temp1.x);
+    // rcp r1.x, r1.x
+    temp1.x = 1.0f / temp1.x;
+    // mul_sat_pp r1.x, r1.x, c20.w
+    ;// error
+    // mad r1.yzw, r4.xxyz, r2.xxyz, r3.xxyz
+    temp1.yzw = temp4.xyz * temp2.xyz + temp3.xyz;
+    // mad_pp oC0.xyz, r0.yzww, r2.w, r1.yzww
+    out_color.xyz = /* not implemented _pp modifier */ temp0.yzw * temp2.www + temp1.yzw;
+    // add r0.y, -r1.x, c20.y
+    temp0.y = -temp1.x + float1(1);
+    // mad_pp r0.y, c17.z, r0.y, r1.x
+    temp0.y = /* not implemented _pp modifier */ ref_fresnel_settings.z * temp0.y + temp1.x;
+    // mul_pp r0.y, r0.y, r6.x
+    temp0.y = /* not implemented _pp modifier */ temp0.y * temp6.x;
+    // mov r1.y, c20.y
+    temp1.y = float1(1);
+    // add r0.z, r1.y, c17.x
+    temp0.z = temp1.y + ref_fresnel_settings.x;
+    // pow r1.x, r0.x, r0.z
+    temp1.x = pow(temp0.x, temp0.z);
+    // add r0.x, r1.x, c20.z
+    temp0.x = temp1.x + float1(-1);
+    // mad r0.x, c17.y, r0.x, r1.y
+    temp0.x = ref_fresnel_settings.y * temp0.x + temp1.y;
+    // mad_pp r0.x, r0.y, r0.x, r6.y
+    temp0.x = /* not implemented _pp modifier */ temp0.y * temp0.x + temp6.y;
+    // mul_pp oC0.w, r0.x, v1.x
+    out_color.w = /* not implemented _pp modifier */ temp0.x * i.texcoord7.x;
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

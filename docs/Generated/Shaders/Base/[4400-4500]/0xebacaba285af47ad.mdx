@@ -1,0 +1,369 @@
+---
+id: 0xebacaba285af47ad
+title: "Opacity Default Cube Environment Mapping Cube Fresnel Diffuse Texture Distortion Normalmap Nvidia Opacity Fade To Solid Take Fog"
+---
+
+# Opacity Default Cube Environment Mapping Cube Fresnel Diffuse Texture Distortion Normalmap Nvidia Opacity Fade To Solid Take Fog
+(`opacity:default:CUBE_ENVIRONMENT_MAPPING:CUBE_FRESNEL:DIFFUSE_TEXTURE:DISTORTION:NORMALMAP:NVIDIA:OPACITY_FADE_TO_SOLID:TAKE_FOG`, `0xebacaba285af47ad`)
+
+### Technique `transparent`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 1,
+	D3DRS_CULLMODE = 2,
+	D3DRS_COLORWRITEENABLE = 7,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 1,
+	D3DRS_STENCILFUNC = 6,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 5,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 4,
+	D3DRS_STENCILWRITEMASK = 5,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+	D3DRS_BLENDOP = 1,
+	D3DRS_DESTBLEND = 6,
+	D3DRS_SRCBLEND = 5,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 1,
+	D3DSAMP_MINFILTER = 1,
+	D3DSAMP_MIPFILTER = 1,
+};
+```
+#### Sampler 1
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+#### Sampler 2
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 3
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float camera_near_range : register(vs_3_0, c12);
+column_major float4x4 proj_matrix : register(vs_3_0, c8);
+float3 ref_opacity_fade_to_solid : register(vs_3_0, c16);
+float3 render_target_texel_offset : register(vs_3_0, c13);
+column_major float4x4 view_matrix : register(vs_3_0, c4);
+float3 vp_offset : register(vs_3_0, c14);
+float3 vp_size : register(vs_3_0, c15);
+column_major float4x4 world_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 normal : NORMAL;
+    float4 texcoord1 : TEXCOORD1;
+    float4 texcoord4 : TEXCOORD4;
+    float4 texcoord : TEXCOORD;
+    float4 tangent : TANGENT;
+    float4 binormal : BINORMAL;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float4 texcoord5 : TEXCOORD5;
+    float4 texcoord6 : TEXCOORD6;
+    float texcoord7 : TEXCOORD7;
+    float2 texcoord1 : TEXCOORD1;
+    float3 texcoord4 : TEXCOORD4;
+    float4 texcoord : TEXCOORD;
+    float3 texcoord2 : TEXCOORD2;
+    float3 texcoord3 : TEXCOORD3;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0, temp2, temp3;
+    float2 temp1;
+    // def c17, 2, -1, 0.5, 1
+    // dcl_position v0
+    // dcl_normal v1
+    // dcl_texcoord1 v2
+    // dcl_texcoord4 v3
+    // dcl_texcoord v4
+    // dcl_tangent v5
+    // dcl_binormal v6
+    // dcl_position o0
+    // dcl_texcoord5 o1
+    // dcl_texcoord6 o2
+    // dcl_texcoord7 o3.x
+    // dcl_texcoord1 o4.xy
+    // dcl_texcoord4 o5.xyz
+    // dcl_texcoord o6
+    // dcl_texcoord2 o7.xyz
+    // dcl_texcoord3 o8.xyz
+    // mov r0.xz, c17
+    temp0.xz = float2(2, 0.5);
+    // add r0.yz, r0.z, c13.xxyw
+    temp0.yz = temp0.zz + render_target_texel_offset.xy;
+    // mov r1.xy, c15
+    temp1.xy = vp_size.xy;
+    // mad r1.xy, c14, r0.x, r1
+    temp1.xy = vp_offset.xy * temp0.xx + temp1.xy;
+    // add r1.xy, r1, c17.y
+    temp1.xy = temp1.xy + float2(-1, -1);
+    // dp4 r2.w, v0, c3
+    temp2.w = dot(i.position, (world_matrix._m03_m13_m23_m33));
+    // dp4 r2.x, v0, c0
+    temp2.x = dot(i.position, (world_matrix._m00_m10_m20_m30));
+    // dp4 r2.y, v0, c1
+    temp2.y = dot(i.position, (world_matrix._m01_m11_m21_m31));
+    // dp4 r2.z, v0, c2
+    temp2.z = dot(i.position, (world_matrix._m02_m12_m22_m32));
+    // dp4 r3.x, r2, c4
+    temp3.x = dot(temp2, (view_matrix._m00_m10_m20_m30));
+    // dp4 r3.y, r2, c5
+    temp3.y = dot(temp2, (view_matrix._m01_m11_m21_m31));
+    // dp4 r3.z, r2, c6
+    temp3.z = dot(temp2, (view_matrix._m02_m12_m22_m32));
+    // dp4 r3.w, r2, c7
+    temp3.w = dot(temp2, (view_matrix._m03_m13_m23_m33));
+    // mov o1.xyz, r2
+    o.texcoord5.xyz = temp2.xyz;
+    // dp4 r2.w, r3, c11
+    temp2.w = dot(temp3, (proj_matrix._m03_m13_m23_m33));
+    // mul r1.xy, r1, r2.w
+    temp1.xy = temp1.xy * temp2.ww;
+    // dp4 r2.x, r3, c8
+    temp2.x = dot(temp3, (proj_matrix._m00_m10_m20_m30));
+    // mad r0.w, r2.x, c15.x, r1.x
+    temp0.w = temp2.x * vp_size.x + temp1.x;
+    // add r1.x, r2.w, r2.w
+    temp1.x = temp2.w + temp2.w;
+    // mad o2.x, r1.x, r0.y, r0.w
+    o.texcoord6.x = temp1.x * temp0.y + temp0.w;
+    // dp4 r2.y, r3, c9
+    temp2.y = dot(temp3, (proj_matrix._m01_m11_m21_m31));
+    // dp4 r2.z, r3, c10
+    temp2.z = dot(temp3, (proj_matrix._m02_m12_m22_m32));
+    // mad r0.y, r2.y, -c15.y, r1.y
+    temp0.y = temp2.y * -vp_size.y + temp1.y;
+    // mov o0, r2
+    o.position = temp2;
+    // mad o2.y, r1.x, r0.z, r0.y
+    o.texcoord6.y = temp1.x * temp0.z + temp0.y;
+    // mad r0.x, r2.w, r0.x, -c16.x
+    temp0.x = temp2.w * temp0.x + -ref_opacity_fade_to_solid.x;
+    // mul o2.zw, r2, c17.xywx
+    o.texcoord6.zw = temp2.zw * float2(1, 2);
+    // add o1.w, r2.z, c12.x
+    o.texcoord5.w = temp2.z + camera_near_range.x;
+    // rcp r0.y, c16.y
+    temp0.y = 1.0f / ref_opacity_fade_to_solid.y;
+    // mul_sat o3.x, r0.y, r0.x
+    o.texcoord7 = saturate(temp0.y * temp0.x);
+    // mad r0.xyz, v5, c17.x, c17.y
+    temp0.xyz = i.tangent.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o7.x, r0, c0
+    o.texcoord2.x = dot(temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o8.x, r0, c1
+    o.texcoord3.x = dot(temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o5.x, r0, c2
+    o.texcoord4.x = dot(temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mad r0.xyz, v6, c17.x, c17.y
+    temp0.xyz = i.binormal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o7.y, -r0, c0
+    o.texcoord2.y = dot(-temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o8.y, -r0, c1
+    o.texcoord3.y = dot(-temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o5.y, -r0, c2
+    o.texcoord4.y = dot(-temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mad r0.xyz, v1, c17.x, c17.y
+    temp0.xyz = i.normal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o7.z, r0, c0
+    o.texcoord2.z = dot(temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o8.z, r0, c1
+    o.texcoord3.z = dot(temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o5.z, r0, c2
+    o.texcoord4.z = dot(temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mov o4.xy, v3
+    o.texcoord1 = i.texcoord4;
+    // mov o6.xy, v4
+    o.texcoord.xy = i.texcoord.xy;
+    // mov o6.zw, v2.xyxy
+    o.texcoord.zw = i.texcoord1.xy;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+float3 GLOBAL_fog_far_low_color : register(ps_3_0, c2);
+float GLOBAL_fog_max_range : register(ps_3_0, c4);
+float GLOBAL_fog_min_range : register(ps_3_0, c3);
+float3 GLOBAL_fog_start_color : register(ps_3_0, c1);
+sampler2D bump_normal_texture : register(ps_3_0, s3);
+sampler2D depth : register(ps_3_0, s0);
+sampler2D diffuse_texture : register(ps_3_0, s2);
+sampler2D distortion_source : register(ps_3_0, s1);
+float ref_depth_opacity : register(ps_3_0, c0);
+struct PixelMain_Input
+{
+    float4 texcoord5 : TEXCOORD5;
+    float4 texcoord6 : TEXCOORD6;
+    float texcoord7 : TEXCOORD7;
+    float3 texcoord4 : TEXCOORD4;
+    float4 texcoord : TEXCOORD;
+    float3 texcoord2 : TEXCOORD2;
+    float3 texcoord3 : TEXCOORD3;
+};
+
+float4 PixelMain(PixelMain_Input i) : COLOR
+{
+    float4 out_color;
+    float4 temp0, temp1, temp2;
+    // def c5, -0.5, 1, 0.05, 2
+    // dcl_texcoord5 v0.w
+    // dcl_texcoord6 v1
+    // dcl_texcoord7 v2.x
+    // dcl_texcoord4 v3.xyz
+    // dcl_texcoord v4
+    // dcl_texcoord2 v5.xyz
+    // dcl_texcoord3 v6.xyz
+    // dcl_2d s0
+    // dcl_2d s1
+    // dcl_2d s2
+    // dcl_2d s3
+    // texld_pp r0, v4.zwzw, s3
+    temp0 = /* not implemented _pp modifier */ tex2D(bump_normal_texture, i.texcoord.zw);
+    // add_pp r0.xy, r0.wyzw, c5.x
+    temp0.xy = /* not implemented _pp modifier */ temp0.wy + float2(-0.5, -0.5);
+    // add_pp r0.xy, r0, r0
+    temp0.xy = /* not implemented _pp modifier */ temp0.xy + temp0.xy;
+    // mul_pp r0.w, r0.x, r0.x
+    temp0.w = /* not implemented _pp modifier */ temp0.x * temp0.x;
+    // mad_pp r0.w, r0.y, r0.y, -r0.w
+    temp0.w = /* not implemented _pp modifier */ temp0.y * temp0.y + -temp0.w;
+    // add_pp r0.w, -r0.w, c5.y
+    temp0.w = /* not implemented _pp modifier */ -temp0.w + float1(1);
+    // rsq_pp r0.w, r0.w
+    temp0.w = /* not implemented _pp modifier */ 1 / sqrt(temp0.w);
+    // rcp_pp r0.z, r0.w
+    temp0.z = /* not implemented _pp modifier */ 1.0f / temp0.w;
+    // dp3 r1.z, r0, v3
+    temp1.z = dot(temp0.xyz, i.texcoord4.xyz);
+    // dp3 r1.x, r0, v5
+    temp1.x = dot(temp0.xyz, i.texcoord2.xyz);
+    // dp3 r1.y, r0, v6
+    temp1.y = dot(temp0.xyz, i.texcoord3.xyz);
+    // dp3 r0.x, r1, r1
+    temp0.x = dot(temp1.xyz, temp1.xyz);
+    // rsq r0.x, r0.x
+    temp0.x = 1 / sqrt(temp0.x);
+    // mul_pp r0.xy, r0.x, r1
+    temp0.xy = /* not implemented _pp modifier */ temp0.xx * temp1.xy;
+    // texld r1, v1, s0
+    temp1 = tex2D(depth, i.texcoord6.xy);
+    // add r0.z, -r1.x, v1.z
+    temp0.z = -temp1.x + i.texcoord6.z;
+    // rcp r0.w, c0.x
+    temp0.w = 1.0f / ref_depth_opacity.x;
+    // mul_sat_pp r0.z, r0.w, r0_abs.z
+    ;// error
+    // mul_pp r0.w, r0.z, c5.z
+    temp0.w = /* not implemented _pp modifier */ temp0.z * float1(0.05);
+    // mul r0.xy, r0.w, r0
+    temp0.xy = temp0.ww * temp0.xy;
+    // rcp r0.w, v1.w
+    temp0.w = 1.0f / i.texcoord6.w;
+    // mad r0.xy, v1, r0.w, r0
+    temp0.xy = i.texcoord6.xy * temp0.ww + temp0.xy;
+    // texld r1, r0, s1
+    temp1 = tex2D(distortion_source, temp0.xy);
+    // texld_pp r2, v4, s2
+    temp2 = /* not implemented _pp modifier */ tex2D(diffuse_texture, i.texcoord.xy);
+    // mul r0.xyw, r1.xyzz, r2.xyzz
+    temp0.xyw = temp1.xyz * temp2.xyz;
+    // mad r1.xyz, r0.xyww, -c5.w, r2
+    temp1.xyz = temp0.xyw * float3(-2, -2, -2) + temp2.xyz;
+    // add r0.xyw, r0, r0
+    temp0.xyw = temp0.xyw + temp0.xyw;
+    // mad_pp r0.xyz, r0.z, r1, r0.xyww
+    temp0.xyz = /* not implemented _pp modifier */ temp0.zzz * temp1.xyz + temp0.xyw;
+    // add r0.w, -c3.x, v0.w
+    temp0.w = -GLOBAL_fog_min_range.x + i.texcoord5.w;
+    // rcp r1.x, c4.x
+    temp1.x = 1.0f / GLOBAL_fog_max_range.x;
+    // mul_sat r0.w, r0.w, r1.x
+    temp0.w = saturate(temp0.w * temp1.x);
+    // add r0.w, -r0.w, c5.y
+    temp0.w = -temp0.w + float1(1);
+    // mul r0.w, r0.w, r0.w
+    temp0.w = temp0.w * temp0.w;
+    // mul r0.w, r0.w, r0.w
+    temp0.w = temp0.w * temp0.w;
+    // mov r1.xyz, c2
+    temp1.xyz = GLOBAL_fog_far_low_color.xyz;
+    // add r1.xyz, -r1, c1
+    temp1.xyz = -temp1.xyz + GLOBAL_fog_start_color.xyz;
+    // mad r1.xyz, r0.w, r1, c2
+    temp1.xyz = temp0.www * temp1.xyz + GLOBAL_fog_far_low_color.xyz;
+    // add r0.xyz, r0, -r1
+    temp0.xyz = temp0.xyz + -temp1.xyz;
+    // mad_pp oC0.xyz, r0.w, r0, r1
+    out_color.xyz = /* not implemented _pp modifier */ temp0.www * temp0.xyz + temp1.xyz;
+    // add_pp oC0.w, c5.y, v2.x
+    out_color.w = /* not implemented _pp modifier */ float1(1) + i.texcoord7.x;
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

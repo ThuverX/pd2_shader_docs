@@ -1,0 +1,283 @@
+---
+id: 0x4ac1d3a014cfc00a
+title: "Opacity Default Cube Environment Mapping Cube Fresnel Diffuse Texture Nvidia Take Fog Vertex Color"
+---
+
+# Opacity Default Cube Environment Mapping Cube Fresnel Diffuse Texture Nvidia Take Fog Vertex Color
+(`opacity:default:CUBE_ENVIRONMENT_MAPPING:CUBE_FRESNEL:DIFFUSE_TEXTURE:NVIDIA:TAKE_FOG:VERTEX_COLOR`, `0x4ac1d3a014cfc00a`)
+
+### Technique `transparent`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 1,
+	D3DRS_CULLMODE = 2,
+	D3DRS_COLORWRITEENABLE = 7,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 1,
+	D3DRS_STENCILFUNC = 6,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 5,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 4,
+	D3DRS_STENCILWRITEMASK = 5,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+	D3DRS_BLENDOP = 1,
+	D3DRS_DESTBLEND = 6,
+	D3DRS_SRCBLEND = 5,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 1
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 2
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float camera_near_range : register(vs_3_0, c12);
+column_major float4x4 proj_matrix : register(vs_3_0, c8);
+column_major float4x4 view_matrix : register(vs_3_0, c4);
+column_major float4x4 world_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 color : COLOR;
+    float4 normal : NORMAL;
+    float4 texcoord4 : TEXCOORD4;
+    float4 texcoord : TEXCOORD;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float4 color : COLOR;
+    float4 texcoord5 : TEXCOORD5;
+    float2 texcoord1 : TEXCOORD1;
+    float2 texcoord : TEXCOORD;
+    float3 texcoord2 : TEXCOORD2;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0, temp1;
+    // def c13, 2, -1, 0, 0
+    // dcl_position v0
+    // dcl_color v1
+    // dcl_normal v2
+    // dcl_texcoord4 v3
+    // dcl_texcoord v4
+    // dcl_position o0
+    // dcl_color o1
+    // dcl_texcoord5 o2
+    // dcl_texcoord1 o3.xy
+    // dcl_texcoord o4.xy
+    // dcl_texcoord2 o5.xyz
+    // dp4 r0.w, v0, c3
+    temp0.w = dot(i.position, (world_matrix._m03_m13_m23_m33));
+    // dp4 r0.x, v0, c0
+    temp0.x = dot(i.position, (world_matrix._m00_m10_m20_m30));
+    // dp4 r0.y, v0, c1
+    temp0.y = dot(i.position, (world_matrix._m01_m11_m21_m31));
+    // dp4 r0.z, v0, c2
+    temp0.z = dot(i.position, (world_matrix._m02_m12_m22_m32));
+    // dp4 r1.x, r0, c4
+    temp1.x = dot(temp0, (view_matrix._m00_m10_m20_m30));
+    // dp4 r1.y, r0, c5
+    temp1.y = dot(temp0, (view_matrix._m01_m11_m21_m31));
+    // dp4 r1.z, r0, c6
+    temp1.z = dot(temp0, (view_matrix._m02_m12_m22_m32));
+    // dp4 r1.w, r0, c7
+    temp1.w = dot(temp0, (view_matrix._m03_m13_m23_m33));
+    // mov o2.xyz, r0
+    o.texcoord5.xyz = temp0.xyz;
+    // dp4 o0.x, r1, c8
+    o.position.x = dot(temp1, (proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, r1, c9
+    o.position.y = dot(temp1, (proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, r1, c11
+    o.position.w = dot(temp1, (proj_matrix._m03_m13_m23_m33));
+    // dp4 r0.x, r1, c10
+    temp0.x = dot(temp1, (proj_matrix._m02_m12_m22_m32));
+    // mad r0.yzw, v2.xxyz, c13.x, c13.y
+    temp0.yzw = i.normal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o5.x, r0.yzww, c0
+    o.texcoord2.x = dot(temp0.yzw, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o5.y, r0.yzww, c1
+    o.texcoord2.y = dot(temp0.yzw, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o5.z, r0.yzww, c2
+    o.texcoord2.z = dot(temp0.yzw, (world_matrix._m02_m12_m22_m32).xyz);
+    // add o2.w, r0.x, c12.x
+    o.texcoord5.w = temp0.x + camera_near_range.x;
+    // mov o0.z, r0.x
+    o.position.z = temp0.x;
+    // mov o1, v1
+    o.color = i.color;
+    // mov o3.xy, v3
+    o.texcoord1 = i.texcoord4;
+    // mov o4.xy, v4
+    o.texcoord = i.texcoord;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+float3 GLOBAL_fog_far_low_color : register(ps_3_0, c5);
+float GLOBAL_fog_max_range : register(ps_3_0, c7);
+float GLOBAL_fog_min_range : register(ps_3_0, c6);
+float3 GLOBAL_fog_start_color : register(ps_3_0, c4);
+column_major float4x4 camera_world_matrix : register(ps_3_0, c0);
+sampler2D diffuse_texture : register(ps_3_0, s2);
+sampler2D opacity_texture : register(ps_3_0, s1);
+float3 ref_fresnel_settings : register(ps_3_0, c3);
+samplerCUBE reflection_texture : register(ps_3_0, s0);
+struct PixelMain_Input
+{
+    float4 texcoord5 : TEXCOORD5;
+    float2 texcoord : TEXCOORD;
+    float3 texcoord2 : TEXCOORD2;
+};
+
+float4 PixelMain(PixelMain_Input i) : COLOR
+{
+    float4 out_color;
+    float4 temp0, temp1, temp2;
+    // def c8, 1, -1, 0.5773672, 0
+    // dcl_texcoord5 v0
+    // dcl_texcoord v1.xy
+    // dcl_texcoord2 v2.xyz
+    // dcl_cube s0
+    // dcl_2d s1
+    // dcl_2d s2
+    // mov r0.x, -c0.w
+    temp0.x = -(camera_world_matrix._m00_m10_m20_m30).w;
+    // mov r0.y, -c1.w
+    temp0.y = -(camera_world_matrix._m01_m11_m21_m31).w;
+    // mov r0.z, -c2.w
+    temp0.z = -(camera_world_matrix._m02_m12_m22_m32).w;
+    // add r0.xyz, r0, v0
+    temp0.xyz = temp0.xyz + i.texcoord5.xyz;
+    // nrm r1.xyz, r0
+    temp1.xyz = normalize(temp0.xyz).xyz;
+    // nrm_pp r0.xyz, v2
+    temp0.xyz = /* not implemented _pp modifier */ normalize(i.texcoord2.xyz).xyz;
+    // dp3 r0.w, r0, -r1
+    temp0.w = dot(temp0.xyz, -temp1.xyz);
+    // add r1.w, r0.w, r0.w
+    temp1.w = temp0.w + temp0.w;
+    // mov_sat r0.w, r0.w
+    temp0.w = saturate(temp0.w);
+    // mad_pp r0.xyz, r1.w, -r0, -r1
+    temp0.xyz = /* not implemented _pp modifier */ temp1.www * -temp0.xyz + -temp1.xyz;
+    // texld_pp r1, r0, s0
+    temp1 = /* not implemented _pp modifier */ texCUBE(reflection_texture, temp0.xyz);
+    // dp3 r0.x, r1, r1
+    temp0.x = dot(temp1.xyz, temp1.xyz);
+    // rsq r0.x, r0.x
+    temp0.x = 1 / sqrt(temp0.x);
+    // rcp r0.x, r0.x
+    temp0.x = 1.0f / temp0.x;
+    // mul_sat_pp r0.x, r0.x, c8.z
+    ;// error
+    // add r0.yw, -r0.xxzw, c8.x
+    temp0.yw = -temp0.xw + float2(1, 1);
+    // mad_pp r0.x, c3.z, r0.y, r0.x
+    temp0.x = /* not implemented _pp modifier */ ref_fresnel_settings.z * temp0.y + temp0.x;
+    // texld_pp r2, v1, s1
+    temp2 = /* not implemented _pp modifier */ tex2D(opacity_texture, i.texcoord.xy);
+    // mul_pp r0.x, r0.x, r2.x
+    temp0.x = /* not implemented _pp modifier */ temp0.x * temp2.x;
+    // mov r2.x, c8.x
+    temp2.x = float1(1);
+    // add r0.y, r2.x, c3.x
+    temp0.y = temp2.x + ref_fresnel_settings.x;
+    // pow r1.w, r0.w, r0.y
+    temp1.w = pow(temp0.w, temp0.y);
+    // add r0.y, r1.w, c8.y
+    temp0.y = temp1.w + float1(-1);
+    // mad r0.y, c3.y, r0.y, r2.x
+    temp0.y = ref_fresnel_settings.y * temp0.y + temp2.x;
+    // mad_pp oC0.w, r0.x, r0.y, r2.y
+    out_color.w = /* not implemented _pp modifier */ temp0.x * temp0.y + temp2.y;
+    // texld_pp r0, v1, s2
+    temp0 = /* not implemented _pp modifier */ tex2D(diffuse_texture, i.texcoord.xy);
+    // mad_pp r0.xyz, r1, r2.z, r0
+    temp0.xyz = /* not implemented _pp modifier */ temp1.xyz * temp2.zzz + temp0.xyz;
+    // add r0.w, -c6.x, v0.w
+    temp0.w = -GLOBAL_fog_min_range.x + i.texcoord5.w;
+    // rcp r1.x, c7.x
+    temp1.x = 1.0f / GLOBAL_fog_max_range.x;
+    // mul_sat r0.w, r0.w, r1.x
+    temp0.w = saturate(temp0.w * temp1.x);
+    // add r0.w, -r0.w, c8.x
+    temp0.w = -temp0.w + float1(1);
+    // mul r0.w, r0.w, r0.w
+    temp0.w = temp0.w * temp0.w;
+    // mul r0.w, r0.w, r0.w
+    temp0.w = temp0.w * temp0.w;
+    // mov r1.xyz, c5
+    temp1.xyz = GLOBAL_fog_far_low_color.xyz;
+    // add r1.xyz, -r1, c4
+    temp1.xyz = -temp1.xyz + GLOBAL_fog_start_color.xyz;
+    // mad r1.xyz, r0.w, r1, c5
+    temp1.xyz = temp0.www * temp1.xyz + GLOBAL_fog_far_low_color.xyz;
+    // add r0.xyz, r0, -r1
+    temp0.xyz = temp0.xyz + -temp1.xyz;
+    // mad_pp oC0.xyz, r0.w, r0, r1
+    out_color.xyz = /* not implemented _pp modifier */ temp0.www * temp0.xyz + temp1.xyz;
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

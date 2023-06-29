@@ -1,0 +1,839 @@
+---
+id: 0x611afb2017b7168f
+title: "Generic Customizable Default Contour Cube Environment Mapping Decal Sticker Uv2 Diffuse Texture Gradientmap Normalmap Pattern Gradientmap Pattern Gradientmap Angle Offset Pattern Uv2 Rl Players Skinned 3weights Wear Tear Masking"
+---
+
+# Generic Customizable Default Contour Cube Environment Mapping Decal Sticker Uv2 Diffuse Texture Gradientmap Normalmap Pattern Gradientmap Pattern Gradientmap Angle Offset Pattern Uv2 Rl Players Skinned 3weights Wear Tear Masking
+(`generic_customizable:default:CONTOUR:CUBE_ENVIRONMENT_MAPPING:DECAL_STICKER_UV2:DIFFUSE_TEXTURE:GRADIENTMAP:NORMALMAP:PATTERN_GRADIENTMAP:PATTERN_GRADIENTMAP_ANGLE_OFFSET:PATTERN_UV2:RL_PLAYERS:SKINNED_3WEIGHTS:WEAR_TEAR_MASKING`, `0x611afb2017b7168f`)
+
+### Technique `deferred_players`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 1,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 2,
+	D3DRS_COLORWRITEENABLE = 15,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+#### Sampler 1
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+#### Sampler 2
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+#### Sampler 3
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 4
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 5
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 6
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+column_major float4x3 bones[54] : register(vs_3_0, c0);
+float camera_near_range : register(vs_3_0, c174);
+column_major float4x4 proj_matrix : register(vs_3_0, c170);
+float3 ref_uv_offset_rot : register(vs_3_0, c176);
+float3 ref_uv_scale : register(vs_3_0, c175);
+column_major float4x4 view_matrix : register(vs_3_0, c166);
+column_major float4x4 world_matrix : register(vs_3_0, c162);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 normal : NORMAL;
+    float4 blendweight : BLENDWEIGHT;
+    float4 blendindices : BLENDINDICES;
+    float4 texcoord : TEXCOORD;
+    float4 texcoord1 : TEXCOORD1;
+    float4 tangent : TANGENT;
+    float4 binormal : BINORMAL;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float2 texcoord6 : TEXCOORD6;
+    float texcoord7 : TEXCOORD7;
+    float3 texcoord5 : TEXCOORD5;
+    float4 texcoord : TEXCOORD;
+    float texcoord1 : TEXCOORD1;
+    float3 texcoord2 : TEXCOORD2;
+    float3 texcoord3 : TEXCOORD3;
+    float3 texcoord4 : TEXCOORD4;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0, temp1;
+    float3 addr0, temp2;
+    // def c177, 2, -1, 3, 1
+    // def c178, 0.5, -0.5, 0.15915494, 1.000001
+    // def c179, 6.2831855, -3.1415927, 0, 0
+    // dcl_position v0
+    // dcl_normal v1
+    // dcl_blendweight v2
+    // dcl_blendindices v3
+    // dcl_texcoord v4
+    // dcl_texcoord1 v5
+    // dcl_tangent v6
+    // dcl_binormal v7
+    // dcl_position o0
+    // dcl_texcoord6 o1.xy
+    // dcl_texcoord7 o2.x
+    // dcl_texcoord5 o3.xyz
+    // dcl_texcoord o4
+    // dcl_texcoord1 o5.x
+    // dcl_texcoord2 o6.xyz
+    // dcl_texcoord3 o7.xyz
+    // dcl_texcoord4 o8.xyz
+    // mul r0.xyz, c177.z, v3
+    temp0.xyz = float3(3, 3, 3) * i.blendindices.xyz;
+    // mova a0.xyz, r0.yxzw
+    addr0.xyz = temp0.yxz;
+    // dp4 r1.x, v0, c0[a0.x]
+    temp1.x = dot(i.position, (bones[0 + (addr0.x / 3)]._m00_m10_m20_m30));
+    // dp4 r1.y, v0, c1[a0.x]
+    temp1.y = dot(i.position, (bones[0 + (addr0.x / 3)]._m01_m11_m21_m31));
+    // dp4 r1.z, v0, c2[a0.x]
+    temp1.z = dot(i.position, (bones[0 + (addr0.x / 3)]._m02_m12_m22_m32));
+    // mul r1.xyz, r1, v2.y
+    temp1.xyz = temp1.xyz * i.blendweight.yyy;
+    // dp4 r0.x, v0, c0[a0.y]
+    temp0.x = dot(i.position, (bones[0 + (addr0.y / 3)]._m00_m10_m20_m30));
+    // dp4 r0.y, v0, c1[a0.y]
+    temp0.y = dot(i.position, (bones[0 + (addr0.y / 3)]._m01_m11_m21_m31));
+    // dp4 r0.z, v0, c2[a0.y]
+    temp0.z = dot(i.position, (bones[0 + (addr0.y / 3)]._m02_m12_m22_m32));
+    // mad r0.xyz, v2.x, r0, r1
+    temp0.xyz = i.blendweight.xxx * temp0.xyz + temp1.xyz;
+    // dp4 r1.x, v0, c0[a0.z]
+    temp1.x = dot(i.position, (bones[0 + (addr0.z / 3)]._m00_m10_m20_m30));
+    // dp4 r1.y, v0, c1[a0.z]
+    temp1.y = dot(i.position, (bones[0 + (addr0.z / 3)]._m01_m11_m21_m31));
+    // dp4 r1.z, v0, c2[a0.z]
+    temp1.z = dot(i.position, (bones[0 + (addr0.z / 3)]._m02_m12_m22_m32));
+    // mad r0.xyz, v2.z, r1, r0
+    temp0.xyz = i.blendweight.zzz * temp1.xyz + temp0.xyz;
+    // mov r0.w, c177.w
+    temp0.w = float1(1);
+    // dp4 r1.w, r0, c165
+    temp1.w = dot(temp0, (world_matrix._m03_m13_m23_m33));
+    // dp4 r1.x, r0, c162
+    temp1.x = dot(temp0, (world_matrix._m00_m10_m20_m30));
+    // dp4 r1.y, r0, c163
+    temp1.y = dot(temp0, (world_matrix._m01_m11_m21_m31));
+    // dp4 r1.z, r0, c164
+    temp1.z = dot(temp0, (world_matrix._m02_m12_m22_m32));
+    // dp4 r0.x, r1, c166
+    temp0.x = dot(temp1, (view_matrix._m00_m10_m20_m30));
+    // dp4 r0.y, r1, c167
+    temp0.y = dot(temp1, (view_matrix._m01_m11_m21_m31));
+    // dp4 r0.z, r1, c168
+    temp0.z = dot(temp1, (view_matrix._m02_m12_m22_m32));
+    // dp4 r0.w, r1, c169
+    temp0.w = dot(temp1, (view_matrix._m03_m13_m23_m33));
+    // mov o3.xyz, r1
+    o.texcoord5 = temp1;
+    // dp4 o0.x, r0, c170
+    o.position.x = dot(temp0, (proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, r0, c171
+    o.position.y = dot(temp0, (proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, r0, c173
+    o.position.w = dot(temp0, (proj_matrix._m03_m13_m23_m33));
+    // dp4 r0.x, r0, c172
+    temp0.x = dot(temp0, (proj_matrix._m02_m12_m22_m32));
+    // add o5.x, r0.x, c174.x
+    o.texcoord1 = temp0.x + camera_near_range.x;
+    // mov o0.z, r0.x
+    o.position.z = temp0.x;
+    // mov r0.y, c177.y
+    temp0.y = float1(-1);
+    // add r0.xyz, r0.y, c175.xyyw
+    temp0.xyz = temp0.yyy + ref_uv_scale.xyy;
+    // mul r0.xyz, r0, c178.x
+    temp0.xyz = temp0.xyz * float3(0.5, 0.5, 0.5);
+    // add r1.xyz, c176.xyyw, v5.xyyw
+    temp1.xyz = ref_uv_offset_rot.xyy + i.texcoord1.xyy;
+    // mad r0.xyz, r1, c175.xyyw, -r0
+    temp0.xyz = temp1.xyz * ref_uv_scale.xyy + -temp0.xyz;
+    // add r0.xyz, r0, c178.y
+    temp0.xyz = temp0.xyz + float3(-0.5, -0.5, -0.5);
+    // mov r1.xz, c178
+    temp1.xz = float2(0.5, 0.15915494);
+    // mad r0.w, c176.z, r1.z, r1.x
+    temp0.w = ref_uv_offset_rot.z * temp1.z + temp1.x;
+    // frc r0.w, r0.w
+    temp0.w = frac(temp0.w);
+    // mad r0.w, r0.w, c179.x, c179.y
+    temp0.w = temp0.w * float1(6.2831855) + float1(-3.1415927);
+    // sincos r1.xy, r0.w
+    temp1.xy = float2(cos(temp0.w), sin(temp0.w));
+    // mul r0.yzw, r0.xxyz, r1.xxyx
+    temp0.yzw = temp0.xyz * temp1.xyx;
+    // mad r1.y, r0.x, -r1.y, r0.w
+    temp1.y = temp0.x * -temp1.y + temp0.w;
+    // add r1.x, r0.z, r0.y
+    temp1.x = temp0.z + temp0.y;
+    // add o1.xy, r1, c178.x
+    o.texcoord6 = temp1 + float4(0.5, 0.5, 0.5, 0.5);
+    // add r0.x, c178.w, -v4.x
+    temp0.x = float1(1.000001) + -i.texcoord.x;
+    // slt r0.y, -r0.x, r0.x
+    temp0.y = (-temp0.x < temp0.x) ? 1 : 0;
+    // slt r0.x, r0.x, -r0.x
+    temp0.x = (temp0.x < -temp0.x) ? 1 : 0;
+    // add r0.x, -r0.x, r0.y
+    temp0.x = -temp0.x + temp0.y;
+    // max o2.x, r0.x, c179.z
+    o.texcoord7 = max(temp0.x, float4(0, 0, 0, 0));
+    // mad r0.xyz, v6, c177.x, c177.y
+    temp0.xyz = i.tangent.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 r1.x, r0, c0[a0.x]
+    temp1.x = dot(temp0.xyz, (bones[0 + (addr0.x / 3)]._m00_m10_m20_m30).xyz);
+    // dp3 r1.y, r0, c1[a0.x]
+    temp1.y = dot(temp0.xyz, (bones[0 + (addr0.x / 3)]._m01_m11_m21_m31).xyz);
+    // dp3 r1.z, r0, c2[a0.x]
+    temp1.z = dot(temp0.xyz, (bones[0 + (addr0.x / 3)]._m02_m12_m22_m32).xyz);
+    // mul r1.xyz, r1, v2.y
+    temp1.xyz = temp1.xyz * i.blendweight.yyy;
+    // dp3 r2.x, r0, c0[a0.y]
+    temp2.x = dot(temp0.xyz, (bones[0 + (addr0.y / 3)]._m00_m10_m20_m30).xyz);
+    // dp3 r2.y, r0, c1[a0.y]
+    temp2.y = dot(temp0.xyz, (bones[0 + (addr0.y / 3)]._m01_m11_m21_m31).xyz);
+    // dp3 r2.z, r0, c2[a0.y]
+    temp2.z = dot(temp0.xyz, (bones[0 + (addr0.y / 3)]._m02_m12_m22_m32).xyz);
+    // mad r1.xyz, v2.x, r2, r1
+    temp1.xyz = i.blendweight.xxx * temp2.xyz + temp1.xyz;
+    // dp3 r2.x, r0, c0[a0.z]
+    temp2.x = dot(temp0.xyz, (bones[0 + (addr0.z / 3)]._m00_m10_m20_m30).xyz);
+    // dp3 r2.y, r0, c1[a0.z]
+    temp2.y = dot(temp0.xyz, (bones[0 + (addr0.z / 3)]._m01_m11_m21_m31).xyz);
+    // dp3 r2.z, r0, c2[a0.z]
+    temp2.z = dot(temp0.xyz, (bones[0 + (addr0.z / 3)]._m02_m12_m22_m32).xyz);
+    // mad r0.xyz, v2.z, r2, r1
+    temp0.xyz = i.blendweight.zzz * temp2.xyz + temp1.xyz;
+    // nrm r1.xyz, r0
+    temp1.xyz = normalize(temp0.xyz).xyz;
+    // dp3 o6.x, r1, c162
+    o.texcoord2.x = dot(temp1.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o7.x, r1, c163
+    o.texcoord3.x = dot(temp1.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o8.x, r1, c164
+    o.texcoord4.x = dot(temp1.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mad r0.xyz, v7, c177.x, c177.y
+    temp0.xyz = i.binormal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 r1.x, r0, c0[a0.x]
+    temp1.x = dot(temp0.xyz, (bones[0 + (addr0.x / 3)]._m00_m10_m20_m30).xyz);
+    // dp3 r1.y, r0, c1[a0.x]
+    temp1.y = dot(temp0.xyz, (bones[0 + (addr0.x / 3)]._m01_m11_m21_m31).xyz);
+    // dp3 r1.z, r0, c2[a0.x]
+    temp1.z = dot(temp0.xyz, (bones[0 + (addr0.x / 3)]._m02_m12_m22_m32).xyz);
+    // mul r1.xyz, r1, v2.y
+    temp1.xyz = temp1.xyz * i.blendweight.yyy;
+    // dp3 r2.x, r0, c0[a0.y]
+    temp2.x = dot(temp0.xyz, (bones[0 + (addr0.y / 3)]._m00_m10_m20_m30).xyz);
+    // dp3 r2.y, r0, c1[a0.y]
+    temp2.y = dot(temp0.xyz, (bones[0 + (addr0.y / 3)]._m01_m11_m21_m31).xyz);
+    // dp3 r2.z, r0, c2[a0.y]
+    temp2.z = dot(temp0.xyz, (bones[0 + (addr0.y / 3)]._m02_m12_m22_m32).xyz);
+    // mad r1.xyz, v2.x, r2, r1
+    temp1.xyz = i.blendweight.xxx * temp2.xyz + temp1.xyz;
+    // dp3 r2.x, r0, c0[a0.z]
+    temp2.x = dot(temp0.xyz, (bones[0 + (addr0.z / 3)]._m00_m10_m20_m30).xyz);
+    // dp3 r2.y, r0, c1[a0.z]
+    temp2.y = dot(temp0.xyz, (bones[0 + (addr0.z / 3)]._m01_m11_m21_m31).xyz);
+    // dp3 r2.z, r0, c2[a0.z]
+    temp2.z = dot(temp0.xyz, (bones[0 + (addr0.z / 3)]._m02_m12_m22_m32).xyz);
+    // mad r0.xyz, v2.z, r2, r1
+    temp0.xyz = i.blendweight.zzz * temp2.xyz + temp1.xyz;
+    // nrm r1.xyz, r0
+    temp1.xyz = normalize(temp0.xyz).xyz;
+    // dp3 o6.y, -r1, c162
+    o.texcoord2.y = dot(-temp1.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o7.y, -r1, c163
+    o.texcoord3.y = dot(-temp1.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o8.y, -r1, c164
+    o.texcoord4.y = dot(-temp1.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mad r0.xyz, v1, c177.x, c177.y
+    temp0.xyz = i.normal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 r1.x, r0, c0[a0.x]
+    temp1.x = dot(temp0.xyz, (bones[0 + (addr0.x / 3)]._m00_m10_m20_m30).xyz);
+    // dp3 r1.y, r0, c1[a0.x]
+    temp1.y = dot(temp0.xyz, (bones[0 + (addr0.x / 3)]._m01_m11_m21_m31).xyz);
+    // dp3 r1.z, r0, c2[a0.x]
+    temp1.z = dot(temp0.xyz, (bones[0 + (addr0.x / 3)]._m02_m12_m22_m32).xyz);
+    // mul r1.xyz, r1, v2.y
+    temp1.xyz = temp1.xyz * i.blendweight.yyy;
+    // dp3 r2.x, r0, c0[a0.y]
+    temp2.x = dot(temp0.xyz, (bones[0 + (addr0.y / 3)]._m00_m10_m20_m30).xyz);
+    // dp3 r2.y, r0, c1[a0.y]
+    temp2.y = dot(temp0.xyz, (bones[0 + (addr0.y / 3)]._m01_m11_m21_m31).xyz);
+    // dp3 r2.z, r0, c2[a0.y]
+    temp2.z = dot(temp0.xyz, (bones[0 + (addr0.y / 3)]._m02_m12_m22_m32).xyz);
+    // mad r1.xyz, v2.x, r2, r1
+    temp1.xyz = i.blendweight.xxx * temp2.xyz + temp1.xyz;
+    // dp3 r2.x, r0, c0[a0.z]
+    temp2.x = dot(temp0.xyz, (bones[0 + (addr0.z / 3)]._m00_m10_m20_m30).xyz);
+    // dp3 r2.y, r0, c1[a0.z]
+    temp2.y = dot(temp0.xyz, (bones[0 + (addr0.z / 3)]._m01_m11_m21_m31).xyz);
+    // dp3 r2.z, r0, c2[a0.z]
+    temp2.z = dot(temp0.xyz, (bones[0 + (addr0.z / 3)]._m02_m12_m22_m32).xyz);
+    // mad r0.xyz, v2.z, r2, r1
+    temp0.xyz = i.blendweight.zzz * temp2.xyz + temp1.xyz;
+    // nrm r1.xyz, r0
+    temp1.xyz = normalize(temp0.xyz).xyz;
+    // dp3 o6.z, r1, c162
+    o.texcoord2.z = dot(temp1.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o7.z, r1, c163
+    o.texcoord3.z = dot(temp1.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o8.z, r1, c164
+    o.texcoord4.z = dot(temp1.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mov o4.xy, v4
+    o.texcoord.xy = i.texcoord.xy;
+    // mov o4.zw, v5.xyxy
+    o.texcoord.zw = i.texcoord1.xy;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+sampler2D bump_normal_texture : register(ps_3_0, s5);
+column_major float4x4 camera_world_matrix : register(ps_3_0, c0);
+sampler2D diffuse_layer0_texture : register(ps_3_0, s3);
+sampler2D diffuse_layer1_texture : register(ps_3_0, s1);
+sampler2D diffuse_layer2_texture : register(ps_3_0, s2);
+sampler2D diffuse_layer3_texture : register(ps_3_0, s0);
+sampler2D diffuse_texture : register(ps_3_0, s4);
+float2 ref_cubemap_pattern_control : register(ps_3_0, c7);
+float2 ref_pattern_pos : register(ps_3_0, c4);
+float3 ref_pattern_tweak : register(ps_3_0, c3);
+float3 ref_uv_scale : register(ps_3_0, c5);
+float ref_wear_tear_value : register(ps_3_0, c6);
+samplerCUBE reflection_texture : register(ps_3_0, s6);
+struct PixelMain_Input
+{
+    float2 texcoord6 : TEXCOORD6;
+    float texcoord7 : TEXCOORD7;
+    float3 texcoord5 : TEXCOORD5;
+    float4 texcoord : TEXCOORD;
+    float texcoord1 : TEXCOORD1;
+    float3 texcoord2 : TEXCOORD2;
+    float3 texcoord3 : TEXCOORD3;
+    float3 texcoord4 : TEXCOORD4;
+};
+
+struct PixelMain_Output
+{
+    float4 color1 : COLOR1;
+    float4 color : COLOR;
+    float4 color2 : COLOR2;
+};
+
+PixelMain_Output PixelMain(PixelMain_Input i)
+{
+    PixelMain_Output o;
+    float4 temp0, temp1, temp2, temp3, temp4, temp5, temp6, temp7;
+    // def c8, 1.3333334, 0.45454547, 5, 0.145
+    // def c9, 0.001, 0, 1.5, 20
+    // def c10, -0.5, 1, 1.025, 0.75
+    // def c11, 0.15915494, 0.5, 6.2831855, -3.1415927
+    // def c12, -1, 1, -2, 3
+    // def c13, 7, 1E-05, 0, 1
+    // dcl_texcoord6 v0.xy
+    // dcl_texcoord7 v1.x
+    // dcl_texcoord5 v2.xyz
+    // dcl_texcoord v3
+    // dcl_texcoord1 v4.x
+    // dcl_texcoord2 v5.xyz
+    // dcl_texcoord3 v6.xyz
+    // dcl_texcoord4 v7.xyz
+    // dcl_2d s0
+    // dcl_2d s1
+    // dcl_2d s2
+    // dcl_2d s3
+    // dcl_2d s4
+    // dcl_2d s5
+    // dcl_cube s6
+    // mov r0.y, c3.y
+    temp0.y = ref_pattern_tweak.y;
+    // mad r0.x, r0.y, c11.x, c11.y
+    temp0.x = temp0.y * float1(0.15915494) + float1(0.5);
+    // frc r0.x, r0.x
+    temp0.x = frac(temp0.x);
+    // mad r0.x, r0.x, c11.z, c11.w
+    temp0.x = temp0.x * float1(6.2831855) + float1(-3.1415927);
+    // sincos r1.xy, r0.x
+    temp1.xy = float2(cos(temp0.x), sin(temp0.x));
+    // mul r0.xy, r1.yxzw, c12
+    temp0.xy = temp1.yx * float2(-1, 1);
+    // add r0.zw, c10.x, v3
+    temp0.zw = float2(-0.5, -0.5) + i.texcoord.zw;
+    // dp2add r0.y, r0.zwzw, r0, c9.y
+    temp0.y = dot(temp0.zw, temp0.xy) + float1(0);
+    // dp2add r0.x, r0.zwzw, r1, c9.y
+    temp0.x = dot(temp0.zw, temp1.xy) + float1(0);
+    // add r0.xy, r0, c4
+    temp0.xy = temp0.xy + ref_pattern_pos.xy;
+    // add r0.xy, r0, -c10.x
+    temp0.xy = temp0.xy + float2(0.5, 0.5);
+    // mul r0.xy, r0, c3.x
+    temp0.xy = temp0.xy * ref_pattern_tweak.xx;
+    // texld r0, r0, s3
+    temp0 = tex2D(diffuse_layer0_texture, temp0.xy);
+    // texld_pp r1, v3, s5
+    temp1 = /* not implemented _pp modifier */ tex2D(bump_normal_texture, i.texcoord.xy);
+    // add_pp r1.xy, r1.wyzw, c10.x
+    temp1.xy = /* not implemented _pp modifier */ temp1.wy + float2(-0.5, -0.5);
+    // add_pp r1.xy, r1, r1
+    temp1.xy = /* not implemented _pp modifier */ temp1.xy + temp1.xy;
+    // mul_pp r1.w, r1.x, r1.x
+    temp1.w = /* not implemented _pp modifier */ temp1.x * temp1.x;
+    // mad_pp r1.w, r1.y, r1.y, -r1.w
+    temp1.w = /* not implemented _pp modifier */ temp1.y * temp1.y + -temp1.w;
+    // add_pp r1.w, -r1.w, c10.y
+    temp1.w = /* not implemented _pp modifier */ -temp1.w + float1(1);
+    // rsq_pp r1.w, r1.w
+    temp1.w = /* not implemented _pp modifier */ 1 / sqrt(temp1.w);
+    // rcp_pp r1.z, r1.w
+    temp1.z = /* not implemented _pp modifier */ 1.0f / temp1.w;
+    // dp3 r2.x, r1, v5
+    temp2.x = dot(temp1.xyz, i.texcoord2.xyz);
+    // dp3 r2.y, r1, v6
+    temp2.y = dot(temp1.xyz, i.texcoord3.xyz);
+    // dp3 r2.z, r1, v7
+    temp2.z = dot(temp1.xyz, i.texcoord4.xyz);
+    // nrm r1.xyz, r2
+    temp1.xyz = normalize(temp2.xyz).xyz;
+    // add r2.x, c0.w, -v2.x
+    temp2.x = (camera_world_matrix._m00_m10_m20_m30).w + -i.texcoord5.x;
+    // add r2.y, c1.w, -v2.y
+    temp2.y = (camera_world_matrix._m01_m11_m21_m31).w + -i.texcoord5.y;
+    // add r2.z, c2.w, -v2.z
+    temp2.z = (camera_world_matrix._m02_m12_m22_m32).w + -i.texcoord5.z;
+    // nrm r3.xyz, r2
+    temp3.xyz = normalize(temp2.xyz).xyz;
+    // dp3 r1.w, r1, r3
+    temp1.w = dot(temp1.xyz, temp3.xyz);
+    // mov_sat r2.x, r1.w
+    temp2.x = saturate(temp1.w);
+    // add r1.w, r1.w, r1.w
+    temp1.w = temp1.w + temp1.w;
+    // mad r3.xyz, r1.w, -r1, r3
+    temp3.xyz = temp1.www * -temp1.xyz + temp3.xyz;
+    // mad_pp oC1.xyz, r1, -c10.x, -c10.x
+    o.color1.xyz = /* not implemented _pp modifier */ temp1.xyz * float3(0.5, 0.5, 0.5) + float3(0.5, 0.5, 0.5);
+    // add r1.xy, -r2.x, c10.yzzw
+    temp1.xy = -temp2.xx + float2(1, 1.025);
+    // mov_sat r2.y, r1.y
+    temp2.y = saturate(temp1.y);
+    // texld_pp r4, v3, s4
+    temp4 = /* not implemented _pp modifier */ tex2D(diffuse_texture, i.texcoord.xy);
+    // pow r1.y, r4.x, c8.y
+    temp1.y = pow(temp4.x, float1(0.45454547));
+    // add r1.w, r4.z, -c6.x
+    temp1.w = temp4.z + -ref_wear_tear_value.x;
+    // mul_sat r1.w, r1.w, c8.x
+    temp1.w = saturate(temp1.w * float1(1.3333334));
+    // mad r2.x, r1.w, c8.w, r1.y
+    temp2.x = temp1.w * float1(0.145) + temp1.y;
+    // texld r5, r2, s1
+    temp5 = tex2D(diffuse_layer1_texture, temp2.xy);
+    // mov r2.z, c9.x
+    temp2.z = float1(0.001);
+    // texld r2, r2.xzzw, s1
+    temp2 = tex2D(diffuse_layer1_texture, temp2.xz);
+    // lrp r6.xy, r2.z, -c10.x, r4.wyzw
+    temp6.xy = lerp(temp4.wy, float2(0.5, 0.5), temp2.zz);
+    // mul r5.xyz, r5, r6.y
+    temp5.xyz = temp5.xyz * temp6.yyy;
+    // add r7.xyz, r5, r5
+    temp7.xyz = temp5.xyz + temp5.xyz;
+    // dp2add r7.w, r6.x, r2.w, c9.y
+    temp7.w = dot(temp6.xx, temp2.ww) + float1(0);
+    // mov_pp r4.w, r6.x
+    temp4.w = /* not implemented _pp modifier */ temp6.x;
+    // max r1.y, r4.y, c9.y
+    temp1.y = max(temp4.y, float1(0));
+    // lrp_pp r6, v1.x, r7, r4
+    temp6 = /* not implemented _pp modifier */ lerp(temp4, temp7, i.texcoord7.x);
+    // add r2.z, r1.y, c10.x
+    temp2.z = temp1.y + float1(-0.5);
+    // mul r1.y, r1.y, c9.z
+    temp1.y = temp1.y * float1(1.5);
+    // cmp r1.y, r2.z, c10.w, r1.y
+    temp1.y = (temp2.z >= 0) ? float1(0.75) : temp1.y;
+    // mad r0.w, r0.w, r1.y, -r6.w
+    temp0.w = temp0.w * temp1.y + -temp6.w;
+    // add r2.z, -r1.w, c10.y
+    temp2.z = -temp1.w + float1(1);
+    // mul r4.x, r1.w, c8.z
+    temp4.x = temp1.w * float1(5);
+    // mov_sat r4.x, r4.x
+    temp4.x = saturate(temp4.x);
+    // add r1.w, -r4.x, c10.y
+    temp1.w = -temp4.x + float1(1);
+    // mul r2.w, c3.z, v1.x
+    temp2.w = ref_pattern_tweak.z * i.texcoord7.x;
+    // mul r2.w, r0.x, r2.w
+    temp2.w = temp0.x * temp2.w;
+    // mul r2.z, r2.z, r2.w
+    temp2.z = temp2.z * temp2.w;
+    // mul r2.z, r5.w, r2.z
+    temp2.z = temp5.w * temp2.z;
+    // mad_pp r0.w, r2.z, r0.w, r6.w
+    temp0.w = /* not implemented _pp modifier */ temp2.z * temp0.w + temp6.w;
+    // texld r4, v0, s0
+    temp4 = tex2D(diffuse_layer3_texture, i.texcoord6.xy);
+    // add r2.z, -r0.w, r4.w
+    temp2.z = -temp0.w + temp4.w;
+    // mul_sat r2.w, r4.w, c9.w
+    temp2.w = saturate(temp4.w * float1(20));
+    // mad r4.w, r2.w, c12.z, c12.w
+    temp4.w = temp2.w * float1(-2) + float1(3);
+    // mul r2.w, r2.w, r2.w
+    temp2.w = temp2.w * temp2.w;
+    // mul r2.w, r2.w, r4.w
+    temp2.w = temp2.w * temp4.w;
+    // mul r2.w, r1.w, r2.w
+    temp2.w = temp1.w * temp2.w;
+    // mul r1.w, r0.x, r1.w
+    temp1.w = temp0.x * temp1.w;
+    // mul r4.w, r2.w, c5.z
+    temp4.w = temp2.w * ref_uv_scale.z;
+    // mad_pp oC1.w, r4.w, r2.z, r0.w
+    o.color1.w = /* not implemented _pp modifier */ temp4.w * temp2.z + temp0.w;
+    // mul r0.x, r0.x, r5.w
+    temp0.x = temp0.x * temp5.w;
+    // lrp r4.w, r0.x, r0.z, r2.y
+    temp4.w = lerp(temp2.y, temp0.z, temp0.x);
+    // mov r1.z, r0.y
+    temp1.z = temp0.y;
+    // texld r0, r1.zxzw, s2
+    temp0 = tex2D(diffuse_layer2_texture, temp1.zx);
+    // dp2add r0.w, r1.x, r1.x, c10.w
+    temp0.w = dot(temp1.xx, temp1.xx) + float1(0.75);
+    // mad r0.xyz, r0, r1.y, -r6
+    temp0.xyz = temp0.xyz * temp1.yyy + -temp6.xyz;
+    // add r1.x, -r4.w, c10.y
+    temp1.x = -temp4.w + float1(1);
+    // mov oC0.w, r4.w
+    o.color.w = temp4.w;
+    // mul r1.x, r1.x, c13.x
+    temp1.x = temp1.x * float1(7);
+    // frc r1.y, r1.x
+    temp1.y = frac(temp1.x);
+    // add r3.w, -r1.y, r1.x
+    temp3.w = -temp1.y + temp1.x;
+    // texldl r3, r3, s6
+    temp3 = texCUBElod(reflection_texture, temp3);
+    // mul r1.x, r1.w, c7.y
+    temp1.x = temp1.w * ref_cubemap_pattern_control.y;
+    // mul r1.xy, r5.w, r1.xwzw
+    temp1.xy = temp5.ww * temp1.xw;
+    // lrp r3.w, r1.x, c7.x, r2.x
+    temp3.w = lerp(temp2.x, ref_cubemap_pattern_control.x, temp1.x);
+    // mul r1.xzw, r3.w, r3.xyyz
+    temp1.xzw = temp3.www * temp3.xyz;
+    // mul r1.xzw, r0.w, r1
+    temp1.xzw = temp0.www * temp1.xzw;
+    // mad_pp r0.xyz, r1.y, r0, r6
+    temp0.xyz = /* not implemented _pp modifier */ temp1.yyy * temp0.xyz + temp6.xyz;
+    // lrp_pp r3.xyz, r2.w, r4, r0
+    temp3.xyz = /* not implemented _pp modifier */ lerp(temp0.xyz, temp4.xyz, temp2.www);
+    // add r0.x, c13.y, -v3.y
+    temp0.x = float1(1E-05) + -i.texcoord.y;
+    // cmp r0.y, -r0.x, c13.z, c13.w
+    temp0.y = (-temp0.x >= 0) ? float1(0) : float1(1);
+    // cmp r0.x, r0.x, -c13.z, -c13.w
+    temp0.x = (temp0.x >= 0) ? float1(-0) : float1(-1);
+    // add r0.x, r0.x, r0.y
+    temp0.x = temp0.x + temp0.y;
+    // max r1.y, r0.x, c9.y
+    temp1.y = max(temp0.x, float1(0));
+    // mad_sat_pp oC0.xyz, r1_abs.xzww, r1.y, r3
+    ;// error
+    // mov oC2, v4.x
+    o.color2 = i.texcoord1.x;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+### Technique `contours`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 0,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 1,
+	D3DRS_CULLMODE = 2,
+	D3DRS_COLORWRITEENABLE = 15,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+	D3DRS_BLENDOP = 1,
+	D3DRS_DESTBLEND = 6,
+	D3DRS_SRCBLEND = 5,
+};
+```
+### Sampler States
+### Shaders
+#### Vertex Shader
+```hlsl
+column_major float4x3 bones[54] : register(vs_3_0, c0);
+column_major float4x4 proj_matrix : register(vs_3_0, c170);
+column_major float4x4 view_matrix : register(vs_3_0, c166);
+column_major float4x4 world_matrix : register(vs_3_0, c162);
+struct VertexMain_Input
+{
+    float4 blendweight : BLENDWEIGHT;
+    float4 blendindices : BLENDINDICES;
+    float4 position : POSITION;
+};
+
+float4 VertexMain(VertexMain_Input i) : POSITION
+{
+    float4 out_position;
+    float4 temp0, temp1;
+    float2 addr0;
+    // def c174, 3, 1, 0, 0
+    // dcl_blendweight v0
+    // dcl_blendindices v1
+    // dcl_position v2
+    // dcl_position o0
+    // mul r0.xyz, c174.x, v1
+    temp0.xyz = float3(3, 3, 3) * i.blendindices.xyz;
+    // mova a0.x, r0.y
+    addr0.x = temp0.y;
+    // dp4 r1.x, v2, c0[a0.x]
+    temp1.x = dot(i.position, (bones[0 + (addr0.x / 3)]._m00_m10_m20_m30));
+    // dp4 r1.y, v2, c1[a0.x]
+    temp1.y = dot(i.position, (bones[0 + (addr0.x / 3)]._m01_m11_m21_m31));
+    // dp4 r1.z, v2, c2[a0.x]
+    temp1.z = dot(i.position, (bones[0 + (addr0.x / 3)]._m02_m12_m22_m32));
+    // mul r1.xyz, r1, v0.y
+    temp1.xyz = temp1.xyz * i.blendweight.yyy;
+    // mova a0.xy, r0.xzzw
+    addr0.xy = temp0.xz;
+    // dp4 r0.x, v2, c0[a0.x]
+    temp0.x = dot(i.position, (bones[0 + (addr0.x / 3)]._m00_m10_m20_m30));
+    // dp4 r0.y, v2, c1[a0.x]
+    temp0.y = dot(i.position, (bones[0 + (addr0.x / 3)]._m01_m11_m21_m31));
+    // dp4 r0.z, v2, c2[a0.x]
+    temp0.z = dot(i.position, (bones[0 + (addr0.x / 3)]._m02_m12_m22_m32));
+    // mad r0.xyz, v0.x, r0, r1
+    temp0.xyz = i.blendweight.xxx * temp0.xyz + temp1.xyz;
+    // dp4 r1.x, v2, c0[a0.y]
+    temp1.x = dot(i.position, (bones[0 + (addr0.y / 3)]._m00_m10_m20_m30));
+    // dp4 r1.y, v2, c1[a0.y]
+    temp1.y = dot(i.position, (bones[0 + (addr0.y / 3)]._m01_m11_m21_m31));
+    // dp4 r1.z, v2, c2[a0.y]
+    temp1.z = dot(i.position, (bones[0 + (addr0.y / 3)]._m02_m12_m22_m32));
+    // mad r0.xyz, v0.z, r1, r0
+    temp0.xyz = i.blendweight.zzz * temp1.xyz + temp0.xyz;
+    // mov r0.w, c174.y
+    temp0.w = float1(1);
+    // dp4 r1.x, r0, c162
+    temp1.x = dot(temp0, (world_matrix._m00_m10_m20_m30));
+    // dp4 r1.y, r0, c163
+    temp1.y = dot(temp0, (world_matrix._m01_m11_m21_m31));
+    // dp4 r1.z, r0, c164
+    temp1.z = dot(temp0, (world_matrix._m02_m12_m22_m32));
+    // dp4 r1.w, r0, c165
+    temp1.w = dot(temp0, (world_matrix._m03_m13_m23_m33));
+    // dp4 r0.x, r1, c166
+    temp0.x = dot(temp1, (view_matrix._m00_m10_m20_m30));
+    // dp4 r0.y, r1, c167
+    temp0.y = dot(temp1, (view_matrix._m01_m11_m21_m31));
+    // dp4 r0.z, r1, c168
+    temp0.z = dot(temp1, (view_matrix._m02_m12_m22_m32));
+    // dp4 r0.w, r1, c169
+    temp0.w = dot(temp1, (view_matrix._m03_m13_m23_m33));
+    // dp4 o0.x, r0, c170
+    out_position.x = dot(temp0, (proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, r0, c171
+    out_position.y = dot(temp0, (proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.z, r0, c172
+    out_position.z = dot(temp0, (proj_matrix._m02_m12_m22_m32));
+    // dp4 o0.w, r0, c173
+    out_position.w = dot(temp0, (proj_matrix._m03_m13_m23_m33));
+    // 
+
+    return out_position;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+column_major float4x4 camera_world_matrix : register(ps_3_0, c3);
+float3 ref_contour_color : register(ps_3_0, c6);
+float ref_contour_distance : register(ps_3_0, c8);
+float ref_contour_opacity : register(ps_3_0, c7);
+column_major float4x4 world_matrix : register(ps_3_0, c0);
+float4 PixelMain() : COLOR
+{
+    float4 out_color;
+    float4 temp0;
+    float2 temp1;
+    // def c9, 1, 0, 0, 0
+    // mov r0.w, c0.w
+    temp0.w = (world_matrix._m00_m10_m20_m30).w;
+    // add r0.x, r0.w, -c3.w
+    temp0.x = temp0.w + -(camera_world_matrix._m00_m10_m20_m30).w;
+    // mov r0.w, c1.w
+    temp0.w = (world_matrix._m01_m11_m21_m31).w;
+    // add r0.y, r0.w, -c4.w
+    temp0.y = temp0.w + -(camera_world_matrix._m01_m11_m21_m31).w;
+    // mov r0.w, c2.w
+    temp0.w = (world_matrix._m02_m12_m22_m32).w;
+    // add r0.z, r0.w, -c5.w
+    temp0.z = temp0.w + -(camera_world_matrix._m02_m12_m22_m32).w;
+    // dp3 r0.x, r0, r0
+    temp0.x = dot(temp0.xyz, temp0.xyz);
+    // rsq r0.x, r0.x
+    temp0.x = 1 / sqrt(temp0.x);
+    // rcp r0.x, r0.x
+    temp0.x = 1.0f / temp0.x;
+    // add r0.x, -r0.x, c8.x
+    temp0.x = -temp0.x + ref_contour_distance.x;
+    // cmp r0.x, r0.x, c9.x, c9.y
+    temp0.x = (temp0.x >= 0) ? float1(1) : float1(0);
+    // mov r1.xy, c9
+    temp1.xy = float2(1, 0);
+    // cmp r0.y, -c8.x, r1.x, r1.y
+    temp0.y = (-ref_contour_distance.x >= 0) ? temp1.x : temp1.y;
+    // add r0.x, r0.y, r0.x
+    temp0.x = temp0.y + temp0.x;
+    // frc r0.y, -c7.x
+    temp0.y = frac(-ref_contour_opacity.x);
+    // add r0.y, r0.y, c7.x
+    temp0.y = temp0.y + ref_contour_opacity.x;
+    // mul_pp oC0.w, r0.x, r0.y
+    out_color.w = /* not implemented _pp modifier */ temp0.x * temp0.y;
+    // mov_pp oC0.xyz, c6
+    out_color.xyz = /* not implemented _pp modifier */ ref_contour_color.xyz;
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

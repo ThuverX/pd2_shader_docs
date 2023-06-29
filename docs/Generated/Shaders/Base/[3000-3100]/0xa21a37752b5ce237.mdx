@@ -1,0 +1,119 @@
+---
+id: 0xa21a37752b5ce237
+title: "Generic Shadow Caster Diffuse Texture Instanced Nvidia Rl Environment Vertex Color"
+---
+
+# Generic Shadow Caster Diffuse Texture Instanced Nvidia Rl Environment Vertex Color
+(`generic:shadow_caster:DIFFUSE_TEXTURE:INSTANCED:NVIDIA:RL_ENVIRONMENT:VERTEX_COLOR`, `0xa21a37752b5ce237`)
+
+### Technique `ambient`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 1,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 2,
+	D3DRS_COLORWRITEENABLE = 0,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 961656599,
+	D3DRS_SLOPESCALEDEPTHBIAS = 1075838976,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+### Shaders
+#### Vertex Shader
+```hlsl
+column_major float4x4 ref_world_tm[50] : register(vs_3_0, c0);
+column_major float4x4 view_proj_matrix : register(vs_3_0, c200);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 position1 : POSITION1;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float texcoord1 : TEXCOORD1;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0, temp1;
+    float addr0;
+    // def c204, 4, 1, 0, 0
+    // dcl_position v0
+    // dcl_position1 v1
+    // dcl_position o0
+    // dcl_texcoord1 o1.x
+    // frc r0.x, v1.x
+    temp0.x = frac(i.position1.x);
+    // add r0.x, -r0.x, v1.x
+    temp0.x = -temp0.x + i.position1.x;
+    // mul r0.x, r0.x, c204.x
+    temp0.x = temp0.x * float1(4);
+    // mova a0.x, r0.x
+    addr0.x = temp0.x;
+    // mad r0, v0.xyzx, c204.yyyz, c204.zzzy
+    temp0 = i.position.xyzx * float4(1, 1, 1, 0) + float4(0, 0, 0, 1);
+    // dp4 r1.x, r0, c0[a0.x]
+    temp1.x = dot(temp0, (ref_world_tm[0 + (addr0.x / 4)]._m00_m10_m20_m30));
+    // dp4 r1.y, r0, c1[a0.x]
+    temp1.y = dot(temp0, (ref_world_tm[0 + (addr0.x / 4)]._m01_m11_m21_m31));
+    // dp4 r1.z, r0, c2[a0.x]
+    temp1.z = dot(temp0, (ref_world_tm[0 + (addr0.x / 4)]._m02_m12_m22_m32));
+    // dp4 r1.w, r0, c3[a0.x]
+    temp1.w = dot(temp0, (ref_world_tm[0 + (addr0.x / 4)]._m03_m13_m23_m33));
+    // dp4 o0.x, r1, c200
+    o.position.x = dot(temp1, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, r1, c201
+    o.position.y = dot(temp1, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, r1, c203
+    o.position.w = dot(temp1, (view_proj_matrix._m03_m13_m23_m33));
+    // dp4 r0.x, r1, c202
+    temp0.x = dot(temp1, (view_proj_matrix._m02_m12_m22_m32));
+    // mov o0.z, r0.x
+    o.position.z = temp0.x;
+    // mov o1.x, r0.x
+    o.texcoord1 = temp0.x;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+float4 PixelMain(float texcoord1 : TEXCOORD1) : COLOR
+{
+    float4 out_color;
+    // def c0, 1, 0, 0, 0
+    // dcl_texcoord1 v0.x
+    // mul oC0, c0.xyyy, v0.x
+    out_color = float4(1, 0, 0, 0) * texcoord1.x;
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

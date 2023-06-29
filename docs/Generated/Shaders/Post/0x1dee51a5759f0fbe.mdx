@@ -1,0 +1,214 @@
+---
+id: 0x1dee51a5759f0fbe
+title: "Post Smaa Edge Detect Default Smaa Hlsl 3"
+---
+
+# Post Smaa Edge Detect Default Smaa Hlsl 3
+(`post_SMAA_edge_detect:default:SMAA_HLSL_3`, `0x1dee51a5759f0fbe`)
+
+### Technique `ambient`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 0,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 1,
+	D3DRS_COLORWRITEENABLE = 15,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 1,
+	D3DRS_STENCILFUNC = 8,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = -1,
+	D3DRS_STENCILPASS = 3,
+	D3DRS_STENCILREF = 8,
+	D3DRS_STENCILWRITEMASK = 8,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float3 render_target_size : register(vs_3_0, c4);
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 texcoord : TEXCOORD;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float2 texcoord : TEXCOORD;
+    float4 texcoord1 : TEXCOORD1;
+    float4 texcoord2 : TEXCOORD2;
+    float4 texcoord3 : TEXCOORD3;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0;
+    // def c5, -1, 0, 1, -2
+    // dcl_position v0
+    // dcl_texcoord v1
+    // dcl_position o0
+    // dcl_texcoord o1.xy
+    // dcl_texcoord1 o2
+    // dcl_texcoord2 o3
+    // dcl_texcoord3 o4
+    // dp4 o0.x, v0, c0
+    o.position.x = dot(i.position, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, v0, c1
+    o.position.y = dot(i.position, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, v0, c3
+    o.position.w = dot(i.position, (view_proj_matrix._m03_m13_m23_m33));
+    // rcp r0.xz, c4.x
+    temp0.xz = 1.0f / render_target_size.x;
+    // rcp r0.yw, c4.y
+    temp0.yw = 1.0f / render_target_size.y;
+    // mad o2, r0.zwzw, c5.xyyx, v1.xyxy
+    o.texcoord1 = temp0.zwzw * float4(-1, 0, 0, -1) + i.texcoord.xyxy;
+    // mad o3, r0.zwzw, c5.zyyz, v1.xyxy
+    o.texcoord2 = temp0.zwzw * float4(1, 0, 0, 1) + i.texcoord.xyxy;
+    // mad o4, r0, c5.wyyw, v1.xyxy
+    o.texcoord3 = temp0 * float4(-2, 0, 0, -2) + i.texcoord.xyxy;
+    // mov o0.z, c5.z
+    o.position.z = float1(1);
+    // mov o1.xy, v1
+    o.texcoord = i.texcoord;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+sampler2D diffuse_texture : register(ps_3_0, s0);
+struct PixelMain_Input
+{
+    float2 texcoord : TEXCOORD;
+    float4 texcoord1 : TEXCOORD1;
+    float4 texcoord2 : TEXCOORD2;
+    float4 texcoord3 : TEXCOORD3;
+};
+
+float4 PixelMain(PixelMain_Input i) : COLOR
+{
+    float4 out_color;
+    float4 temp0, temp1, temp3;
+    float3 temp2;
+    float2 temp4;
+    // def c0, -0.1, 1, 0, 2
+    // dcl_texcoord v0.xy
+    // dcl_texcoord1 v1
+    // dcl_texcoord2 v2
+    // dcl_texcoord3 v3
+    // dcl_2d s0
+    // texld r0, v0, s0
+    temp0 = tex2D(diffuse_texture, i.texcoord.xy);
+    // texld r1, v1, s0
+    temp1 = tex2D(diffuse_texture, i.texcoord1.xy);
+    // add r1.xyz, r0, -r1
+    temp1.xyz = temp0.xyz + -temp1.xyz;
+    // max r0.w, r1_abs.x, r1_abs.y
+    temp0.w = max(abs(temp1).x, abs(temp1).y);
+    // max r2.x, r0.w, r1_abs.z
+    temp2.x = max(temp0.w, abs(temp1).z);
+    // texld r1, v1.zwzw, s0
+    temp1 = tex2D(diffuse_texture, i.texcoord1.zw);
+    // add r1.xyz, r0, -r1
+    temp1.xyz = temp0.xyz + -temp1.xyz;
+    // max r0.w, r1_abs.x, r1_abs.y
+    temp0.w = max(abs(temp1).x, abs(temp1).y);
+    // max r2.y, r0.w, r1_abs.z
+    temp2.y = max(temp0.w, abs(temp1).z);
+    // add r1.xy, r2, c0.x
+    temp1.xy = temp2.xy + float2(-0.1, -0.1);
+    // cmp r1.xy, r1, c0.y, c0.z
+    temp1.xy = (temp1.xy >= 0) ? float2(1, 1) : float2(0, 0);
+    // dp2add r0.w, r1, c0.y, c0.z
+    temp0.w = dot(temp1.xy, float2(1, 1)) + float1(0);
+    // cmp r3, -r0.w, -c0.y, -c0.z
+    temp3 = (-temp0.w >= 0) ? float4(-1, -1, -1, -1) : float4(-0, -0, -0, -0);
+    // texkill r3
+    clip(temp3);
+    // texld r3, v2, s0
+    temp3 = tex2D(diffuse_texture, i.texcoord2.xy);
+    // add r3.xyz, r0, -r3
+    temp3.xyz = temp0.xyz + -temp3.xyz;
+    // max r0.w, r3_abs.x, r3_abs.y
+    temp0.w = max(abs(temp3).x, abs(temp3).y);
+    // max r4.x, r0.w, r3_abs.z
+    temp4.x = max(temp0.w, abs(temp3).z);
+    // texld r3, v2.zwzw, s0
+    temp3 = tex2D(diffuse_texture, i.texcoord2.zw);
+    // add r3.xyz, r0, -r3
+    temp3.xyz = temp0.xyz + -temp3.xyz;
+    // max r0.w, r3_abs.x, r3_abs.y
+    temp0.w = max(abs(temp3).x, abs(temp3).y);
+    // max r4.y, r0.w, r3_abs.z
+    temp4.y = max(temp0.w, abs(temp3).z);
+    // max r1.zw, r2.xyxy, r4.xyxy
+    temp1.zw = max(temp2.xy, temp4.xy);
+    // texld r3, v3, s0
+    temp3 = tex2D(diffuse_texture, i.texcoord3.xy);
+    // add r3.xyz, r0, -r3
+    temp3.xyz = temp0.xyz + -temp3.xyz;
+    // max r0.w, r3_abs.x, r3_abs.y
+    temp0.w = max(abs(temp3).x, abs(temp3).y);
+    // max r4.x, r0.w, r3_abs.z
+    temp4.x = max(temp0.w, abs(temp3).z);
+    // texld r3, v3.zwzw, s0
+    temp3 = tex2D(diffuse_texture, i.texcoord3.zw);
+    // add r0.xyz, r0, -r3
+    temp0.xyz = temp0.xyz + -temp3.xyz;
+    // max r2.z, r0_abs.x, r0_abs.y
+    temp2.z = max(abs(temp0).x, abs(temp0).y);
+    // max r4.y, r2.z, r0_abs.z
+    temp4.y = max(temp2.z, abs(temp0).z);
+    // max r0.xy, r1.zwzw, r4
+    temp0.xy = max(temp1.zw, temp4.xy);
+    // max r1.z, r0.x, r0.y
+    temp1.z = max(temp0.x, temp0.y);
+    // mad r0.xy, r2, c0.w, -r1.z
+    temp0.xy = temp2.xy * float2(2, 2) + -temp1.zz;
+    // cmp r0.xy, r0, r1, c0.z
+    temp0.xy = (temp0.xy >= 0) ? temp1.xy : float2(0, 0);
+    // mov oC0.xy, r0
+    out_color.xy = temp0.xy;
+    // mov oC0.zw, c0.z
+    out_color.zw = float2(0, 0);
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

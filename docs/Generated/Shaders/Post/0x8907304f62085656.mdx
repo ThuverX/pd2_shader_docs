@@ -1,0 +1,79 @@
+---
+id: 0x8907304f62085656
+title: "Post Area Mask Depth Default"
+---
+
+# Post Area Mask Depth Default
+(`post_area_mask_depth:default`, `0x8907304f62085656`)
+
+### Technique `ambient`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 8,
+	D3DRS_ZWRITEENABLE = 1,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 1,
+	D3DRS_COLORWRITEENABLE = 15,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 1,
+	D3DRS_STENCILFUNC = 8,
+	D3DRS_STENCILFAIL = 3,
+	D3DRS_STENCILMASK = -1,
+	D3DRS_STENCILPASS = 3,
+	D3DRS_STENCILREF = 16,
+	D3DRS_STENCILWRITEMASK = 16,
+	D3DRS_STENCILZFAIL = 3,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+### Shaders
+#### Vertex Shader
+```hlsl
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+float4 VertexMain(float4 position : POSITION) : POSITION
+{
+    float4 out_position;
+    // def c4, 0, 0, 0, 0
+    // dcl_position v0
+    // dcl_position o0
+    // dp4 o0.x, v0, c0
+    out_position.x = dot(position, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, v0, c1
+    out_position.y = dot(position, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, v0, c3
+    out_position.w = dot(position, (view_proj_matrix._m03_m13_m23_m33));
+    // mov o0.z, c4.x
+    out_position.z = float1(0);
+    // 
+
+    return out_position;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+float4 PixelMain() : COLOR
+{
+    float4 out_color;
+    // def c0, 0, 0, 0, 0
+    // mov oC0, c0.x
+    out_color = float4(0, 0, 0, 0);
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

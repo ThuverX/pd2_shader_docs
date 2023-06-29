@@ -1,0 +1,387 @@
+---
+id: 0xdbd9f0f1137197ea
+title: "Effect Default Lazer"
+---
+
+# Effect Default Lazer
+(`effect:default:LAZER`, `0xdbd9f0f1137197ea`)
+
+### Technique `additive`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 1,
+	D3DRS_CULLMODE = 2,
+	D3DRS_COLORWRITEENABLE = 7,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+	D3DRS_BLENDOP = 1,
+	D3DRS_DESTBLEND = 2,
+	D3DRS_SRCBLEND = 5,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float3 ref_lazer_color : register(vs_3_0, c8);
+float ref_lazer_length : register(vs_3_0, c9);
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+column_major float4x4 world_matrix : register(vs_3_0, c4);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 normal : NORMAL;
+    float4 texcoord : TEXCOORD;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float4 texcoord : TEXCOORD;
+    float4 texcoord1 : TEXCOORD1;
+    float4 texcoord2 : TEXCOORD2;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0;
+    // def c10, 2, -1, 0.25, 1
+    // dcl_position v0
+    // dcl_normal v1
+    // dcl_texcoord v2
+    // dcl_position o0
+    // dcl_texcoord o1
+    // dcl_texcoord1 o2
+    // dcl_texcoord2 o3
+    // mad r0.xyz, v1, c10.x, c10.y
+    temp0.xyz = i.normal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o2.x, r0, c4
+    o.texcoord1.x = dot(temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o2.y, r0, c5
+    o.texcoord1.y = dot(temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o2.z, r0, c6
+    o.texcoord1.z = dot(temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mov r0.y, v0.y
+    temp0.y = i.position.y;
+    // mad r0.y, c9.x, v2.x, r0.y
+    temp0.y = ref_lazer_length.x * i.texcoord.x + temp0.y;
+    // mul r0.xzw, c10.zyzw, v0
+    temp0.xzw = float3(0.25, 0.25, 1) * i.position.xzw;
+    // dp4 o3.x, r0, c4
+    o.texcoord2.x = dot(temp0, (world_matrix._m00_m10_m20_m30));
+    // dp4 o3.y, r0, c5
+    o.texcoord2.y = dot(temp0, (world_matrix._m01_m11_m21_m31));
+    // dp4 o3.z, r0, c6
+    o.texcoord2.z = dot(temp0, (world_matrix._m02_m12_m22_m32));
+    // dp4 o3.w, r0, c7
+    o.texcoord2.w = dot(temp0, (world_matrix._m03_m13_m23_m33));
+    // dp4 o0.x, r0, c0
+    o.position.x = dot(temp0, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, r0, c1
+    o.position.y = dot(temp0, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.z, r0, c2
+    o.position.z = dot(temp0, (view_proj_matrix._m02_m12_m22_m32));
+    // dp4 o0.w, r0, c3
+    o.position.w = dot(temp0, (view_proj_matrix._m03_m13_m23_m33));
+    // mov o1.xy, v2
+    o.texcoord.xy = i.texcoord.xy;
+    // mov o1.zw, c8.xyxy
+    o.texcoord.zw = ref_lazer_color.xy;
+    // mov o2.w, c8.z
+    o.texcoord1.w = ref_lazer_color.z;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+column_major float4x4 camera_world_matrix : register(ps_3_0, c0);
+sampler2D diffuse_texture : register(ps_3_0, s0);
+float ref_lazer_smoke_scale : register(ps_3_0, c4);
+float ref_lazer_time_scale : register(ps_3_0, c5);
+float ref_time : register(ps_3_0, c3);
+struct PixelMain_Input
+{
+    float4 texcoord : TEXCOORD;
+    float4 texcoord1 : TEXCOORD1;
+    float3 texcoord2 : TEXCOORD2;
+};
+
+float4 PixelMain(PixelMain_Input i) : COLOR
+{
+    float4 out_color;
+    float3 temp0;
+    float4 temp1;
+    // def c6, 0.5, 4, 1, 0
+    // dcl_texcoord v0.zw
+    // dcl_texcoord1 v1
+    // dcl_texcoord2 v2.xyz
+    // dcl_2d s0
+    // add r0.x, c0.w, -v2.x
+    temp0.x = (camera_world_matrix._m00_m10_m20_m30).w + -i.texcoord2.x;
+    // add r0.y, c1.w, -v2.y
+    temp0.y = (camera_world_matrix._m01_m11_m21_m31).w + -i.texcoord2.y;
+    // add r0.z, c2.w, -v2.z
+    temp0.z = (camera_world_matrix._m02_m12_m22_m32).w + -i.texcoord2.z;
+    // nrm r1.xyz, r0
+    temp1.xyz = normalize(temp0.xyz).xyz;
+    // dp3 r0.x, v1, r1
+    temp0.x = dot(i.texcoord1.xyz, temp1.xyz);
+    // mov r1.x, c3.x
+    temp1.x = ref_time.x;
+    // mul r0.y, r1.x, c5.x
+    temp0.y = temp1.x * ref_lazer_time_scale.x;
+    // mul r0.z, c4.x, v2.z
+    temp0.z = ref_lazer_smoke_scale.x * i.texcoord2.z;
+    // mad r0.y, r0.z, c6.x, r0.y
+    temp0.y = temp0.z * float1(0.5) + temp0.y;
+    // mad r0.yz, v2.xxyw, c4.x, r0.y
+    temp0.yz = i.texcoord2.xy * ref_lazer_smoke_scale.xx + temp0.yy;
+    // texld r1, r0.yzzw, s0
+    temp1 = tex2D(diffuse_texture, temp0.yz);
+    // mul r0.x, r0.x, r1.x
+    temp0.x = temp0.x * temp1.x;
+    // mov r1.xy, v0.zwzw
+    temp1.xy = i.texcoord.zw;
+    // mov r1.z, v1.w
+    temp1.z = i.texcoord1.w;
+    // mul r0.xyz, r0.x, r1
+    temp0.xyz = temp0.xxx * temp1.xyz;
+    // mul oC0.xyz, r0, c6.y
+    out_color.xyz = temp0.xyz * float3(4, 4, 4);
+    // mov oC0.w, c6.z
+    out_color.w = float1(1);
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.
+### Technique `effect_glow`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 1,
+	D3DRS_CULLMODE = 1,
+	D3DRS_COLORWRITEENABLE = 8,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+	D3DRS_BLENDOP = 1,
+	D3DRS_DESTBLEND = 2,
+	D3DRS_SRCBLEND = 2,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float3 ref_lazer_color : register(vs_3_0, c8);
+float ref_lazer_length : register(vs_3_0, c9);
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+column_major float4x4 world_matrix : register(vs_3_0, c4);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 normal : NORMAL;
+    float4 texcoord : TEXCOORD;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float4 texcoord : TEXCOORD;
+    float4 texcoord1 : TEXCOORD1;
+    float4 texcoord2 : TEXCOORD2;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0;
+    float4 temp1;
+    // def c10, 2, -1, 0.37, -0.25
+    // dcl_position v0
+    // dcl_normal v1
+    // dcl_texcoord v2
+    // dcl_position o0
+    // dcl_texcoord o1
+    // dcl_texcoord1 o2
+    // dcl_texcoord2 o3
+    // mad r0.xyz, v1, c10.x, c10.y
+    temp0.xyz = i.normal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o2.x, r0, c4
+    o.texcoord1.x = dot(temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o2.y, r0, c5
+    o.texcoord1.y = dot(temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o2.z, r0, c6
+    o.texcoord1.z = dot(temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mov r0.y, v0.y
+    temp0.y = i.position.y;
+    // mad r0.y, c9.x, v2.x, r0.y
+    temp0.y = ref_lazer_length.x * i.texcoord.x + temp0.y;
+    // mul r0.xzw, -c10.wywy, v0
+    temp0.xzw = float3(0.25, 0.25, 1) * i.position.xzw;
+    // dp4 o3.x, r0, c4
+    o.texcoord2.x = dot(temp0, (world_matrix._m00_m10_m20_m30));
+    // dp4 o3.y, r0, c5
+    o.texcoord2.y = dot(temp0, (world_matrix._m01_m11_m21_m31));
+    // dp4 o3.z, r0, c6
+    o.texcoord2.z = dot(temp0, (world_matrix._m02_m12_m22_m32));
+    // dp4 o3.w, r0, c7
+    o.texcoord2.w = dot(temp0, (world_matrix._m03_m13_m23_m33));
+    // dp4 o0.x, r0, c0
+    o.position.x = dot(temp0, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, r0, c1
+    o.position.y = dot(temp0, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.z, r0, c2
+    o.position.z = dot(temp0, (view_proj_matrix._m02_m12_m22_m32));
+    // dp4 o0.w, r0, c3
+    o.position.w = dot(temp0, (view_proj_matrix._m03_m13_m23_m33));
+    // mov r0.yz, v2.xxyw
+    temp0.yz = i.texcoord.xy;
+    // mov r1.z, c10.z
+    temp1.z = float1(0.37);
+    // dp3 r0.x, c8, r1.z
+    temp0.x = dot(ref_lazer_color.xyz, temp1.z);
+    // mov o1, r0.yzxx
+    o.texcoord = temp0.yzxx;
+    // mov o2.w, r0.x
+    o.texcoord1.w = temp0.x;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+column_major float4x4 camera_world_matrix : register(ps_3_0, c0);
+sampler2D diffuse_texture : register(ps_3_0, s0);
+float ref_lazer_smoke_scale : register(ps_3_0, c4);
+float ref_lazer_time_scale : register(ps_3_0, c5);
+float ref_time : register(ps_3_0, c3);
+struct PixelMain_Input
+{
+    float3 texcoord : TEXCOORD;
+    float3 texcoord1 : TEXCOORD1;
+    float3 texcoord2 : TEXCOORD2;
+};
+
+float4 PixelMain(PixelMain_Input i) : COLOR
+{
+    float4 out_color;
+    float3 temp0;
+    float4 temp1;
+    // def c6, 0.5, 4, 1, 0
+    // dcl_texcoord v0.z
+    // dcl_texcoord1 v1.xyz
+    // dcl_texcoord2 v2.xyz
+    // dcl_2d s0
+    // add r0.x, c0.w, -v2.x
+    temp0.x = (camera_world_matrix._m00_m10_m20_m30).w + -i.texcoord2.x;
+    // add r0.y, c1.w, -v2.y
+    temp0.y = (camera_world_matrix._m01_m11_m21_m31).w + -i.texcoord2.y;
+    // add r0.z, c2.w, -v2.z
+    temp0.z = (camera_world_matrix._m02_m12_m22_m32).w + -i.texcoord2.z;
+    // nrm r1.xyz, r0
+    temp1.xyz = normalize(temp0.xyz).xyz;
+    // dp3 r0.x, v1, r1
+    temp0.x = dot(i.texcoord1.xyz, temp1.xyz);
+    // mov r1.x, c3.x
+    temp1.x = ref_time.x;
+    // mul r0.y, r1.x, c5.x
+    temp0.y = temp1.x * ref_lazer_time_scale.x;
+    // mul r0.z, c4.x, v2.z
+    temp0.z = ref_lazer_smoke_scale.x * i.texcoord2.z;
+    // mad r0.y, r0.z, c6.x, r0.y
+    temp0.y = temp0.z * float1(0.5) + temp0.y;
+    // mad r0.yz, v2.xxyw, c4.x, r0.y
+    temp0.yz = i.texcoord2.xy * ref_lazer_smoke_scale.xx + temp0.yy;
+    // texld r1, r0.yzzw, s0
+    temp1 = tex2D(diffuse_texture, temp0.yz);
+    // mul r0.x, r0.x, r1.x
+    temp0.x = temp0.x * temp1.x;
+    // mul r0.y, r0.x, v0.z
+    temp0.y = temp0.x * i.texcoord.z;
+    // mov oC0.x, r0.x
+    out_color.x = temp0.x;
+    // mul oC0.w, r0.y, c6.y
+    out_color.w = temp0.y * float1(4);
+    // mov oC0.yz, c6.z
+    out_color.yz = float2(1, 1);
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

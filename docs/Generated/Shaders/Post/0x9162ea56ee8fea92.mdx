@@ -1,0 +1,131 @@
+---
+id: 0x9162ea56ee8fea92
+title: "Post Downscale Default No A"
+---
+
+# Post Downscale Default No A
+(`post_downscale:default:NO_A`, `0x9162ea56ee8fea92`)
+
+### Technique `ambient`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 0,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 1,
+	D3DRS_COLORWRITEENABLE = 7,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float3 render_target_size : register(vs_3_0, c4);
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 texcoord : TEXCOORD;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float4 texcoord : TEXCOORD;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0;
+    // def c5, 0.5, -0.5, 1, 0
+    // dcl_position v0
+    // dcl_texcoord v1
+    // dcl_position o0
+    // dcl_texcoord o1
+    // dp4 o0.x, v0, c0
+    o.position.x = dot(i.position, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, v0, c1
+    o.position.y = dot(i.position, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, v0, c3
+    o.position.w = dot(i.position, (view_proj_matrix._m03_m13_m23_m33));
+    // rcp r0.xz, c4.x
+    temp0.xz = 1.0f / render_target_size.x;
+    // rcp r0.yw, c4.y
+    temp0.yw = 1.0f / render_target_size.y;
+    // mad o1, r0, c5.xyyx, v1.xyxy
+    o.texcoord = temp0 * float4(0.5, -0.5, -0.5, 0.5) + i.texcoord.xyxy;
+    // mov o0.z, c5.z
+    o.position.z = float1(1);
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+sampler2D diffuse_texture : register(ps_3_0, s0);
+float4 PixelMain(float4 texcoord : TEXCOORD) : COLOR
+{
+    float4 out_color;
+    float4 temp0, temp1;
+    // def c0, 0.25, 0, 0, 0
+    // dcl_texcoord v0
+    // dcl_2d s0
+    // texld r0, v0, s0
+    temp0 = tex2D(diffuse_texture, texcoord.xy);
+    // texld r1, v0.zyzw, s0
+    temp1 = tex2D(diffuse_texture, texcoord.zy);
+    // add r0, r0.xyzz, r1.xyzz
+    temp0 = temp0.xyzz + temp1.xyzz;
+    // texld r1, v0.xwzw, s0
+    temp1 = tex2D(diffuse_texture, texcoord.xw);
+    // add r0, r0, r1.xyzz
+    temp0 = temp0 + temp1.xyzz;
+    // texld r1, v0.zwzw, s0
+    temp1 = tex2D(diffuse_texture, texcoord.zw);
+    // add r0, r0, r1.xyzz
+    temp0 = temp0 + temp1.xyzz;
+    // mul oC0, r0, c0.x
+    out_color = temp0 * float4(0.25, 0.25, 0.25, 0.25);
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

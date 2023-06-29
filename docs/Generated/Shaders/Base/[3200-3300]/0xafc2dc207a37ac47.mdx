@@ -1,0 +1,207 @@
+---
+id: 0xafc2dc207a37ac47
+title: "Generic Default Align Normal World Z Alpha Masked Diffuse Texture Double Sided External Alpha Ref Opacity Texture"
+---
+
+# Generic Default Align Normal World Z Alpha Masked Diffuse Texture Double Sided External Alpha Ref Opacity Texture
+(`generic:default:ALIGN_NORMAL_WORLD_Z:ALPHA_MASKED:DIFFUSE_TEXTURE:DOUBLE_SIDED:EXTERNAL_ALPHA_REF:OPACITY_TEXTURE`, `0xafc2dc207a37ac47`)
+
+### Technique `deferred_ambient_alpha_masked`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 1,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 1,
+	D3DRS_COLORWRITEENABLE = 15,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 1
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float camera_near_range : register(vs_3_0, c12);
+column_major float4x4 proj_matrix : register(vs_3_0, c8);
+column_major float4x4 view_matrix : register(vs_3_0, c4);
+column_major float4x4 world_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 normal : NORMAL;
+    float4 texcoord : TEXCOORD;
+    float4 texcoord4 : TEXCOORD4;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float texcoord1 : TEXCOORD1;
+    float2 texcoord : TEXCOORD;
+    float3 texcoord2 : TEXCOORD2;
+    float3 texcoord5 : TEXCOORD5;
+    float2 texcoord7 : TEXCOORD7;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0, temp1;
+    // def c13, 2, -1, 0, 0
+    // dcl_position v0
+    // dcl_normal v1
+    // dcl_texcoord v2
+    // dcl_texcoord4 v3
+    // dcl_position o0
+    // dcl_texcoord1 o1.x
+    // dcl_texcoord o2.xy
+    // dcl_texcoord2 o3.xyz
+    // dcl_texcoord5 o4.xyz
+    // dcl_texcoord7 o5.xy
+    // dp4 r0.w, v0, c3
+    temp0.w = dot(i.position, (world_matrix._m03_m13_m23_m33));
+    // dp4 r0.x, v0, c0
+    temp0.x = dot(i.position, (world_matrix._m00_m10_m20_m30));
+    // dp4 r0.y, v0, c1
+    temp0.y = dot(i.position, (world_matrix._m01_m11_m21_m31));
+    // dp4 r0.z, v0, c2
+    temp0.z = dot(i.position, (world_matrix._m02_m12_m22_m32));
+    // dp4 r1.x, r0, c4
+    temp1.x = dot(temp0, (view_matrix._m00_m10_m20_m30));
+    // dp4 r1.y, r0, c5
+    temp1.y = dot(temp0, (view_matrix._m01_m11_m21_m31));
+    // dp4 r1.z, r0, c6
+    temp1.z = dot(temp0, (view_matrix._m02_m12_m22_m32));
+    // dp4 r1.w, r0, c7
+    temp1.w = dot(temp0, (view_matrix._m03_m13_m23_m33));
+    // mov o4.xyz, r0
+    o.texcoord5 = temp0;
+    // dp4 o0.x, r1, c8
+    o.position.x = dot(temp1, (proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, r1, c9
+    o.position.y = dot(temp1, (proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, r1, c11
+    o.position.w = dot(temp1, (proj_matrix._m03_m13_m23_m33));
+    // dp4 r0.x, r1, c10
+    temp0.x = dot(temp1, (proj_matrix._m02_m12_m22_m32));
+    // add o1.x, r0.x, c12.x
+    o.texcoord1 = temp0.x + camera_near_range.x;
+    // mov o0.z, r0.x
+    o.position.z = temp0.x;
+    // mad r0.xyz, v1, c13.x, c13.y
+    temp0.xyz = i.normal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o3.x, r0, c0
+    o.texcoord2.x = dot(temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o3.y, r0, c1
+    o.texcoord2.y = dot(temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o3.z, r0, c2
+    o.texcoord2.z = dot(temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mov o2.xy, v2
+    o.texcoord = i.texcoord;
+    // mov o5.xy, v3
+    o.texcoord7 = i.texcoord4;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+sampler2D diffuse_texture : register(ps_3_0, s0);
+sampler2D opacity_texture : register(ps_3_0, s1);
+float ref_alpha_ref : register(ps_3_0, c0);
+struct PixelMain_Input
+{
+    float texcoord1 : TEXCOORD1;
+    float2 texcoord : TEXCOORD;
+    float2 texcoord7 : TEXCOORD7;
+};
+
+struct PixelMain_Output
+{
+    float4 color : COLOR;
+    float4 color1 : COLOR1;
+    float4 color2 : COLOR2;
+};
+
+PixelMain_Output PixelMain(PixelMain_Input i)
+{
+    PixelMain_Output o;
+    float4 temp0;
+    // def c1, 1, -1, 0.4, 0
+    // def c2, 0, 1, 0.5, 0
+    // dcl_texcoord1 v0.x
+    // dcl_texcoord v1.xy
+    // dcl_texcoord7 v2.xy
+    // dcl_2d s0
+    // dcl_2d s1
+    // texld_pp r0, v2, s1
+    temp0 = /* not implemented _pp modifier */ tex2D(opacity_texture, i.texcoord7.xy);
+    // add r0.x, r0.x, -c0.x
+    temp0.x = temp0.x + -ref_alpha_ref.x;
+    // cmp r0, r0.x, c1.x, c1.y
+    temp0 = (temp0.x >= 0) ? float4(1, 1, 1, 1) : float4(-1, -1, -1, -1);
+    // texkill r0
+    clip(temp0);
+    // texld_pp r0, v1, s0
+    temp0 = /* not implemented _pp modifier */ tex2D(diffuse_texture, i.texcoord.xy);
+    // mov_pp oC0.xyz, r0
+    o.color.xyz = /* not implemented _pp modifier */ temp0.xyz;
+    // mad_pp oC1, r0.w, c2.xxxy, c2.zzyx
+    o.color1 = /* not implemented _pp modifier */ temp0.w * float4(0, 0, 0, 1) + float4(0.5, 0.5, 1, 0);
+    // mov oC0.w, c1.z
+    o.color.w = float1(0.4);
+    // mov oC2, v0.x
+    o.color2 = i.texcoord1.x;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.

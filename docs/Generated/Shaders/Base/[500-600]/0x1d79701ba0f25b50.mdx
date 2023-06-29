@@ -1,0 +1,268 @@
+---
+id: 0x1d79701ba0f25b50
+title: "Effect Default Diffuse0 Texture Diffuse0 Threshold Sweep Diffuse0 Uvanim Diffuse1 Blend Op Rgb Add Diffuse1 Texture Diffuse1 Uvanim Intersection Fadeout"
+---
+
+# Effect Default Diffuse0 Texture Diffuse0 Threshold Sweep Diffuse0 Uvanim Diffuse1 Blend Op Rgb Add Diffuse1 Texture Diffuse1 Uvanim Intersection Fadeout
+(`effect:default:DIFFUSE0_TEXTURE:DIFFUSE0_THRESHOLD_SWEEP:DIFFUSE0_UVANIM:DIFFUSE1_BLEND_OP_RGB_ADD:DIFFUSE1_TEXTURE:DIFFUSE1_UVANIM:INTERSECTION_FADEOUT`, `0x1d79701ba0f25b50`)
+
+### Technique `transparent`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 1,
+	D3DRS_CULLMODE = 2,
+	D3DRS_COLORWRITEENABLE = 7,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+	D3DRS_BLENDOP = 1,
+	D3DRS_DESTBLEND = 6,
+	D3DRS_SRCBLEND = 5,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 1
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 2
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 1,
+	D3DSAMP_MINFILTER = 1,
+	D3DSAMP_MIPFILTER = 1,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float ref_threshold_sweep_speed : register(vs_3_0, c5);
+float ref_threshold_sweep_time_exp : register(vs_3_0, c6);
+float ref_time : register(vs_3_0, c4);
+float3 ref_uv0_speed : register(vs_3_0, c7);
+float3 ref_uv1_speed : register(vs_3_0, c8);
+float3 render_target_texel_offset : register(vs_3_0, c9);
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+float3 vp_offset : register(vs_3_0, c10);
+float3 vp_size : register(vs_3_0, c11);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 texcoord : TEXCOORD;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float2 texcoord : TEXCOORD;
+    float2 texcoord1 : TEXCOORD1;
+    float4 texcoord6 : TEXCOORD6;
+    float2 texcoord7 : TEXCOORD7;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0, temp1;
+    float3 temp2;
+    float2 temp3;
+    // def c12, 2, -1, 0.5, 1
+    // dcl_position v0
+    // dcl_texcoord v1
+    // dcl_position o0
+    // dcl_texcoord o3.xy
+    // dcl_texcoord1 o4.xy
+    // dcl_texcoord6 o5
+    // dcl_texcoord7 o6.xy
+    // mov r0.x, c4.x
+    temp0.x = ref_time.x;
+    // mad o3.xy, c7, r0.x, v1
+    o.texcoord = ref_uv0_speed * temp0.x + i.texcoord;
+    // mad o4.xy, c8, r0.x, v1
+    o.texcoord1 = ref_uv1_speed * temp0.x + i.texcoord;
+    // dp4 r1.x, v0, c0
+    temp1.x = dot(i.position, (view_proj_matrix._m00_m10_m20_m30));
+    // mov r2.xz, c12
+    temp2.xz = float2(2, 0.5);
+    // mov r3.xy, c11
+    temp3.xy = vp_size.xy;
+    // mad r0.yz, c10.xxyw, r2.x, r3.xxyw
+    temp0.yz = vp_offset.xy * temp2.xx + temp3.xy;
+    // add r0.yz, r0, c12.y
+    temp0.yz = temp0.yz + float2(-1, -1);
+    // dp4 r1.w, v0, c3
+    temp1.w = dot(i.position, (view_proj_matrix._m03_m13_m23_m33));
+    // mul r0.yz, r0, r1.w
+    temp0.yz = temp0.yz * temp1.ww;
+    // mad r0.y, r1.x, c11.x, r0.y
+    temp0.y = temp1.x * vp_size.x + temp0.y;
+    // add r2.xy, r2.z, c9
+    temp2.xy = temp2.zz + render_target_texel_offset.xy;
+    // add r0.w, r1.w, r1.w
+    temp0.w = temp1.w + temp1.w;
+    // mad o5.x, r0.w, r2.x, r0.y
+    o.texcoord6.x = temp0.w * temp2.x + temp0.y;
+    // dp4 r1.y, v0, c1
+    temp1.y = dot(i.position, (view_proj_matrix._m01_m11_m21_m31));
+    // mad r0.y, r1.y, -c11.y, r0.z
+    temp0.y = temp1.y * -vp_size.y + temp0.z;
+    // mad o5.y, r0.w, r2.y, r0.y
+    o.texcoord6.y = temp0.w * temp2.y + temp0.y;
+    // mul r0.x, r0.x, c5.x
+    temp0.x = temp0.x * ref_threshold_sweep_speed.x;
+    // frc r0.y, r0_abs.x
+    temp0.y = frac(abs(temp0).x);
+    // sge r0.x, r0.x, -r0.x
+    temp0.x = (temp0.x >= -temp0.x) ? 1 : 0;
+    // lrp r2.x, r0.x, r0.y, -r0.y
+    temp2.x = lerp(-temp0.y, temp0.y, temp0.x);
+    // log r0.x, r2.x
+    temp0.x = log2(temp2.x);
+    // mov o6.x, r2.x
+    o.texcoord7.x = temp2.x;
+    // mul r0.x, r0.x, c6.x
+    temp0.x = temp0.x * ref_threshold_sweep_time_exp.x;
+    // exp o6.y, r0.x
+    o.texcoord7.y = exp2(temp0.x);
+    // dp4 r1.z, v0, c2
+    temp1.z = dot(i.position, (view_proj_matrix._m02_m12_m22_m32));
+    // mov o0, r1
+    o.position = temp1;
+    // mul o5.zw, r1, c12.xywx
+    o.texcoord6.zw = temp1.zw * float2(1, 2);
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+sampler2D depth : register(ps_3_0, s2);
+sampler2D detail_diffuse_texture : register(ps_3_0, s1);
+sampler2D diffuse_texture : register(ps_3_0, s0);
+float ref_fadeout_distance : register(ps_3_0, c6);
+float ref_intensity : register(ps_3_0, c7);
+float3 ref_threshold_sweep_color_e : register(ps_3_0, c1);
+float3 ref_threshold_sweep_color_s : register(ps_3_0, c0);
+float ref_threshold_sweep_fuzziness_e : register(ps_3_0, c5);
+float ref_threshold_sweep_fuzziness_s : register(ps_3_0, c4);
+float ref_threshold_sweep_op_e : register(ps_3_0, c3);
+float ref_threshold_sweep_op_s : register(ps_3_0, c2);
+struct PixelMain_Input
+{
+    float2 texcoord : TEXCOORD;
+    float2 texcoord1 : TEXCOORD1;
+    float4 texcoord6 : TEXCOORD6;
+    float2 texcoord7 : TEXCOORD7;
+};
+
+float4 PixelMain(PixelMain_Input i) : COLOR
+{
+    float4 out_color;
+    float4 temp0, temp1, temp2;
+    // def c8, 1, 0, 0, 0
+    // dcl_texcoord v0.xy
+    // dcl_texcoord1 v1.xy
+    // dcl_texcoord6 v2
+    // dcl_texcoord7 v3.xy
+    // dcl_2d s0
+    // dcl_2d s1
+    // dcl_2d s2
+    // texld r0, v2, s2
+    temp0 = tex2D(depth, i.texcoord6.xy);
+    // add r0.x, -r0.x, v2.z
+    temp0.x = -temp0.x + i.texcoord6.z;
+    // rcp r0.y, c6.x
+    temp0.y = 1.0f / ref_fadeout_distance.x;
+    // mul_sat_pp r0.x, r0.y, r0_abs.x
+    ;// error
+    // mov r1.xyz, c0
+    temp1.xyz = ref_threshold_sweep_color_s.xyz;
+    // add r2.xyz, -r1, c1
+    temp2.xyz = -temp1.xyz + ref_threshold_sweep_color_e.xyz;
+    // mov r1.w, c2.x
+    temp1.w = ref_threshold_sweep_op_s.x;
+    // add r2.w, -r1.w, c3.x
+    temp2.w = -temp1.w + ref_threshold_sweep_op_e.x;
+    // mad_pp r1, v3.x, r2, r1
+    temp1 = /* not implemented _pp modifier */ i.texcoord7.x * temp2 + temp1;
+    // mov r2.x, c4.x
+    temp2.x = ref_threshold_sweep_fuzziness_s.x;
+    // add r0.y, -r2.x, c5.x
+    temp0.y = -temp2.x + ref_threshold_sweep_fuzziness_e.x;
+    // mad_pp r0.y, v3.y, r0.y, c4.x
+    temp0.y = /* not implemented _pp modifier */ i.texcoord7.y * temp0.y + ref_threshold_sweep_fuzziness_s.x;
+    // rcp r0.z, r0.y
+    temp0.z = 1.0f / temp0.y;
+    // texld_pp r2, v0, s0
+    temp2 = /* not implemented _pp modifier */ tex2D(diffuse_texture, i.texcoord.xy);
+    // add r0.w, r2.y, -v3.x
+    temp0.w = temp2.y + -i.texcoord7.x;
+    // mad r0.z, r0_abs.w, -r0.z, c8.x
+    temp0.z = abs(temp0).w * -temp0.z + float1(1);
+    // add r0.y, -r0.y, r0_abs.w
+    temp0.y = -temp0.y + abs(temp0).w;
+    // mul r0.z, r0.z, r1.w
+    temp0.z = temp0.z * temp1.w;
+    // mul_pp r0.x, r0.x, r0.z
+    temp0.x = /* not implemented _pp modifier */ temp0.x * temp0.z;
+    // cmp_pp oC0.w, r0.y, c8.y, r0.x
+    out_color.w = /* not implemented _pp modifier */ (temp0.y >= 0) ? float1(0) : temp0.x;
+    // texld_pp r0, v1, s1
+    temp0 = /* not implemented _pp modifier */ tex2D(detail_diffuse_texture, i.texcoord1.xy);
+    // add_sat_pp r0.xyz, r0, r1
+    ;// error
+    // mul oC0.xyz, r0, c7.x
+    out_color.xyz = temp0.xyz * ref_intensity.xxx;
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

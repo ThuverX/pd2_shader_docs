@@ -1,0 +1,261 @@
+---
+id: 0xfbdbb63254cf1bc2
+title: "Post Night Vision Default"
+---
+
+# Post Night Vision Default
+(`post_night_vision:default`, `0xfbdbb63254cf1bc2`)
+
+### Technique `transparent`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 0,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 1,
+	D3DRS_COLORWRITEENABLE = 15,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 1,
+	D3DSAMP_MINFILTER = 1,
+	D3DSAMP_MIPFILTER = 1,
+};
+```
+#### Sampler 1
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float3 filter_color_texture_size : register(vs_3_0, c5);
+float3 ref_noise_settings_a : register(vs_3_0, c7);
+float ref_time : register(vs_3_0, c6);
+float3 render_target_size : register(vs_3_0, c4);
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 texcoord : TEXCOORD;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float2 texcoord : TEXCOORD;
+    float4 texcoord1 : TEXCOORD1;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0;
+    float2 temp1, temp2;
+    // def c8, 0.15915494, 0.5, 6.2831855, -3.1415927
+    // def c9, 1, 0, 0, 0
+    // dcl_position v0
+    // dcl_texcoord v1
+    // dcl_position o0
+    // dcl_texcoord o1.xy
+    // dcl_texcoord1 o2
+    // dp4 o0.w, v0, c3
+    o.position.w = dot(i.position, (view_proj_matrix._m03_m13_m23_m33));
+    // mov r0.y, c7.y
+    temp0.y = ref_noise_settings_a.y;
+    // mul r0.x, r0.y, c6.x
+    temp0.x = temp0.y * ref_time.x;
+    // mad r0.y, r0.x, c8.x, c8.y
+    temp0.y = temp0.x * float1(0.15915494) + float1(0.5);
+    // frc r0.y, r0.y
+    temp0.y = frac(temp0.y);
+    // mad r0.y, r0.y, c8.z, c8.w
+    temp0.y = temp0.y * float1(6.2831855) + float1(-3.1415927);
+    // sincos r1.x, r0.y
+    temp1.x = cos(temp0.y);
+    // rcp r0.y, c4.x
+    temp0.y = 1.0f / render_target_size.x;
+    // mul r0.y, r0.y, c4.y
+    temp0.y = temp0.y * render_target_size.y;
+    // mul r0.x, r0.y, r0.x
+    temp0.x = temp0.y * temp0.x;
+    // mad r0.x, r0.x, c8.x, c8.y
+    temp0.x = temp0.x * float1(0.15915494) + float1(0.5);
+    // frc r0.x, r0.x
+    temp0.x = frac(temp0.x);
+    // mad r0.x, r0.x, c8.z, c8.w
+    temp0.x = temp0.x * float1(6.2831855) + float1(-3.1415927);
+    // sincos r2.y, r0.x
+    temp2.y = sin(temp0.x);
+    // mov r1.y, r2.y
+    temp1.y = temp2.y;
+    // rcp r0.x, c5.x
+    temp0.x = 1.0f / filter_color_texture_size.x;
+    // rcp r0.z, c7.x
+    temp0.z = 1.0f / ref_noise_settings_a.x;
+    // mul r0.zw, r0.z, c4.xyxy
+    temp0.zw = temp0.zz * render_target_size.xy;
+    // mul r0.x, r0.x, r0.z
+    temp0.x = temp0.x * temp0.z;
+    // mul r2.x, r0.x, v1.x
+    temp2.x = temp0.x * i.texcoord.x;
+    // rcp r0.x, c5.y
+    temp0.x = 1.0f / filter_color_texture_size.y;
+    // mul r0.x, r0.x, r0.w
+    temp0.x = temp0.x * temp0.w;
+    // mul r2.y, r0.x, v1.y
+    temp2.y = temp0.x * i.texcoord.y;
+    // mad o2.xy, r1, c7.z, r2
+    o.texcoord1.xy = temp1.xy * ref_noise_settings_a.zz + temp2.xy;
+    // dp4 r1.y, v0, c1
+    temp1.y = dot(i.position, (view_proj_matrix._m01_m11_m21_m31));
+    // mul o2.w, r0.y, r1.y
+    o.texcoord1.w = temp0.y * temp1.y;
+    // mov o0.z, c9.x
+    o.position.z = float1(1);
+    // dp4 r1.x, v0, c0
+    temp1.x = dot(i.position, (view_proj_matrix._m00_m10_m20_m30));
+    // mov o0.xy, r1
+    o.position.xy = temp1.xy;
+    // mov o2.z, r1.x
+    o.texcoord1.z = temp1.x;
+    // mov o1.xy, v1
+    o.texcoord = i.texcoord;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+sampler2D diffuse_texture : register(ps_3_0, s0);
+sampler2D filter_color_texture : register(ps_3_0, s1);
+float3 ref_noise_settings_b : register(ps_3_0, c2);
+float3 ref_scanline_settings : register(ps_3_0, c1);
+float3 ref_vignette_settings_a : register(ps_3_0, c3);
+float3 ref_vignette_settings_b : register(ps_3_0, c4);
+float3 render_target_size : register(ps_3_0, c0);
+struct PixelMain_Input
+{
+    float2 texcoord : TEXCOORD;
+    float4 texcoord1 : TEXCOORD1;
+};
+
+float4 PixelMain(PixelMain_Input i) : COLOR
+{
+    float4 out_color;
+    float4 temp0, temp1, temp2;
+    // def c5, 0.5, 2, 0, -3
+    // def c6, -1, 1, 0, 0
+    // dcl_texcoord v0.xy
+    // dcl_texcoord1 v1
+    // dcl_2d s0
+    // dcl_2d s1
+    // rcp r0.x, c1.x
+    temp0.x = 1.0f / ref_scanline_settings.x;
+    // mul r0.x, r0.x, c0.y
+    temp0.x = temp0.x * render_target_size.y;
+    // mul r0.x, r0.x, v0.y
+    temp0.x = temp0.x * i.texcoord.y;
+    // frc r0.y, r0.x
+    temp0.y = frac(temp0.x);
+    // add r0.x, -r0.y, r0.x
+    temp0.x = -temp0.y + temp0.x;
+    // mul r0.y, r0.x, c5.x
+    temp0.y = temp0.x * float1(0.5);
+    // frc r0.y, r0_abs.y
+    temp0.y = frac(abs(temp0).y);
+    // cmp r0.x, r0.x, r0.y, -r0.y
+    temp0.x = (temp0.x >= 0) ? temp0.y : -temp0.y;
+    // rcp r0.y, c0.y
+    temp0.y = 1.0f / render_target_size.y;
+    // mad r0.x, r0.x, c5.y, -r0.y
+    temp0.x = temp0.x * float1(2) + -temp0.y;
+    // texld r1, v1, s1
+    temp1 = tex2D(filter_color_texture, i.texcoord1.xy);
+    // add r0.y, r1.z, c6.x
+    temp0.y = temp1.z + float1(-1);
+    // mov r1.y, c2.y
+    temp1.y = ref_noise_settings_b.y;
+    // mad r0.y, r1.y, r0.y, c6.y
+    temp0.y = temp1.y * temp0.y + float1(1);
+    // mul r0.y, r0.y, c1.y
+    temp0.y = temp0.y * ref_scanline_settings.y;
+    // cmp r0.x, r0.x, r0.y, c5.z
+    temp0.x = (temp0.x >= 0) ? temp0.y : float1(0);
+    // texld_pp r2, v0, s0
+    temp2 = /* not implemented _pp modifier */ tex2D(diffuse_texture, i.texcoord.xy);
+    // mad r1, r1.z, c2.x, r2.xyzz
+    temp1 = temp1.z * ref_noise_settings_b.x + temp2.xyzz;
+    // add r0, r0.x, r1
+    temp0 = temp0.x + temp1;
+    // dp2add r1.x, v1.zwzw, v1.zwzw, c5.z
+    temp1.x = dot(i.texcoord1.zw, i.texcoord1.zw) + float1(0);
+    // rsq r1.x, r1.x
+    temp1.x = 1 / sqrt(temp1.x);
+    // rcp r1.x, r1.x
+    temp1.x = 1.0f / temp1.x;
+    // add r1.x, r1.x, -c3.x
+    temp1.x = temp1.x + -ref_vignette_settings_a.x;
+    // add r1.y, -c3.x, c3.y
+    temp1.y = -ref_vignette_settings_a.x + ref_vignette_settings_a.y;
+    // rcp r1.y, r1.y
+    temp1.y = 1.0f / temp1.y;
+    // mul_sat r1.x, r1.y, r1.x
+    temp1.x = saturate(temp1.y * temp1.x);
+    // mad r1.y, r1.x, -c5.y, -c5.w
+    temp1.y = temp1.x * float1(-2) + float1(3);
+    // mul r1.x, r1.x, r1.x
+    temp1.x = temp1.x * temp1.x;
+    // mul r1.x, r1.x, r1.y
+    temp1.x = temp1.x * temp1.y;
+    // mov r1.y, c6.y
+    temp1.y = float1(1);
+    // lrp r2.x, r1.x, r1.y, c4.x
+    temp2.x = lerp(ref_vignette_settings_b.x, temp1.y, temp1.x);
+    // mul_pp oC0, r0, r2.x
+    out_color = /* not implemented _pp modifier */ temp0 * temp2.x;
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

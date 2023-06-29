@@ -1,0 +1,294 @@
+---
+id: 0x361fcfcdd31cd570
+title: "Post Dof Upscale Default Three"
+---
+
+# Post Dof Upscale Default Three
+(`post_DOF_upscale:default:THREE`, `0x361fcfcdd31cd570`)
+
+### Technique `ambient`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 0,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 1,
+	D3DRS_COLORWRITEENABLE = 15,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+#### Sampler 1
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float3 ref_radial_offset : register(vs_3_0, c5);
+float3 ref_settings : register(vs_3_0, c4);
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 texcoord : TEXCOORD;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float2 texcoord : TEXCOORD;
+    float4 texcoord1 : TEXCOORD1;
+    float4 texcoord2 : TEXCOORD2;
+    float4 texcoord3 : TEXCOORD3;
+    float4 texcoord4 : TEXCOORD4;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0, temp1, temp2, temp3, temp4;
+    // def c6, 0, 1, -0.5, 0.5
+    // def c7, 0.003, 0.006, 0.009, 0.012
+    // def c8, 0.01, 0.02, 0.03, 0.04
+    // def c9, 0.05, 0.06, 0.07, 0.08
+    // def c10, 0.015, 0.018, 0.021, 0.024
+    // dcl_position v0
+    // dcl_texcoord v1
+    // dcl_position o0
+    // dcl_texcoord o1.xy
+    // dcl_texcoord1 o2
+    // dcl_texcoord2 o3
+    // dcl_texcoord3 o4
+    // dcl_texcoord4 o5
+    // dp4 o0.x, v0, c0
+    o.position.x = dot(i.position, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, v0, c1
+    o.position.y = dot(i.position, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, v0, c3
+    o.position.w = dot(i.position, (view_proj_matrix._m03_m13_m23_m33));
+    // dp3 r0.x, c5, c5
+    temp0.x = dot(ref_radial_offset.xyz, ref_radial_offset.xyz);
+    // rsq r0.x, r0.x
+    temp0.x = 1 / sqrt(temp0.x);
+    // rcp r0.y, r0.x
+    temp0.y = 1.0f / temp0.x;
+    // mad r0.xzw, c5.xyyz, r0.x, -c5.xyyz
+    temp0.xzw = ref_radial_offset.xyz * temp0.xxx + -ref_radial_offset.xyz;
+    // slt r0.y, c6.x, r0.y
+    temp0.y = (float1(0) < temp0.y) ? 1 : 0;
+    // mad r0.xyz, r0.y, r0.xzww, c5
+    temp0.xyz = temp0.yyy * temp0.xzw + ref_radial_offset.xyz;
+    // mul r0.z, r0.z, c4.x
+    temp0.z = temp0.z * ref_settings.x;
+    // mov r1.y, c6.y
+    temp1.y = float1(1);
+    // mad r2, r0.xyxy, c4.x, r1.y
+    temp2 = temp0.xyxy * ref_settings.x + temp1.y;
+    // add r2, -r2, c6.y
+    temp2 = -temp2 + float4(1, 1, 1, 1);
+    // mad r3, r0.z, c8, r1.y
+    temp3 = temp0.z * float4(0.01, 0.02, 0.03, 0.04) + temp1.y;
+    // mad r0, r0.z, c9, r1.y
+    temp0 = temp0.z * float4(0.05, 0.06, 0.07, 0.08) + temp1.y;
+    // add r1, c6.z, v1.xyxy
+    temp1 = float4(-0.5, -0.5, -0.5, -0.5) + i.texcoord.xyxy;
+    // mad r4, r2.zwzw, c7.xxyy, r1.zwzw
+    temp4 = temp2.zwzw * float4(0.003, 0.003, 0.006, 0.006) + temp1.zwzw;
+    // mad o2, r4, r3.xxyy, c6.w
+    o.texcoord1 = temp4 * temp3.xxyy + float4(0.5, 0.5, 0.5, 0.5);
+    // mad r4, r2.zwzw, c7.zzww, r1.zwzw
+    temp4 = temp2.zwzw * float4(0.009, 0.009, 0.012, 0.012) + temp1.zwzw;
+    // mad o3, r4, r3.zzww, c6.w
+    o.texcoord2 = temp4 * temp3.zzww + float4(0.5, 0.5, 0.5, 0.5);
+    // mad r3, r2.zwzw, c10.xxyy, r1.zwzw
+    temp3 = temp2.zwzw * float4(0.015, 0.015, 0.018, 0.018) + temp1.zwzw;
+    // mad r1, r2, c10.zzww, r1
+    temp1 = temp2 * float4(0.021, 0.021, 0.024, 0.024) + temp1;
+    // mad o5, r1, r0.zzww, c6.w
+    o.texcoord4 = temp1 * temp0.zzww + float4(0.5, 0.5, 0.5, 0.5);
+    // mad o4, r3, r0.xxyy, c6.w
+    o.texcoord3 = temp3 * temp0.xxyy + float4(0.5, 0.5, 0.5, 0.5);
+    // mov o0.z, c6.y
+    o.position.z = float1(1);
+    // mov o1.xy, v1
+    o.texcoord = i.texcoord;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+sampler2D diffuse_texture : register(ps_3_0, s0);
+float3 ref_settings : register(ps_3_0, c1);
+float3 render_target_size : register(ps_3_0, c0);
+sampler2D self_illumination_texture : register(ps_3_0, s1);
+struct PixelMain_Input
+{
+    float2 texcoord : TEXCOORD;
+    float4 texcoord1 : TEXCOORD1;
+    float4 texcoord2 : TEXCOORD2;
+    float4 texcoord3 : TEXCOORD3;
+    float4 texcoord4 : TEXCOORD4;
+};
+
+float4 PixelMain(PixelMain_Input i) : COLOR
+{
+    float4 out_color;
+    float4 temp0, temp1, temp2, temp3, temp4, temp5;
+    // def c2, 1, -1, 0.73, -0.73
+    // def c3, 0.5, -1.5, 1.5, -0.5
+    // def c4, 0.2, 0.215448, 0.1, 0
+    // def c5, 0.25, 0.15, 0.5882353, 2.3529413
+    // dcl_texcoord v0.xy
+    // dcl_texcoord1 v1
+    // dcl_texcoord2 v2
+    // dcl_texcoord3 v3
+    // dcl_texcoord4 v4
+    // dcl_2d s0
+    // dcl_2d s1
+    // texld r0, v0, s0
+    temp0 = tex2D(diffuse_texture, i.texcoord.xy);
+    // texld r1, v0, s1
+    temp1 = tex2D(self_illumination_texture, i.texcoord.xy);
+    // rcp r2.x, c0.x
+    temp2.x = 1.0f / render_target_size.x;
+    // rcp r2.y, c0.y
+    temp2.y = 1.0f / render_target_size.y;
+    // mul r3, r2.xyxy, c1.z
+    temp3 = temp2.xyxy * ref_settings.z;
+    // mad r4, r3.zwzw, c3.xyzx, v0.xyxy
+    temp4 = temp3.zwzw * float4(0.5, -1.5, 1.5, 0.5) + i.texcoord.xyxy;
+    // mad r3, r3, c3.wzyw, v0.xyxy
+    temp3 = temp3 * float4(-0.5, 1.5, -1.5, -0.5) + i.texcoord.xyxy;
+    // texld r5, r4, s1
+    temp5 = tex2D(self_illumination_texture, temp4.xy);
+    // texld r4, r4.zwzw, s1
+    temp4 = tex2D(self_illumination_texture, temp4.zw);
+    // add r1, r1, r5
+    temp1 = temp1 + temp5;
+    // add r1, r4, r1
+    temp1 = temp4 + temp1;
+    // texld r4, r3, s1
+    temp4 = tex2D(self_illumination_texture, temp3.xy);
+    // texld r3, r3.zwzw, s1
+    temp3 = tex2D(self_illumination_texture, temp3.zw);
+    // add r1, r1, r4
+    temp1 = temp1 + temp4;
+    // add r1, r3, r1
+    temp1 = temp3 + temp1;
+    // mad r2.z, r1.w, c4.y, c4.z
+    temp2.z = temp1.w * float1(0.215448) + float1(0.1);
+    // mul r2.xy, r2.z, r2
+    temp2.xy = temp2.zz * temp2.xy;
+    // mov r2.z, c4.w
+    temp2.z = float1(0);
+    // add r3.xy, r2.xzzw, v1
+    temp3.xy = temp2.xz + i.texcoord1.xy;
+    // texld r3, r3, s0
+    temp3 = tex2D(diffuse_texture, temp3.xy);
+    // mul r3, r3, c5.x
+    temp3 = temp3 * float4(0.25, 0.25, 0.25, 0.25);
+    // mad r0, r0, c4.z, r3
+    temp0 = temp0 * float4(0.1, 0.1, 0.1, 0.1) + temp3;
+    // mov r2.w, -r2.x
+    temp2.w = -temp2.x;
+    // add r3.xy, r2.wzzw, v1.zwzw
+    temp3.xy = temp2.wz + i.texcoord1.zw;
+    // texld r3, r3, s0
+    temp3 = tex2D(diffuse_texture, temp3.xy);
+    // mad r0, r3, c5.x, r0
+    temp0 = temp3 * float4(0.25, 0.25, 0.25, 0.25) + temp0;
+    // add r3.xy, r2.zyzw, v2
+    temp3.xy = temp2.zy + i.texcoord2.xy;
+    // mad r2.zw, r2.xyzy, c2.xyxy, v2
+    temp2.zw = temp2.zy * float2(1, -1) + i.texcoord2.zw;
+    // texld r4, r2.zwzw, s0
+    temp4 = tex2D(diffuse_texture, temp2.zw);
+    // texld r3, r3, s0
+    temp3 = tex2D(diffuse_texture, temp3.xy);
+    // mad r0, r3, c5.x, r0
+    temp0 = temp3 * float4(0.25, 0.25, 0.25, 0.25) + temp0;
+    // mad r0, r4, c5.x, r0
+    temp0 = temp4 * float4(0.25, 0.25, 0.25, 0.25) + temp0;
+    // mad r3, r2.xyxy, c2.zzww, v3
+    temp3 = temp2.xyxy * float4(0.73, 0.73, -0.73, -0.73) + i.texcoord3;
+    // mad r2, r2.xyxy, c2.zwwz, v4
+    temp2 = temp2.xyxy * float4(0.73, -0.73, -0.73, 0.73) + i.texcoord4;
+    // texld r4, r3, s0
+    temp4 = tex2D(diffuse_texture, temp3.xy);
+    // texld r3, r3.zwzw, s0
+    temp3 = tex2D(diffuse_texture, temp3.zw);
+    // mad r0, r4, c5.y, r0
+    temp0 = temp4 * float4(0.15, 0.15, 0.15, 0.15) + temp0;
+    // mad r0, r3, c5.y, r0
+    temp0 = temp3 * float4(0.15, 0.15, 0.15, 0.15) + temp0;
+    // texld r3, r2, s0
+    temp3 = tex2D(diffuse_texture, temp2.xy);
+    // texld r2, r2.zwzw, s0
+    temp2 = tex2D(diffuse_texture, temp2.zw);
+    // mad r0, r3, c5.y, r0
+    temp0 = temp3 * float4(0.15, 0.15, 0.15, 0.15) + temp0;
+    // mad r0, r2, c5.y, r0
+    temp0 = temp2 * float4(0.15, 0.15, 0.15, 0.15) + temp0;
+    // mul r0.xyz, r0, c5.z
+    temp0.xyz = temp0.xyz * float3(0.5882353, 0.5882353, 0.5882353);
+    // mad r1.xyz, r1, c4.x, -r0
+    temp1.xyz = temp1.xyz * float3(0.2, 0.2, 0.2) + -temp0.xyz;
+    // mad oC0.xyz, c1.y, r1, r0
+    out_color.xyz = ref_settings.yyy * temp1.xyz + temp0.xyz;
+    // mul r0.x, r1.w, c4.x
+    temp0.x = temp1.w * float1(0.2);
+    // mad r0.x, r0.w, c5.w, r0.x
+    temp0.x = temp0.w * float1(2.3529413) + temp0.x;
+    // add oC0.w, -r0.x, c2.x
+    out_color.w = -temp0.x + float1(1);
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

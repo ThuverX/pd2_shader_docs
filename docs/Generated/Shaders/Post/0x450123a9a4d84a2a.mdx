@@ -1,0 +1,159 @@
+---
+id: 0x450123a9a4d84a2a
+title: "Post Chromatic Aberration Default"
+---
+
+# Post Chromatic Aberration Default
+(`post_chromatic_aberration:default`, `0x450123a9a4d84a2a`)
+
+### Technique `ambient`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 0,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 1,
+	D3DRS_COLORWRITEENABLE = 7,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float ref_chromatic_amount : register(vs_3_0, c4);
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 texcoord : TEXCOORD;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float4 texcoord : TEXCOORD;
+    float2 texcoord1 : TEXCOORD1;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float3 temp0;
+    // def c5, 0.01, 1, -0.5, 0.5
+    // def c6, 2, 0, 0, 0
+    // dcl_position v0
+    // dcl_texcoord v1
+    // dcl_position o0
+    // dcl_texcoord o1
+    // dcl_texcoord1 o2.xy
+    // dp4 o0.x, v0, c0
+    o.position.x = dot(i.position, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, v0, c1
+    o.position.y = dot(i.position, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, v0, c3
+    o.position.w = dot(i.position, (view_proj_matrix._m03_m13_m23_m33));
+    // mov r0.xy, c5
+    temp0.xy = float2(0.01, 1);
+    // mad r0.x, c4.x, -r0.x, r0.y
+    temp0.x = ref_chromatic_amount.x * -temp0.x + temp0.y;
+    // add r0.yz, c5.z, v1.xxyw
+    temp0.yz = float2(-0.5, -0.5) + i.texcoord.xy;
+    // mad o1.zw, r0.xyyz, r0.x, c5.w
+    o.texcoord.zw = temp0.yz * temp0.xx + float2(0.5, 0.5);
+    // add r0.x, -r0.x, c6.x
+    temp0.x = -temp0.x + float1(2);
+    // mad o2.xy, r0.yzzw, r0.x, c5.w
+    o.texcoord1 = temp0.yzzw * temp0.x + float4(0.5, 0.5, 0.5, 0.5);
+    // mov o0.z, c5.y
+    o.position.z = float1(1);
+    // mov o1.xy, v1
+    o.texcoord.xy = i.texcoord.xy;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+sampler2D diffuse_texture : register(ps_3_0, s0);
+float ref_contrast : register(ps_3_0, c1);
+float3 render_target_size : register(ps_3_0, c0);
+struct PixelMain_Input
+{
+    float4 texcoord : TEXCOORD;
+    float2 texcoord1 : TEXCOORD1;
+};
+
+float4 PixelMain(PixelMain_Input i) : COLOR
+{
+    float4 out_color;
+    float4 temp0, temp1, temp2;
+    // def c2, 0.5, 10, 0, 0
+    // dcl_texcoord v0
+    // dcl_texcoord1 v1.xy
+    // dcl_2d s0
+    // rcp r0.x, c0.x
+    temp0.x = 1.0f / render_target_size.x;
+    // rcp r0.y, c0.y
+    temp0.y = 1.0f / render_target_size.y;
+    // mad r0.xy, r0, c2.x, v0
+    temp0.xy = temp0.xy * float2(0.5, 0.5) + i.texcoord.xy;
+    // texld r0, r0, s0
+    temp0 = tex2D(diffuse_texture, temp0.xy);
+    // texld r1, v0.zwzw, s0
+    temp1 = tex2D(diffuse_texture, i.texcoord.zw);
+    // texld r2, v0, s0
+    temp2 = tex2D(diffuse_texture, i.texcoord.xy);
+    // mov r1.y, r2.y
+    temp1.y = temp2.y;
+    // texld r2, v1, s0
+    temp2 = tex2D(diffuse_texture, i.texcoord1.xy);
+    // mov r1.zw, r2.z
+    temp1.zw = temp2.z;
+    // add r0, -r0.xyzz, r1.xyww
+    temp0 = -temp0.xyzz + temp1.xyww;
+    // mul_sat r0, r0, c2.y
+    temp0 = saturate(temp0 * float4(10, 10, 10, 10));
+    // mad oC0, r0, c1.x, r1
+    out_color = temp0 * ref_contrast.x + temp1;
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

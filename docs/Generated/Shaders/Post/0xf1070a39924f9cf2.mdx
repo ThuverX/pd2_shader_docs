@@ -1,0 +1,165 @@
+---
+id: 0xf1070a39924f9cf2
+title: "Post Lex Composite Default"
+---
+
+# Post Lex Composite Default
+(`post_LEX_composite:default`, `0xf1070a39924f9cf2`)
+
+### Technique `ambient`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 0,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 1,
+	D3DRS_COLORWRITEENABLE = 15,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+#### Sampler 1
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+#### Sampler 2
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 3,
+	D3DSAMP_ADDRESSV = 3,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float3 render_target_size : register(vs_3_0, c4);
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 texcoord : TEXCOORD;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float4 texcoord : TEXCOORD;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0;
+    // def c5, 0.5, 1, 0, 0
+    // dcl_position v0
+    // dcl_texcoord v1
+    // dcl_position o0
+    // dcl_texcoord o1
+    // dp4 o0.x, v0, c0
+    o.position.x = dot(i.position, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, v0, c1
+    o.position.y = dot(i.position, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, v0, c3
+    o.position.w = dot(i.position, (view_proj_matrix._m03_m13_m23_m33));
+    // rcp r0.z, c4.x
+    temp0.z = 1.0f / render_target_size.x;
+    // rcp r0.w, c4.y
+    temp0.w = 1.0f / render_target_size.y;
+    // mad o1.zw, r0, -c5.x, v1.xyxy
+    o.texcoord.zw = temp0.zw * float2(-0.5, -0.5) + i.texcoord.xy;
+    // mov o0.z, c5.y
+    o.position.z = float1(1);
+    // mov o1.xy, v1
+    o.texcoord.xy = i.texcoord.xy;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+sampler2D diffuse_texture : register(ps_3_0, s0);
+sampler2D filter_color_texture : register(ps_3_0, s2);
+float ref_bloom_intensity : register(ps_3_0, c0);
+float ref_lense_intensity : register(ps_3_0, c1);
+sampler2D self_illumination_texture : register(ps_3_0, s1);
+float4 PixelMain(float4 texcoord : TEXCOORD) : COLOR
+{
+    float4 out_color;
+    float4 temp0, temp1;
+    // def c2, 0.4, 0.5, 0.75, 1
+    // dcl_texcoord v0
+    // dcl_2d s0
+    // dcl_2d s1
+    // dcl_2d s2
+    // texld r0, v0, s2
+    temp0 = tex2D(filter_color_texture, texcoord.xy);
+    // mad oC0.w, r0.w, -c2.z, c2.w
+    out_color.w = temp0.w * float1(-0.75) + float1(1);
+    // mul r0.w, r0.y, c2.x
+    temp0.w = temp0.y * float1(0.4);
+    // lrp r1.xy, r0.w, c2.y, v0
+    temp1.xy = lerp(texcoord.xy, float2(0.5, 0.5), temp0.ww);
+    // texld r1, r1, s1
+    temp1 = tex2D(self_illumination_texture, temp1.xy);
+    // mul r0.xyz, r0, r1
+    temp0.xyz = temp0.xyz * temp1.xyz;
+    // texld r1, v0.zwzw, s0
+    temp1 = tex2D(diffuse_texture, texcoord.zw);
+    // mul r1.xyz, r1, c0.x
+    temp1.xyz = temp1.xyz * ref_bloom_intensity.xxx;
+    // mad oC0.xyz, r0, c1.x, r1
+    out_color.xyz = temp0.xyz * ref_lense_intensity.xxx + temp1.xyz;
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

@@ -1,0 +1,79 @@
+---
+id: 0x713dbe903213b862
+title: "Post Clear Target Default"
+---
+
+# Post Clear Target Default
+(`post_clear_target:default`, `0x713dbe903213b862`)
+
+### Technique `ambient`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 0,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 1,
+	D3DRS_COLORWRITEENABLE = 15,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+### Shaders
+#### Vertex Shader
+```hlsl
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+float4 VertexMain(float4 position : POSITION) : POSITION
+{
+    float4 out_position;
+    float3 temp0;
+    // dcl_position v0
+    // dcl_position o0
+    // dp4 r0.x, v0, c0
+    temp0.x = dot(position, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 r0.y, v0, c1
+    temp0.y = dot(position, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 r0.z, v0, c3
+    temp0.z = dot(position, (view_proj_matrix._m03_m13_m23_m33));
+    // mov o0, r0.xyzz
+    out_position = temp0.xyzz;
+    // 
+
+    return out_position;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+float4 PixelMain() : COLOR
+{
+    float4 out_color;
+    // def c0, 0, 0, 0, 0
+    // mov oC0, c0.x
+    out_color = float4(0, 0, 0, 0);
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

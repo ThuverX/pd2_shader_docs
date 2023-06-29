@@ -1,0 +1,183 @@
+---
+id: 0x58d66dabe39b0e9c
+title: "Effect Default Blend Add Diffuse0 Texture Diffuse0 Threshold Sweep Diffuse0 Uvanim"
+---
+
+# Effect Default Blend Add Diffuse0 Texture Diffuse0 Threshold Sweep Diffuse0 Uvanim
+(`effect:default:BLEND_ADD:DIFFUSE0_TEXTURE:DIFFUSE0_THRESHOLD_SWEEP:DIFFUSE0_UVANIM`, `0x58d66dabe39b0e9c`)
+
+### Technique `transparent`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 0,
+	D3DRS_ALPHABLENDENABLE = 1,
+	D3DRS_CULLMODE = 2,
+	D3DRS_COLORWRITEENABLE = 7,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+	D3DRS_BLENDOP = 1,
+	D3DRS_DESTBLEND = 2,
+	D3DRS_SRCBLEND = 5,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float ref_threshold_sweep_speed : register(vs_3_0, c5);
+float ref_threshold_sweep_time_exp : register(vs_3_0, c6);
+float ref_time : register(vs_3_0, c4);
+float3 ref_uv0_speed : register(vs_3_0, c7);
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 texcoord : TEXCOORD;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float2 texcoord : TEXCOORD;
+    float2 texcoord7 : TEXCOORD7;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float2 temp0;
+    float temp1;
+    // dcl_position v0
+    // dcl_texcoord v1
+    // dcl_position o0
+    // dcl_texcoord o1.xy
+    // dcl_texcoord7 o2.xy
+    // dp4 o0.x, v0, c0
+    o.position.x = dot(i.position, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, v0, c1
+    o.position.y = dot(i.position, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.z, v0, c2
+    o.position.z = dot(i.position, (view_proj_matrix._m02_m12_m22_m32));
+    // dp4 o0.w, v0, c3
+    o.position.w = dot(i.position, (view_proj_matrix._m03_m13_m23_m33));
+    // mov r0.x, c4.x
+    temp0.x = ref_time.x;
+    // mad o1.xy, c7, r0.x, v1
+    o.texcoord = ref_uv0_speed * temp0.x + i.texcoord;
+    // mul r0.x, r0.x, c5.x
+    temp0.x = temp0.x * ref_threshold_sweep_speed.x;
+    // frc r0.y, r0_abs.x
+    temp0.y = frac(abs(temp0).x);
+    // sge r0.x, r0.x, -r0.x
+    temp0.x = (temp0.x >= -temp0.x) ? 1 : 0;
+    // lrp r1.x, r0.x, r0.y, -r0.y
+    temp1.x = lerp(-temp0.y, temp0.y, temp0.x);
+    // log r0.x, r1.x
+    temp0.x = log2(temp1.x);
+    // mov o2.x, r1.x
+    o.texcoord7.x = temp1.x;
+    // mul r0.x, r0.x, c6.x
+    temp0.x = temp0.x * ref_threshold_sweep_time_exp.x;
+    // exp o2.y, r0.x
+    o.texcoord7.y = exp2(temp0.x);
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+sampler2D diffuse_texture : register(ps_3_0, s0);
+float ref_intensity : register(ps_3_0, c6);
+float3 ref_threshold_sweep_color_e : register(ps_3_0, c1);
+float3 ref_threshold_sweep_color_s : register(ps_3_0, c0);
+float ref_threshold_sweep_fuzziness_e : register(ps_3_0, c5);
+float ref_threshold_sweep_fuzziness_s : register(ps_3_0, c4);
+float ref_threshold_sweep_op_e : register(ps_3_0, c3);
+float ref_threshold_sweep_op_s : register(ps_3_0, c2);
+struct PixelMain_Input
+{
+    float2 texcoord : TEXCOORD;
+    float2 texcoord7 : TEXCOORD7;
+};
+
+float4 PixelMain(PixelMain_Input i) : COLOR
+{
+    float4 out_color;
+    float4 temp0, temp1, temp2;
+    // def c7, 1, 0, 0, 0
+    // dcl_texcoord v0.xy
+    // dcl_texcoord7 v1.xy
+    // dcl_2d s0
+    // mov r0.xyz, c0
+    temp0.xyz = ref_threshold_sweep_color_s.xyz;
+    // add r1.xyz, -r0, c1
+    temp1.xyz = -temp0.xyz + ref_threshold_sweep_color_e.xyz;
+    // mov r0.w, c2.x
+    temp0.w = ref_threshold_sweep_op_s.x;
+    // add r1.w, -r0.w, c3.x
+    temp1.w = -temp0.w + ref_threshold_sweep_op_e.x;
+    // mad_pp r0, v1.x, r1, r0
+    temp0 = /* not implemented _pp modifier */ i.texcoord7.x * temp1 + temp0;
+    // mov r1.x, c4.x
+    temp1.x = ref_threshold_sweep_fuzziness_s.x;
+    // add r1.x, -r1.x, c5.x
+    temp1.x = -temp1.x + ref_threshold_sweep_fuzziness_e.x;
+    // mad_pp r1.x, v1.y, r1.x, c4.x
+    temp1.x = /* not implemented _pp modifier */ i.texcoord7.y * temp1.x + ref_threshold_sweep_fuzziness_s.x;
+    // rcp r1.y, r1.x
+    temp1.y = 1.0f / temp1.x;
+    // texld_pp r2, v0, s0
+    temp2 = /* not implemented _pp modifier */ tex2D(diffuse_texture, i.texcoord.xy);
+    // add r1.z, r2.y, -v1.x
+    temp1.z = temp2.y + -i.texcoord7.x;
+    // mad r1.y, r1_abs.z, -r1.y, c7.x
+    temp1.y = abs(temp1).z * -temp1.y + float1(1);
+    // add r1.x, -r1.x, r1_abs.z
+    temp1.x = -temp1.x + abs(temp1).z;
+    // mul_pp r0.w, r0.w, r1.y
+    temp0.w = /* not implemented _pp modifier */ temp0.w * temp1.y;
+    // mul oC0.xyz, r0, c6.x
+    out_color.xyz = temp0.xyz * ref_intensity.xxx;
+    // cmp_pp oC0.w, r1.x, c7.y, r0.w
+    out_color.w = /* not implemented _pp modifier */ (temp1.x >= 0) ? float1(0) : temp0.w;
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

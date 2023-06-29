@@ -1,0 +1,132 @@
+---
+id: 0x9be4a7945d91bd59
+title: "Generic Shadow Caster Alpha Masked Depth Scaling Diffuse Texture Global Environment Mapping Normalmap Nvidia Opacity Texture"
+---
+
+# Generic Shadow Caster Alpha Masked Depth Scaling Diffuse Texture Global Environment Mapping Normalmap Nvidia Opacity Texture
+(`generic:shadow_caster:ALPHA_MASKED:DEPTH_SCALING:DIFFUSE_TEXTURE:GLOBAL_ENVIRONMENT_MAPPING:NORMALMAP:NVIDIA:OPACITY_TEXTURE`, `0x9be4a7945d91bd59`)
+
+### Technique `ambient`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 1,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 2,
+	D3DRS_COLORWRITEENABLE = 0,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 961656599,
+	D3DRS_SLOPESCALEDEPTHBIAS = 1075838976,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 2,
+	D3DSAMP_MINFILTER = 2,
+	D3DSAMP_MIPFILTER = 2,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 texcoord4 : TEXCOORD4;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float texcoord1 : TEXCOORD1;
+    float2 texcoord4 : TEXCOORD4;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float temp0;
+    // dcl_position v0
+    // dcl_texcoord4 v1
+    // dcl_position o0
+    // dcl_texcoord1 o1.x
+    // dcl_texcoord4 o2.xy
+    // dp4 o0.x, v0, c0
+    o.position.x = dot(i.position, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, v0, c1
+    o.position.y = dot(i.position, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, v0, c3
+    o.position.w = dot(i.position, (view_proj_matrix._m03_m13_m23_m33));
+    // dp4 r0.x, v0, c2
+    temp0.x = dot(i.position, (view_proj_matrix._m02_m12_m22_m32));
+    // mov o0.z, r0.x
+    o.position.z = temp0.x;
+    // mov o1.x, r0.x
+    o.texcoord1 = temp0.x;
+    // mov o2.xy, v1
+    o.texcoord4 = i.texcoord4;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+sampler2D opacity_texture : register(ps_3_0, s0);
+struct PixelMain_Input
+{
+    float texcoord1 : TEXCOORD1;
+    float2 texcoord4 : TEXCOORD4;
+};
+
+float4 PixelMain(PixelMain_Input i) : COLOR
+{
+    float4 out_color;
+    float4 temp0;
+    // def c0, -0.00390625, 1, -1, 0
+    // dcl_texcoord1 v0.x
+    // dcl_texcoord4 v1.xy
+    // dcl_2d s0
+    // texld_pp r0, v1, s0
+    temp0 = /* not implemented _pp modifier */ tex2D(opacity_texture, i.texcoord4.xy);
+    // add r0.x, r0.y, c0.x
+    temp0.x = temp0.y + float1(-0.00390625);
+    // cmp r0, r0.x, c0.y, c0.z
+    temp0 = (temp0.x >= 0) ? float4(1, 1, 1, 1) : float4(-1, -1, -1, -1);
+    // texkill r0
+    clip(temp0);
+    // mul oC0, c0.ywww, v0.x
+    out_color = float4(1, 0, 0, 0) * i.texcoord1.x;
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.

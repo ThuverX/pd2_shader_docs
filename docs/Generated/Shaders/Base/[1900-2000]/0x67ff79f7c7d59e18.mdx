@@ -1,0 +1,241 @@
+---
+id: 0x67ff79f7c7d59e18
+title: "Generic Default Cube Environment Mapping Diffuse Texture Gloss Blurs Cubemap Gloss Control Value Normalmap Normalmap Depth Texture Normalmap Uv1 Parallax Parallax Relief"
+---
+
+# Generic Default Cube Environment Mapping Diffuse Texture Gloss Blurs Cubemap Gloss Control Value Normalmap Normalmap Depth Texture Normalmap Uv1 Parallax Parallax Relief
+(`generic:default:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:GLOSS_BLURS_CUBEMAP:GLOSS_CONTROL_VALUE:NORMALMAP:NORMALMAP_DEPTH_TEXTURE:NORMALMAP_UV1:PARALLAX:PARALLAX_RELIEF`, `0x67ff79f7c7d59e18`)
+
+### Technique `deferred_ambient`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 1,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 2,
+	D3DRS_COLORWRITEENABLE = 15,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 1
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 2
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float camera_near_range : register(vs_3_0, c15);
+column_major float4x4 camera_world_matrix : register(vs_3_0, c12);
+column_major float4x4 proj_matrix : register(vs_3_0, c8);
+column_major float4x4 view_matrix : register(vs_3_0, c4);
+column_major float4x4 world_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 normal : NORMAL;
+    float4 texcoord1 : TEXCOORD1;
+    float4 texcoord : TEXCOORD;
+    float4 tangent : TANGENT;
+    float4 binormal : BINORMAL;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float texcoord1 : TEXCOORD1;
+    float4 texcoord : TEXCOORD;
+    float3 texcoord2 : TEXCOORD2;
+    float3 texcoord3 : TEXCOORD3;
+    float3 texcoord4 : TEXCOORD4;
+    float3 texcoord8 : TEXCOORD8;
+    float texcoord10 : TEXCOORD10;
+    float3 texcoord5 : TEXCOORD5;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float4 temp0, temp1, temp2;
+    float3 temp3, temp4;
+    // def c16, 2, -1, -1500, 0.002
+    // dcl_position v0
+    // dcl_normal v1
+    // dcl_texcoord1 v2
+    // dcl_texcoord v3
+    // dcl_tangent v4
+    // dcl_binormal v5
+    // dcl_position o0
+    // dcl_texcoord1 o1.x
+    // dcl_texcoord o2
+    // dcl_texcoord2 o3.xyz
+    // dcl_texcoord3 o4.xyz
+    // dcl_texcoord4 o5.xyz
+    // dcl_texcoord8 o6.xyz
+    // dcl_texcoord10 o7.x
+    // dcl_texcoord5 o8.xyz
+    // mad r0.xyz, v4, c16.x, c16.y
+    temp0.xyz = i.tangent.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 r1.x, r0, c0
+    temp1.x = dot(temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 r1.y, r0, c1
+    temp1.y = dot(temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 r1.z, r0, c2
+    temp1.z = dot(temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // nrm r0.xyz, r1
+    temp0.xyz = normalize(temp1.xyz).xyz;
+    // mov o3.x, r1.x
+    o.texcoord2.x = temp1.x;
+    // mov o4.x, r1.y
+    o.texcoord3.x = temp1.y;
+    // mov o5.x, r1.z
+    o.texcoord4.x = temp1.z;
+    // dp4 r1.x, v0, c0
+    temp1.x = dot(i.position, (world_matrix._m00_m10_m20_m30));
+    // add r2.x, -r1.x, c12.w
+    temp2.x = -temp1.x + (camera_world_matrix._m00_m10_m20_m30).w;
+    // dp4 r1.y, v0, c1
+    temp1.y = dot(i.position, (world_matrix._m01_m11_m21_m31));
+    // add r2.y, -r1.y, c13.w
+    temp2.y = -temp1.y + (camera_world_matrix._m01_m11_m21_m31).w;
+    // dp4 r1.z, v0, c2
+    temp1.z = dot(i.position, (world_matrix._m02_m12_m22_m32));
+    // add r2.z, -r1.z, c14.w
+    temp2.z = -temp1.z + (camera_world_matrix._m02_m12_m22_m32).w;
+    // dp3 o6.x, r2, r0
+    o.texcoord8.x = dot(temp2.xyz, temp0.xyz);
+    // mad r0.xyz, v5, c16.x, c16.y
+    temp0.xyz = i.binormal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 r3.x, r0, c0
+    temp3.x = dot(temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 r3.y, r0, c1
+    temp3.y = dot(temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 r3.z, r0, c2
+    temp3.z = dot(temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // nrm r4.xyz, r3
+    temp4.xyz = normalize(temp3.xyz).xyz;
+    // dp3 o6.y, r2, r4
+    o.texcoord8.y = dot(temp2.xyz, temp4.xyz);
+    // mad r3.xyz, v1, c16.x, c16.y
+    temp3.xyz = i.normal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 r4.x, r3, c0
+    temp4.x = dot(temp3.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 r4.y, r3, c1
+    temp4.y = dot(temp3.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 r4.z, r3, c2
+    temp4.z = dot(temp3.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // nrm r3.xyz, r4
+    temp3.xyz = normalize(temp4.xyz).xyz;
+    // mov o3.z, r4.x
+    o.texcoord2.z = temp4.x;
+    // mov o4.z, r4.y
+    o.texcoord3.z = temp4.y;
+    // mov o5.z, r4.z
+    o.texcoord4.z = temp4.z;
+    // dp3 o6.z, r2, r3
+    o.texcoord8.z = dot(temp2.xyz, temp3.xyz);
+    // dp4 r1.w, v0, c3
+    temp1.w = dot(i.position, (world_matrix._m03_m13_m23_m33));
+    // dp4 r2.x, r1, c4
+    temp2.x = dot(temp1, (view_matrix._m00_m10_m20_m30));
+    // dp4 r2.y, r1, c5
+    temp2.y = dot(temp1, (view_matrix._m01_m11_m21_m31));
+    // dp4 r2.z, r1, c6
+    temp2.z = dot(temp1, (view_matrix._m02_m12_m22_m32));
+    // dp4 r2.w, r1, c7
+    temp2.w = dot(temp1, (view_matrix._m03_m13_m23_m33));
+    // mov o8.xyz, r1
+    o.texcoord5 = temp1;
+    // dp4 o0.x, r2, c8
+    o.position.x = dot(temp2, (proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, r2, c9
+    o.position.y = dot(temp2, (proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, r2, c11
+    o.position.w = dot(temp2, (proj_matrix._m03_m13_m23_m33));
+    // dp4 r0.w, r2, c10
+    temp0.w = dot(temp2, (proj_matrix._m02_m12_m22_m32));
+    // add r1.x, r0.w, c15.x
+    temp1.x = temp0.w + camera_near_range.x;
+    // mov o0.z, r0.w
+    o.position.z = temp0.w;
+    // add r0.w, r1.x, c16.z
+    temp0.w = temp1.x + float1(-1500);
+    // mov o1.x, r1.x
+    o.texcoord1 = temp1.x;
+    // mul o7.x, r0.w, c16.w
+    o.texcoord10 = temp0.w * float4(0.002, 0.002, 0.002, 0.002);
+    // dp3 o3.y, -r0, c0
+    o.texcoord2.y = dot(-temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o4.y, -r0, c1
+    o.texcoord3.y = dot(-temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o5.y, -r0, c2
+    o.texcoord4.y = dot(-temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mov o2.xy, v3
+    o.texcoord.xy = i.texcoord.xy;
+    // mov o2.zw, v2.xyxy
+    o.texcoord.zw = i.texcoord1.xy;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```raw
+0003fffffeff7a00435441421c000000b30100000003ffff080000001c00000000010000ac010000bc0000000200030001000000d000000000000000e00000000300010001000000f40000000000000004010000020000000300000018010000000000002801000003000000010000003801000000000000480100000200040001000000d0000000000000005f0100000200060001000000d000000000000000730100000200050001000000d0000000000000008601000003000200010000009c01000000000000474c4f42414c5f7573655f706172616c6c6178000000030001000100010000000000000062756d705f6e6f726d616c5f746578747572650004000c0001000100010000000000000063616d6572615f776f726c645f6d61747269780003000300040004000100000000000000646966667573655f746578747572650004000c000100010001000000000000007265665f676c6f7373696e6573735f636f6e74726f6c007265665f706172616c6c61785f6c6179657273007265665f706172616c6c61785f7363616c65007265666c656374696f6e5f7465787475726500ababab04000e0001000100010000000000000070735f335f30004d6963726f736f66742028522920484c534c2053686164657220436f6d70696c657220392e32392e3935322e33313131005100000507000fa0000000000000803f0000a040000000005100000508000fa00000003f000000bf0000803e0000e0403000000500000ff0ff0000000000000000000000000000003000000501000ff0050000000000000000000000000000001f00000205000180000001901f00000205000080010003901f00000205000280020007901f00000205000380030007901f00000205000480040007901f00000205000880050007901f00000205000a80060001901f00000205000580070007901f0000020000009000080fa01f0000020000009001080fa01f0000020000009802080fa001000002000007800700e4a029000402030000a1000000802900040206000090070055a024000002010007800500e49012000004020001800100aa8b0000aa80060000a00600000200000180020000800500000300000c8001004480050000a006000002010001800100aa800500000300000c800000e480010000800500000301000380000000800000ee805b00000201000c80010044905c000002020003800100e4905d00000503000f800100e4900108e4a00100ee800200e48002000003020004800300aa81070055a00100000203000180070000a001000002030002800200aa800100000203000c8001004490260000010000e4f02d0003020300008003005580020000030300018000000080030000800400000403000c800000e480000000810300e4805d00000504000f800300ee800108e4a00100ee800200e48002000003030002800400aa81070055a0270000000500000300000c8001004480080000a0050000030200048000000080080000a004000004010003800100e480080000a00300ee80040000040000018000000080080000a10300008001000002030003800100e48001000002040003800000ee8001000002030004800000008001000002020008800200aa80260000010100e4f00500000304000c8004004480080000a005000003030008800200ff80080000a05d00000505000f800300e4800108e4a00100ee800200e48002000003050001800500aa81070055a002000003050001800300aa800500008104000004060006800400d080080000a10300d08004000004060001800200ff80080000a00300aa8004000004070006800400d080080000a00300d08004000004070001800200ff80080000a10300aa805800000403000780050000800700c9800600c98001000002040003800400ee8001000002020008800300ff80270000002a0000000100000203000380070000a02b0000000100000200001180060000901200000401000380000000800100e4900300e4802a00000001000002010003800100e4902b0000004200000302002f800100e4800008e4a04200000301000f800100e4800108e4a002000003000005800100d480080055a002000003010003800000e8800000e880050000030000018001000080010000800400000400000180010055800100558000000081020000030000018000000081070055a007000002000001800000008006000002010004800000008008000003030001800100e4800200e49008000003030002800100e4800300e49008000003030004800100e4800400e49024000002010027800300e48002000003030001800000ffa00700009102000003030002800100ffa00700559102000003030004800200ffa00700aa9124000002040007800300e48008000003000001800100e4800400e4800200000300000480000000800000008004000004030007800000aa800100e4810400e480010000020000118000000080020000030000018000000081070055a05a0000040000018000000080000000800800aaa005000003000001800200ff8000000080020000030000028000005580040000a10500000300000280000055800800ffa013000002000004800000558002000003030008800000aa81000055805f00000303000f800300e4800208e4a00500000300000780000000800300e48004000004000827800000e4800200ff800200e48004000004010827800100e480080000a0080000a00100000200080880040000a001000002010828800200ff800100000202080f8000000090ffff0000
+```
+This shader was not successfully decompiled. Above is the raw bytecode.
+Decompiled by DXDecompiler.

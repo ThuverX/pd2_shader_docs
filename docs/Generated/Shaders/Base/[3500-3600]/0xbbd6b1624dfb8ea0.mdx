@@ -1,0 +1,359 @@
+---
+id: 0xbbd6b1624dfb8ea0
+title: "Generic Default Diffuse Texture Normalmap Self Illumination Vertex Color"
+---
+
+# Generic Default Diffuse Texture Normalmap Self Illumination Vertex Color
+(`generic:default:DIFFUSE_TEXTURE:NORMALMAP:SELF_ILLUMINATION:VERTEX_COLOR`, `0xbbd6b1624dfb8ea0`)
+
+### Technique `deferred_ambient`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 4,
+	D3DRS_ZWRITEENABLE = 1,
+	D3DRS_ALPHABLENDENABLE = 0,
+	D3DRS_CULLMODE = 2,
+	D3DRS_COLORWRITEENABLE = 15,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+#### Sampler 1
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 0,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+float camera_near_range : register(vs_3_0, c7);
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+column_major float4x4 world_matrix : register(vs_3_0, c4);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 normal : NORMAL;
+    float4 texcoord1 : TEXCOORD1;
+    float4 texcoord : TEXCOORD;
+    float4 tangent : TANGENT;
+    float4 binormal : BINORMAL;
+    float4 color : COLOR;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float texcoord1 : TEXCOORD1;
+    float4 texcoord : TEXCOORD;
+    float3 texcoord2 : TEXCOORD2;
+    float3 texcoord3 : TEXCOORD3;
+    float3 texcoord4 : TEXCOORD4;
+    float4 color : COLOR;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    float3 temp0;
+    // def c8, 2, -1, 1, 0
+    // dcl_position v0
+    // dcl_normal v1
+    // dcl_texcoord1 v2
+    // dcl_texcoord v3
+    // dcl_tangent v4
+    // dcl_binormal v5
+    // dcl_color v6
+    // dcl_position o0
+    // dcl_texcoord1 o1.x
+    // dcl_texcoord o2
+    // dcl_texcoord2 o3.xyz
+    // dcl_texcoord3 o4.xyz
+    // dcl_texcoord4 o5.xyz
+    // dcl_color o6
+    // dp4 o0.x, v0, c0
+    o.position.x = dot(i.position, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, v0, c1
+    o.position.y = dot(i.position, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.w, v0, c3
+    o.position.w = dot(i.position, (view_proj_matrix._m03_m13_m23_m33));
+    // dp4 r0.x, v0, c2
+    temp0.x = dot(i.position, (view_proj_matrix._m02_m12_m22_m32));
+    // add o1.x, r0.x, c7.x
+    o.texcoord1 = temp0.x + camera_near_range.x;
+    // mov o0.z, r0.x
+    o.position.z = temp0.x;
+    // mad r0.xyz, v4, c8.x, c8.y
+    temp0.xyz = i.tangent.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o3.x, r0, c4
+    o.texcoord2.x = dot(temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o4.x, r0, c5
+    o.texcoord3.x = dot(temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o5.x, r0, c6
+    o.texcoord4.x = dot(temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mad r0.xyz, v5, c8.x, c8.y
+    temp0.xyz = i.binormal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o3.y, -r0, c4
+    o.texcoord2.y = dot(-temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o4.y, -r0, c5
+    o.texcoord3.y = dot(-temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o5.y, -r0, c6
+    o.texcoord4.y = dot(-temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mad r0.xyz, v1, c8.x, c8.y
+    temp0.xyz = i.normal.xyz * float3(2, 2, 2) + float3(-1, -1, -1);
+    // dp3 o3.z, r0, c4
+    o.texcoord2.z = dot(temp0.xyz, (world_matrix._m00_m10_m20_m30).xyz);
+    // dp3 o4.z, r0, c5
+    o.texcoord3.z = dot(temp0.xyz, (world_matrix._m01_m11_m21_m31).xyz);
+    // dp3 o5.z, r0, c6
+    o.texcoord4.z = dot(temp0.xyz, (world_matrix._m02_m12_m22_m32).xyz);
+    // mov o2.xy, v3
+    o.texcoord.xy = i.texcoord.xy;
+    // mov o2.zw, v2.xyxy
+    o.texcoord.zw = i.texcoord1.xy;
+    // mul o6, c8.xxxz, v6
+    o.color = float4(2, 2, 2, 1) * i.color;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+sampler2D bump_normal_texture : register(ps_3_0, s1);
+sampler2D diffuse_texture : register(ps_3_0, s0);
+struct PixelMain_Input
+{
+    float texcoord1 : TEXCOORD1;
+    float4 texcoord : TEXCOORD;
+    float3 texcoord2 : TEXCOORD2;
+    float3 texcoord3 : TEXCOORD3;
+    float3 texcoord4 : TEXCOORD4;
+    float3 color : COLOR;
+};
+
+struct PixelMain_Output
+{
+    float4 color : COLOR;
+    float4 color1 : COLOR1;
+    float4 color2 : COLOR2;
+};
+
+PixelMain_Output PixelMain(PixelMain_Input i)
+{
+    PixelMain_Output o;
+    float4 temp0;
+    float3 temp1;
+    // def c0, -0.5, 1, 0.5, 0.4
+    // dcl_texcoord1 v0.x
+    // dcl_texcoord v1
+    // dcl_texcoord2 v2.xyz
+    // dcl_texcoord3 v3.xyz
+    // dcl_texcoord4 v4.xyz
+    // dcl_color v5.xyz
+    // dcl_2d s0
+    // dcl_2d s1
+    // texld_pp r0, v1, s0
+    temp0 = /* not implemented _pp modifier */ tex2D(diffuse_texture, i.texcoord.xy);
+    // mul_pp oC0.xyz, r0, v5
+    o.color.xyz = /* not implemented _pp modifier */ temp0.xyz * i.color.xyz;
+    // mov_pp oC1.w, r0.w
+    o.color1.w = /* not implemented _pp modifier */ temp0.w;
+    // texld_pp r0, v1.zwzw, s1
+    temp0 = /* not implemented _pp modifier */ tex2D(bump_normal_texture, i.texcoord.zw);
+    // add_pp r0.xy, r0.wyzw, c0.x
+    temp0.xy = /* not implemented _pp modifier */ temp0.wy + float2(-0.5, -0.5);
+    // add_pp r0.xy, r0, r0
+    temp0.xy = /* not implemented _pp modifier */ temp0.xy + temp0.xy;
+    // mul_pp r0.w, r0.x, r0.x
+    temp0.w = /* not implemented _pp modifier */ temp0.x * temp0.x;
+    // mad_pp r0.w, r0.y, r0.y, -r0.w
+    temp0.w = /* not implemented _pp modifier */ temp0.y * temp0.y + -temp0.w;
+    // add_pp r0.w, -r0.w, c0.y
+    temp0.w = /* not implemented _pp modifier */ -temp0.w + float1(1);
+    // rsq_pp r0.w, r0.w
+    temp0.w = /* not implemented _pp modifier */ 1 / sqrt(temp0.w);
+    // rcp_pp r0.z, r0.w
+    temp0.z = /* not implemented _pp modifier */ 1.0f / temp0.w;
+    // dp3 r1.x, r0, v2
+    temp1.x = dot(temp0.xyz, i.texcoord2.xyz);
+    // dp3 r1.y, r0, v3
+    temp1.y = dot(temp0.xyz, i.texcoord3.xyz);
+    // dp3 r1.z, r0, v4
+    temp1.z = dot(temp0.xyz, i.texcoord4.xyz);
+    // nrm_pp r0.xyz, r1
+    temp0.xyz = /* not implemented _pp modifier */ normalize(temp1.xyz).xyz;
+    // mad_pp oC1.xyz, r0, c0.z, c0.z
+    o.color1.xyz = /* not implemented _pp modifier */ temp0.xyz * float3(0.5, 0.5, 0.5) + float3(0.5, 0.5, 0.5);
+    // mov oC0.w, c0.w
+    o.color.w = float1(0.4);
+    // mov oC2, v0.x
+    o.color2 = i.texcoord1.x;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+### Technique `self_illumination`
+### Render States
+```cpp
+enum D3DRENDERSTATETYPE {
+	D3DRS_ZENABLE = 1,
+	D3DRS_ZFUNC = 3,
+	D3DRS_ZWRITEENABLE = 1,
+	D3DRS_ALPHABLENDENABLE = 1,
+	D3DRS_CULLMODE = 2,
+	D3DRS_COLORWRITEENABLE = 15,
+	D3DRS_COLORWRITEENABLE1 = 15,
+	D3DRS_COLORWRITEENABLE2 = 15,
+	D3DRS_STENCILENABLE = 0,
+	D3DRS_STENCILFUNC = 1,
+	D3DRS_STENCILFAIL = 1,
+	D3DRS_STENCILMASK = 0,
+	D3DRS_STENCILPASS = 1,
+	D3DRS_STENCILREF = 0,
+	D3DRS_STENCILWRITEMASK = 0,
+	D3DRS_STENCILZFAIL = 1,
+	D3DRS_DEPTHBIAS = 0,
+	D3DRS_SLOPESCALEDEPTHBIAS = 0,
+	D3DRS_FOGENABLE = 0,
+	D3DRS_SPECULARENABLE = 0,
+	D3DRS_ADAPTIVETESS_X = 0,
+	D3DRS_ADAPTIVETESS_Z = 0,
+	D3DRS_ADAPTIVETESS_W = 0,
+	D3DRS_SRGBWRITEENABLE = 0,
+	D3DRS_SEPARATEALPHABLENDENABLE = 0,
+	D3DRS_ALPHATESTENABLE = 0,
+	D3DRS_BLENDOP = 1,
+	D3DRS_SRCBLEND = 2,
+	D3DRS_DESTBLEND = 2,
+};
+```
+### Sampler States
+#### Sampler 0
+```cpp
+enum D3DSAMPLERSTATETYPE {
+	D3DSAMP_MIPMAPLODBIAS = 827606343,
+	D3DSAMP_SRGBTEXTURE = 1,
+	D3DSAMP_ADDRESSU = 1,
+	D3DSAMP_ADDRESSV = 1,
+	D3DSAMP_MAGFILTER = 3,
+	D3DSAMP_MINFILTER = 3,
+	D3DSAMP_MIPFILTER = 3,
+};
+```
+### Shaders
+#### Vertex Shader
+```hlsl
+column_major float4x4 view_proj_matrix : register(vs_3_0, c0);
+struct VertexMain_Input
+{
+    float4 position : POSITION;
+    float4 color : COLOR;
+    float4 texcoord : TEXCOORD;
+    float4 texcoord3 : TEXCOORD3;
+};
+
+struct VertexMain_Output
+{
+    float4 position : POSITION;
+    float4 color : COLOR;
+    float2 texcoord : TEXCOORD;
+    float2 texcoord6 : TEXCOORD6;
+};
+
+VertexMain_Output VertexMain(VertexMain_Input i)
+{
+    VertexMain_Output o;
+    // dcl_position v0
+    // dcl_color v1
+    // dcl_texcoord v2
+    // dcl_texcoord3 v3
+    // dcl_position o0
+    // dcl_color o1
+    // dcl_texcoord o2.xy
+    // dcl_texcoord6 o3.xy
+    // dp4 o0.x, v0, c0
+    o.position.x = dot(i.position, (view_proj_matrix._m00_m10_m20_m30));
+    // dp4 o0.y, v0, c1
+    o.position.y = dot(i.position, (view_proj_matrix._m01_m11_m21_m31));
+    // dp4 o0.z, v0, c2
+    o.position.z = dot(i.position, (view_proj_matrix._m02_m12_m22_m32));
+    // dp4 o0.w, v0, c3
+    o.position.w = dot(i.position, (view_proj_matrix._m03_m13_m23_m33));
+    // mov o1, v1
+    o.color = i.color;
+    // mov o2.xy, v2
+    o.texcoord = i.texcoord;
+    // mov o3.xy, v3
+    o.texcoord6 = i.texcoord3;
+    // 
+
+    return o;
+}
+```
+Decompiled by DXDecompiler.
+#### Pixel Shader
+```hlsl
+float ref_il_multiplier : register(ps_3_0, c0);
+sampler2D self_illumination_texture : register(ps_3_0, s0);
+float4 PixelMain(float2 texcoord : TEXCOORD) : COLOR
+{
+    float4 out_color;
+    float4 temp0;
+    // def c1, 1, 0, 0, 0
+    // dcl_texcoord v0.xy
+    // dcl_2d s0
+    // texld_pp r0, v0, s0
+    temp0 = /* not implemented _pp modifier */ tex2D(self_illumination_texture, texcoord.xy);
+    // mul_pp oC0.xyz, r0, c0.x
+    out_color.xyz = /* not implemented _pp modifier */ temp0.xyz * ref_il_multiplier.xxx;
+    // mov_pp oC0.w, c1.x
+    out_color.w = /* not implemented _pp modifier */ float1(1);
+    // 
+
+    return out_color;
+}
+```
+Decompiled by DXDecompiler.
