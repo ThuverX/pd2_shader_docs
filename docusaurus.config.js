@@ -41,7 +41,7 @@ const config = {
                 docs: {
                     sidebarPath: require.resolve('./sidebars.js'),
                     editUrl:
-                        'https://github.com/thuverx/pd2_shader_docs/tree/main/docs',
+                        'https://github.com/thuverx/pd2_shader_docs/tree/main/',
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
