@@ -6,8 +6,18 @@ title: "Generic Default Cube Environment Mapping Diffuse Texture Gloss Blurs Cub
 # Generic Default Cube Environment Mapping Diffuse Texture Gloss Blurs Cubemap Gloss Control Value Normalmap Rl Core Environment
 (`generic:default:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:GLOSS_BLURS_CUBEMAP:GLOSS_CONTROL_VALUE:NORMALMAP:RL_CORE_ENVIRONMENT`, `0x7d0df1b81c738cef`)
 
+This template is referenced 1 time by [generic:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:GLOSS_BLURS_CUBEMAP:GLOSS_CONTROL_VALUE:NORMALMAP:RL_CORE_ENVIRONMENT](/docs/Generated/Render%20Templates/base.render_template_database#generic-cube-environment-mapping-diffuse-texture-gloss-blurs-cubemap-gloss-control-value-normalmap-rl-core-environment).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|reflection_texture|Reflection Cube|texture|
+|glossiness_control|Glossiness value|scalar|.
+
 ### Technique `deferred_core_environment`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +49,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

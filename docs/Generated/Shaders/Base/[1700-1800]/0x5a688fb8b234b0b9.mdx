@@ -6,8 +6,25 @@ title: "Effect Default Scope Scope Lense Distortion"
 # Effect Default Scope Scope Lense Distortion
 (`effect:default:SCOPE:SCOPE_LENSE_DISTORTION`, `0x5a688fb8b234b0b9`)
 
+This template is referenced 1 time by [effect:SCOPE:SCOPE_LENSE_DISTORTION](/docs/Generated/Render%20Templates/base.render_template_database#effect-scope-scope-lense-distortion).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Reticle0 Texture|texture|
+|macrodetail_diffuse_texture|Background Texture|texture|
+|scope_zoom|Scope zoom|scalar|
+|scope_params|Distance, Length, Scale|vector3|
+|scope_inner_vignett|Inner vignett (Radius, Edge%)|vector3|
+|scope_outer_vignett|Outer vignett (Max radius, Min Radius, Edge%)|vector3|
+|scope_fadeout_params|Fadeout (Eye distance, Length)|vector3|
+|scope_fadeout|Scope fadeout|scalar|
+|scope_k|Dist k|vector3|
+|scope_kcube|Dist kcube|vector3|
+|scope_distortion_params|Dist params (radius, edge%)|vector3|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +59,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {
@@ -390,6 +408,7 @@ float4 PixelMain(PixelMain_Input i) : COLOR
 Decompiled by DXDecompiler.
 ### Technique `contours`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 0,
@@ -424,6 +443,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

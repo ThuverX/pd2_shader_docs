@@ -6,8 +6,23 @@ title: "Effect Default Blend Add Diffuse0 Texture Diffuse0 Tint Fps Intersection
 # Effect Default Blend Add Diffuse0 Texture Diffuse0 Tint Fps Intersection Fadeout Threshold Reveal View Angle Falloff Op
 (`effect:default:BLEND_ADD:DIFFUSE0_TEXTURE:DIFFUSE0_TINT:FPS:INTERSECTION_FADEOUT:THRESHOLD_REVEAL:VIEW_ANGLE_FALLOFF_OP`, `0x8312404ee55a54f4`)
 
+This template is referenced 1 time by [effect:BLEND_ADD:DIFFUSE0_TEXTURE:DIFFUSE0_TINT:FPS:INTERSECTION_FADEOUT:THRESHOLD_REVEAL:VIEW_ANGLE_FALLOFF_OP](/docs/Generated/Render%20Templates/base.render_template_database#effect-blend-add-diffuse0-texture-diffuse0-tint-fps-intersection-fadeout-threshold-reveal-view-angle-falloff-op).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse0 Texture|texture|
+|detail_diffuse_texture|Reveal Map|texture|
+|falloff_exp|Opacity View Angle Falloff|scalar|
+|tint_diffuse0_color|Diffuse0 Tint Color (x2)|vector3|
+|fadeout_distance|Intersection Fade-out Distance|scalar|
+|reveal_start|Reveal Start|scalar|
+|reveal_end|Reveal End|scalar|
+|reveal_fuzz|Reveal Threshold Fuzz|scalar|
+|intensity|Intensity|scalar|.
+
 ### Technique `transparent_fps`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +57,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

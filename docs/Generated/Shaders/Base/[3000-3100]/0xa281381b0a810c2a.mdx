@@ -6,8 +6,15 @@ title: "Generic Default Diffuse Texture Rl Backdrop Vertex Color"
 # Generic Default Diffuse Texture Rl Backdrop Vertex Color
 (`generic:default:DIFFUSE_TEXTURE:RL_BACKDROP:VERTEX_COLOR`, `0xa281381b0a810c2a`)
 
+This template is referenced 1 time by [generic:DIFFUSE_TEXTURE:RL_BACKDROP:VERTEX_COLOR](/docs/Generated/Render%20Templates/base.render_template_database#generic-diffuse-texture-rl-backdrop-vertex-color).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|.
+
 ### Technique `deferred_backdrop`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +46,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

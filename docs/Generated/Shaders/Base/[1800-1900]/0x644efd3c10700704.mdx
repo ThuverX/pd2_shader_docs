@@ -6,8 +6,21 @@ title: "Generic Shadow Caster Blend Diffuse Blend Gsma Blend Mask Control Blend 
 # Generic Shadow Caster Blend Diffuse Blend Gsma Blend Mask Control Blend Normal Diffuse Texture Gloss Control Value Normalmap Nvidia Rl Environment Vertex Color
 (`generic:shadow_caster:BLEND_DIFFUSE:BLEND_GSMA:BLEND_MASK_CONTROL:BLEND_NORMAL:DIFFUSE_TEXTURE:GLOSS_CONTROL_VALUE:NORMALMAP:NVIDIA:RL_ENVIRONMENT:VERTEX_COLOR`, `0x644efd3c10700704`)
 
+This template is referenced 1 time by [generic:BLEND_DIFFUSE:BLEND_GSMA:BLEND_MASK_CONTROL:BLEND_NORMAL:DIFFUSE_TEXTURE:GLOSS_CONTROL_VALUE:NORMALMAP:RL_ENVIRONMENT:VERTEX_COLOR](/docs/Generated/Render%20Templates/base.render_template_database#generic-blend-diffuse-blend-gsma-blend-mask-control-blend-normal-diffuse-texture-gloss-control-value-normalmap-rl-environment-vertex-color).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|diffuse_layer0_texture|Second diffuse (Shifted UV1)|texture|
+|diffuse_layer2_texture|Second Gloss-Spec-Material-Alpha Texture (GSMA)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|normal_layer0_texture|Second normal map (UV1)|texture|
+|glossiness_control|Glossiness value|scalar|
+|blend_control|Blending Smoothing, Blend mask Bias|vector3|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +52,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

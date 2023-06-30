@@ -6,8 +6,16 @@ title: "Generic Shadow Caster Align Normal World Z Alpha Masked Diffuse Texture 
 # Generic Shadow Caster Align Normal World Z Alpha Masked Diffuse Texture Double Sided Instanced Opacity Texture
 (`generic:shadow_caster:ALIGN_NORMAL_WORLD_Z:ALPHA_MASKED:DIFFUSE_TEXTURE:DOUBLE_SIDED:INSTANCED:OPACITY_TEXTURE`, `0x3d3d34a80f8fdf65`)
 
+This template is referenced 1 time by [generic:ALIGN_NORMAL_WORLD_Z:ALPHA_MASKED:DIFFUSE_TEXTURE:DOUBLE_SIDED:INSTANCED:OPACITY_TEXTURE](/docs/Generated/Render%20Templates/base.render_template_database#generic-align-normal-world-z-alpha-masked-diffuse-texture-double-sided-instanced-opacity-texture).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|opacity_texture|Alpha Mask (UV5)|texture|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +47,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

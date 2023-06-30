@@ -6,8 +6,23 @@ title: "Opacity Default Diffuse Texture Double Sided Is Water Normalmap Take Fog
 # Opacity Default Diffuse Texture Double Sided Is Water Normalmap Take Fog
 (`opacity:default:DIFFUSE_TEXTURE:DOUBLE_SIDED:IS_WATER:NORMALMAP:TAKE_FOG`, `0x37e8be937d42a008`)
 
+This template is referenced 1 time by [opacity:DIFFUSE_TEXTURE:DOUBLE_SIDED:IS_WATER:NORMALMAP:TAKE_FOG](/docs/Generated/Render%20Templates/base.render_template_database#opacity-diffuse-texture-double-sided-is-water-normalmap-take-fog).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|reflection_texture|Reflection Cube|texture|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|bump_normal_texture|Normal Map (UV2 else UV1)|texture|
+|depth_opacity|Opacity Distance Falloff|scalar|
+|water_col_a|Water color A|vector3|
+|water_col_b|Water color B|vector3|
+|water_settingz_b|Water settings, Dist A, Dist B, Distortion size|vector3|
+|water_settingz_c|Water settings, Speed A, Speed B, Not used|vector3|
+|surface_settings|Water surface Settings (Reflection Instensity, Reflection Falloff Curve, Max Opacity dimmer)|vector3|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +57,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

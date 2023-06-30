@@ -6,8 +6,16 @@ title: "Generic Default Diffuse Texture Instanced Normalmap Vertex Color Alpha"
 # Generic Default Diffuse Texture Instanced Normalmap Vertex Color Alpha
 (`generic:default:DIFFUSE_TEXTURE:INSTANCED:NORMALMAP:VERTEX_COLOR_ALPHA`, `0x98c2a901f883b9fe`)
 
+This template is referenced 1 time by [generic:DIFFUSE_TEXTURE:INSTANCED:NORMALMAP:VERTEX_COLOR_ALPHA](/docs/Generated/Render%20Templates/base.render_template_database#generic-diffuse-texture-instanced-normalmap-vertex-color-alpha).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|.
+
 ### Technique `deferred_ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +47,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

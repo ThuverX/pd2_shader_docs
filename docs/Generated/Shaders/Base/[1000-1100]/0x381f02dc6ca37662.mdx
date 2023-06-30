@@ -6,8 +6,16 @@ title: "Effect Default Dof Cutter Cut Far Dof Cutter Standard"
 # Effect Default Dof Cutter Cut Far Dof Cutter Standard
 (`effect:default:DOF_CUTTER_CUT_FAR:DOF_CUTTER_STANDARD`, `0x381f02dc6ca37662`)
 
+This template is referenced 1 time by [effect:DOF_CUTTER_CUT_FAR:DOF_CUTTER_STANDARD](/docs/Generated/Render%20Templates/base.render_template_database#effect-dof-cutter-cut-far-dof-cutter-standard).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse0 Texture|texture|
+|cut_amount|Cut amount|scalar|.
+
 ### Technique `0xb5b15d43fbe8772f`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 0,
@@ -42,6 +50,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

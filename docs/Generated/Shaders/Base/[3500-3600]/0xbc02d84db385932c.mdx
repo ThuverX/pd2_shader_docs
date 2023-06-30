@@ -6,8 +6,19 @@ title: "Opacity Default Cube Environment Mapping Cube Fresnel Diffuse Texture Do
 # Opacity Default Cube Environment Mapping Cube Fresnel Diffuse Texture Double Sided Instanced Nvidia Opacity Fade
 (`opacity:default:CUBE_ENVIRONMENT_MAPPING:CUBE_FRESNEL:DIFFUSE_TEXTURE:DOUBLE_SIDED:INSTANCED:NVIDIA:OPACITY_FADE`, `0xbc02d84db385932c`)
 
+This template is referenced 1 time by [opacity:CUBE_ENVIRONMENT_MAPPING:CUBE_FRESNEL:DIFFUSE_TEXTURE:DOUBLE_SIDED:INSTANCED:OPACITY_FADE](/docs/Generated/Render%20Templates/base.render_template_database#opacity-cube-environment-mapping-cube-fresnel-diffuse-texture-double-sided-instanced-opacity-fade).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|reflection_texture|Reflection Cube|texture|
+|opacity_texture|Opacity Texture (UV5)|texture|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|fresnel_settings|Falloff Settings (Falloff curve, Falloff multiplier, Opacity dimmer)|vector3|
+|opacity_fade|Opacity fade (fade, end in cm)|vector3|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +53,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

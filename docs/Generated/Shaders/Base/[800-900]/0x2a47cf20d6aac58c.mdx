@@ -6,8 +6,17 @@ title: "Generic Shadow Caster Align Normal World Z Alpha Masked Diffuse Texture 
 # Generic Shadow Caster Align Normal World Z Alpha Masked Diffuse Texture External Alpha Ref Instanced
 (`generic:shadow_caster:ALIGN_NORMAL_WORLD_Z:ALPHA_MASKED:DIFFUSE_TEXTURE:EXTERNAL_ALPHA_REF:INSTANCED`, `0x2a47cf20d6aac58c`)
 
+This template is referenced 1 time by [generic:ALIGN_NORMAL_WORLD_Z:ALPHA_MASKED:DIFFUSE_TEXTURE:EXTERNAL_ALPHA_REF:INSTANCED](/docs/Generated/Render%20Templates/base.render_template_database#generic-align-normal-world-z-alpha-masked-diffuse-texture-external-alpha-ref-instanced).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|alpha_ref|Alpha Mask Reference|scalar|
+|normal_world_z_blend|Align-Normal-To-World-Up-Blend|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +48,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

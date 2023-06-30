@@ -6,8 +6,17 @@ title: "Generic Default Alpha Masked Diffuse Texture External Alpha Ref Normalma
 # Generic Default Alpha Masked Diffuse Texture External Alpha Ref Normalmap
 (`generic:default:ALPHA_MASKED:DIFFUSE_TEXTURE:EXTERNAL_ALPHA_REF:NORMALMAP`, `0x846f2ab3c2f421`)
 
+This template is referenced 1 time by [generic:ALPHA_MASKED:DIFFUSE_TEXTURE:EXTERNAL_ALPHA_REF:NORMALMAP](/docs/Generated/Render%20Templates/base.render_template_database#generic-alpha-masked-diffuse-texture-external-alpha-ref-normalmap).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|alpha_ref|Alpha Mask Reference|scalar|.
+
 ### Technique `deferred_ambient_alpha_masked`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +48,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

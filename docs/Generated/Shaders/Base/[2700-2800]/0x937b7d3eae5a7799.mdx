@@ -6,8 +6,19 @@ title: "Generic Shadow Caster Alpha Masked Axis Aligned Billboard Billboard Cent
 # Generic Shadow Caster Alpha Masked Axis Aligned Billboard Billboard Center Offset Billboard Up Axis Diffuse Texture Double Sided Nvidia Opacity Texture
 (`generic:shadow_caster:ALPHA_MASKED:AXIS_ALIGNED_BILLBOARD:BILLBOARD_CENTER_OFFSET:BILLBOARD_UP_AXIS:DIFFUSE_TEXTURE:DOUBLE_SIDED:NVIDIA:OPACITY_TEXTURE`, `0x937b7d3eae5a7799`)
 
+This template is referenced 1 time by [generic:ALPHA_MASKED:AXIS_ALIGNED_BILLBOARD:BILLBOARD_CENTER_OFFSET:BILLBOARD_UP_AXIS:DIFFUSE_TEXTURE:DOUBLE_SIDED:OPACITY_TEXTURE](/docs/Generated/Render%20Templates/base.render_template_database#generic-alpha-masked-axis-aligned-billboard-billboard-center-offset-billboard-up-axis-diffuse-texture-double-sided-opacity-texture).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|opacity_texture|Alpha Mask (UV5)|texture|
+|billboard_up_axis|Billboard up axis|vector3|
+|billboard_center_offset|Billboard center offset|vector3|
+|global_axis|World Space fixed axis|vector3|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +50,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

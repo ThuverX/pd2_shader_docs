@@ -6,8 +6,25 @@ title: "Effect Default Blend Add Diffuse0 Texture Diffuse0 Threshold Sweep Diffu
 # Effect Default Blend Add Diffuse0 Texture Diffuse0 Threshold Sweep Diffuse1 Blend Op Rgb Add Diffuse1 Texture
 (`effect:default:BLEND_ADD:DIFFUSE0_TEXTURE:DIFFUSE0_THRESHOLD_SWEEP:DIFFUSE1_BLEND_OP_RGB_ADD:DIFFUSE1_TEXTURE`, `0x56085aef81da3b`)
 
+This template is referenced 1 time by [effect:BLEND_ADD:DIFFUSE0_TEXTURE:DIFFUSE0_THRESHOLD_SWEEP:DIFFUSE1_BLEND_OP_RGB_ADD:DIFFUSE1_TEXTURE](/docs/Generated/Render%20Templates/base.render_template_database#effect-blend-add-diffuse0-texture-diffuse0-threshold-sweep-diffuse1-blend-op-rgb-add-diffuse1-texture).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse0 Texture|texture|
+|detail_diffuse_texture|Diffuse1 Texture|texture|
+|threshold_sweep_color_s|Threshold Sweep Color Start|vector3|
+|threshold_sweep_color_e|Threshold Sweep Color End|vector3|
+|threshold_sweep_op_s|Threshold Sweep Opacity Start|scalar|
+|threshold_sweep_op_e|Threshold Sweep Opacity End|scalar|
+|threshold_sweep_fuzziness_s|Threshold Sweep Fuzziness Start|scalar|
+|threshold_sweep_fuzziness_e|Threshold Sweep Fuzziness End|scalar|
+|threshold_sweep_speed|Threshold Sweep Speed|scalar|
+|threshold_sweep_time_exp|Threshold Sweep Fuzziness Time Exponent|scalar|
+|intensity|Intensity|scalar|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +59,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

@@ -6,8 +6,18 @@ title: "Tintobject Default Depth Bias Blend Double Sided View Distance Fade"
 # Tintobject Default Depth Bias Blend Double Sided View Distance Fade
 (`tintobject:default:DEPTH_BIAS_BLEND:DOUBLE_SIDED:VIEW_DISTANCE_FADE`, `0x20a4cfe2b6ab26f3`)
 
+This template is referenced 1 time by [tintobject:DEPTH_BIAS_BLEND:DOUBLE_SIDED:VIEW_DISTANCE_FADE](/docs/Generated/Render%20Templates/base.render_template_database#tintobject-depth-bias-blend-double-sided-view-distance-fade).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|tint_color|Tint Color|vector3|
+|intensity|Intensity|scalar|
+|distance_fade|Distance fade|scalar|
+|depth_bias|Depth bias|scalar|.
+
 ### Technique `effect_glow`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +52,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

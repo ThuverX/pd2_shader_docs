@@ -6,8 +6,17 @@ title: "Generic Shadow Caster Alpha Masked Diffuse Texture Double Sided External
 # Generic Shadow Caster Alpha Masked Diffuse Texture Double Sided External Alpha Ref Normalmap
 (`generic:shadow_caster:ALPHA_MASKED:DIFFUSE_TEXTURE:DOUBLE_SIDED:EXTERNAL_ALPHA_REF:NORMALMAP`, `0x5ed32d9b01f3a883`)
 
+This template is referenced 1 time by [generic:ALPHA_MASKED:DIFFUSE_TEXTURE:DOUBLE_SIDED:EXTERNAL_ALPHA_REF:NORMALMAP](/docs/Generated/Render%20Templates/base.render_template_database#generic-alpha-masked-diffuse-texture-double-sided-external-alpha-ref-normalmap).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|alpha_ref|Alpha Mask Reference|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +48,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

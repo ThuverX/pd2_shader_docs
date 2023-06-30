@@ -6,8 +6,24 @@ title: "Solid Mask Default Decal Sticker"
 # Solid Mask Default Decal Sticker
 (`solid_mask:default:DECAL_STICKER`, `0x687fa141783756da`)
 
+This template is referenced 1 time by [solid_mask:DECAL_STICKER](/docs/Generated/Render%20Templates/base.render_template_database#solid-mask-decal-sticker).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse|texture|
+|bump_normal_texture|Normalmap|texture|
+|reflection_texture|MATCAP Texture|texture|
+|material_texture|Pattern texture|texture|
+|diffuse_layer3_texture|Decal (UV5 and UV6)|texture|
+|uv_scale|Sticker Scale x y, Sticker Wear and Tear Influence|vector3|
+|uv_offset_rot|Sticker Position Offset x y, Sticker Rotation|vector3|
+|tint_color_a|Tint Color A|vector3|
+|tint_color_b|Tint Color B|vector3|
+|material_amount|Material apply amount|scalar|.
+
 ### Technique `deferred_ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +55,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

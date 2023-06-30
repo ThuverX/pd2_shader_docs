@@ -4,8 +4,91 @@ title: Shader File Format
 category: Shader
 ---
 
-The shader package file format is used to store shader-related data, including shaders, shader passes, and shader libraries. This documentation provides an overview of the file format structure.
+This file describes the `.shaders` file format used by Payday 2. It's a custom format used to store the shaders used by the game.
 
-## Overview
+(All values are stored in little endian.)
 
-&lt;wip&gt;
+## Headers
+
+The file is structured as follows:
+* The start of the file is the padding and the number of [Objects](#objects):
+    * Either `count` or `-1` (4 bytes)
+    * If the previous value was `-1`, then this is `padding` (4 bytes)
+    * And if the previous value was `padding` then this is the `count` instead (4 bytes)
+* A list of [Objects](#objects):
+    * Each object has a `type` according to [Types](#object-types) (4 bytes)
+    * A reference id so this object can be referenced to by other objects (4 bytes)
+    * The `size` of the object (4 bytes)
+    * The data of the object (`size` bytes)
+
+## Objects
+
+### Object types
+
+| Type | Value | Description |
+| --- | --- | --- |
+| `Shader` | `0x7F3552D1` | Contains a list of techniques with shader passes |
+| `Shader Pass` | `0x214b1aaf` | Contains render and sampler state along with a vertex and pixel shader |
+| `Shader Library` | `0x12812C1A` | Contains a list of shader templates |
+
+### Shader Library
+
+The Shader Library Object contains a list of [shader templates](#shader).
+
+It is structured as follows:
+* `count`, the number of shader templates (4 bytes)
+* A list of references to shader templates:
+    * The [lookup8 hash](/docs/lookup8) of the shader templates name (8 bytes)
+    * The reference id to the shader template object (4 bytes)
+
+### Shader
+
+The Shader Object contains a list of techniques each containing a list of passes.
+
+It is structured as follows:
+* `count`, the number of techniques (4 bytes)
+* A list of techniques:
+    * The [lookup8 hash](/docs/lookup8) of the technique name (8 bytes)
+    * `count`, the number of passes (4 bytes)
+        * reference id to the shader pass object (4 bytes)
+
+### Shader pass
+
+The Shader Pass Object contains the bulk of the relevant data for the shaders. It contains the render and sampler state along with the vertex and pixel shader.
+
+It is structured as follows:
+* `render_state_count`, the number of render states (4 bytes)
+* A list of render states according to [Render States](#render-states)
+* `sampler_state_count`, the number of sampler states (4 bytes)
+* A list of sampler states according to [Sampler States](#sampler-states)
+* `vertex_shader_size`, the size of the vertex shader data (4 bytes)
+* `vertex_shader_data`, the vertex shader data (`vertex_shader_size` bytes)
+* `pixel_shader_size`, the size of the pixel shader data (4 bytes)
+* `pixel_shader_data`, the pixel shader data (`pixel_shader_size` bytes)
+
+## Render States
+
+A Render State contains information how this shader should render.
+
+It is structured as follows:
+* `id`, the [D3DRENDERSTATETYPE](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype) as a 32 bit integer (4 bytes)
+* `b`, whether is value is a `int` or a `long` (1 byte)
+* if `b` is equal to `0`
+    * `value4`, the value of the render state (4 bytes)
+* else if `b` is not equal to `0`
+    * `value8`, the value of the render state (8 bytes)
+
+## Sampler States
+
+A Sampler State contains information about how a sampler should sample a texture.
+
+It is structured as follows:
+* `id`, the id the sampler (4 bytes)
+* `state_count`, the number of state for this sampler (4 bytes)
+* A list of states:
+    * `id`, the [D3DSAMPLERSTATETYPE](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype) as a 32 bit integer (4 bytes)
+    * `b`, whether is value is a `int` or a `long` (1 byte)
+    * if `b` is equal to `0`
+        * `value4`, the value of the render state (4 bytes)
+    * else if `b` is not equal to `0`
+        * `value8`, the value of the render state (8 bytes)

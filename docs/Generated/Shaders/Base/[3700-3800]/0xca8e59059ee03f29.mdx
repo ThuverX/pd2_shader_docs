@@ -6,8 +6,20 @@ title: "Opacity Default Cube Environment Mapping Cube Fresnel Diffuse Texture No
 # Opacity Default Cube Environment Mapping Cube Fresnel Diffuse Texture Normalmap Opacity Fade Skinned 3weights
 (`opacity:default:CUBE_ENVIRONMENT_MAPPING:CUBE_FRESNEL:DIFFUSE_TEXTURE:NORMALMAP:OPACITY_FADE:SKINNED_3WEIGHTS`, `0xca8e59059ee03f29`)
 
+This template is referenced 1 time by [opacity:CUBE_ENVIRONMENT_MAPPING:CUBE_FRESNEL:DIFFUSE_TEXTURE:NORMALMAP:OPACITY_FADE:SKINNED_3WEIGHTS](/docs/Generated/Render%20Templates/base.render_template_database#opacity-cube-environment-mapping-cube-fresnel-diffuse-texture-normalmap-opacity-fade-skinned-3weights).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|reflection_texture|Reflection Cube|texture|
+|opacity_texture|Opacity Texture (UV5)|texture|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|bump_normal_texture|Normal Map (UV2 else UV1)|texture|
+|fresnel_settings|Falloff Settings (Falloff curve, Falloff multiplier, Opacity dimmer)|vector3|
+|opacity_fade|Opacity fade (fade, end in cm)|vector3|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +54,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

@@ -6,8 +6,17 @@ title: "Generic Default Align Normal World Z Alpha Masked Diffuse Texture Distan
 # Generic Default Align Normal World Z Alpha Masked Diffuse Texture Distance Fade 3 External Alpha Ref
 (`generic:default:ALIGN_NORMAL_WORLD_Z:ALPHA_MASKED:DIFFUSE_TEXTURE:DISTANCE_FADE_3:EXTERNAL_ALPHA_REF`, `0x7dee281a581585b4`)
 
+This template is referenced 1 time by [generic:ALIGN_NORMAL_WORLD_Z:ALPHA_MASKED:DIFFUSE_TEXTURE:DISTANCE_FADE_3:EXTERNAL_ALPHA_REF](/docs/Generated/Render%20Templates/base.render_template_database#generic-align-normal-world-z-alpha-masked-diffuse-texture-distance-fade-3-external-alpha-ref).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|alpha_ref|Alpha Mask Reference|scalar|
+|normal_world_z_blend|Align-Normal-To-World-Up-Blend|scalar|.
+
 ### Technique `deferred_ambient_alpha_masked`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +48,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

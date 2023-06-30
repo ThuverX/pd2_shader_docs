@@ -6,8 +6,19 @@ title: "Generic Default Alpha Masked Diffuse Texture Distance Fade 3 Double Side
 # Generic Default Alpha Masked Diffuse Texture Distance Fade 3 Double Sided External Alpha Ref Instanced Vegetation Bending
 (`generic:default:ALPHA_MASKED:DIFFUSE_TEXTURE:DISTANCE_FADE_3:DOUBLE_SIDED:EXTERNAL_ALPHA_REF:INSTANCED:VEGETATION_BENDING`, `0xf53ede572c2450e6`)
 
+This template is referenced 1 time by [generic:ALPHA_MASKED:DIFFUSE_TEXTURE:DISTANCE_FADE_3:DOUBLE_SIDED:EXTERNAL_ALPHA_REF:INSTANCED:VEGETATION_BENDING](/docs/Generated/Render%20Templates/base.render_template_database#generic-alpha-masked-diffuse-texture-distance-fade-3-double-sided-external-alpha-ref-instanced-vegetation-bending).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|speed|Speed|scalar|
+|detail_settings|Detail Bending Amplitude / Frequency|vector3|
+|branch_settings|Branch Bending Amplitude / Frequency|vector3|
+|alpha_ref|Alpha Mask Reference|scalar|.
+
 ### Technique `deferred_ambient_alpha_masked`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +50,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

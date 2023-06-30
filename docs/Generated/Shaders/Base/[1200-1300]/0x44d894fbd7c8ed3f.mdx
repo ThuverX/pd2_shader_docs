@@ -6,8 +6,16 @@ title: "Effect Default Blend Mul Diffuse0 Texture Instanced"
 # Effect Default Blend Mul Diffuse0 Texture Instanced
 (`effect:default:BLEND_MUL:DIFFUSE0_TEXTURE:INSTANCED`, `0x44d894fbd7c8ed3f`)
 
+This template is referenced 1 time by [effect:BLEND_MUL:DIFFUSE0_TEXTURE:INSTANCED](/docs/Generated/Render%20Templates/base.render_template_database#effect-blend-mul-diffuse0-texture-instanced).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse0 Texture|texture|
+|intensity|Intensity|scalar|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +50,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

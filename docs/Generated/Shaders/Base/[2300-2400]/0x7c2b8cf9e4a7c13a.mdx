@@ -6,8 +6,20 @@ title: "Generic Shadow Caster Blend Diffuse Blend Fade Cube Environment Mapping 
 # Generic Shadow Caster Blend Diffuse Blend Fade Cube Environment Mapping Diffuse Texture Gsma Texture Normalmap Nvidia
 (`generic:shadow_caster:BLEND_DIFFUSE:BLEND_FADE:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:GSMA_TEXTURE:NORMALMAP:NVIDIA`, `0x7c2b8cf9e4a7c13a`)
 
+This template is referenced 1 time by [generic:BLEND_DIFFUSE:BLEND_FADE:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:GSMA_TEXTURE:NORMALMAP](/docs/Generated/Render%20Templates/base.render_template_database#generic-blend-diffuse-blend-fade-cube-environment-mapping-diffuse-texture-gsma-texture-normalmap).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|diffuse_layer0_texture|Second diffuse (Shifted UV1)|texture|
+|material_texture|Gloss-Spec-Material-Alpha Texture (GSMA)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|reflection_texture|Reflection Cube|texture|
+|blend_fade_value|Blend fade value|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +51,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

@@ -6,8 +6,27 @@ title: "Landscape Shadow Caster Gloss From Spec Mat0 Mat0 Blend World Mask Mat0 
 # Landscape Shadow Caster Gloss From Spec Mat0 Mat0 Blend World Mask Mat0 Nm Mat0 W Uv B Mat1 Mat1 Blend World Mask Mat1 Nm Mat1 W Uv B Mat2 Mat2 Blend World Mask Mat2 Nm Mat2 W Uv B Mat3 Mat3 Blend World Mask Mat3 Nm Mat3 W Uv B Nvidia Overlay Over Detail World Mask A Wetness World Nm World Overlay Mask Texture World Overlay Texture
 (`landscape:shadow_caster:GLOSS_FROM_SPEC:MAT0:MAT0_BLEND_WORLD_MASK:MAT0_NM:MAT0_W_UV_B:MAT1:MAT1_BLEND_WORLD_MASK:MAT1_NM:MAT1_W_UV_B:MAT2:MAT2_BLEND_WORLD_MASK:MAT2_NM:MAT2_W_UV_B:MAT3:MAT3_BLEND_WORLD_MASK:MAT3_NM:MAT3_W_UV_B:NVIDIA:OVERLAY_OVER_DETAIL:WORLD_MASK_A_WETNESS:WORLD_NM:WORLD_OVERLAY_MASK_TEXTURE:WORLD_OVERLAY_TEXTURE`, `0xd1ae4a6b1229eee3`)
 
+This template is referenced 1 time by [landscape:GLOSS_FROM_SPEC:MAT0:MAT0_BLEND_WORLD_MASK:MAT0_NM:MAT0_W_UV_B:MAT1:MAT1_BLEND_WORLD_MASK:MAT1_NM:MAT1_W_UV_B:MAT2:MAT2_BLEND_WORLD_MASK:MAT2_NM:MAT2_W_UV_B:MAT3:MAT3_BLEND_WORLD_MASK:MAT3_NM:MAT3_W_UV_B:OVERLAY_OVER_DETAIL:WORLD_MASK_A_WETNESS:WORLD_NM:WORLD_OVERLAY_MASK_TEXTURE:WORLD_OVERLAY_TEXTURE](/docs/Generated/Render%20Templates/base.render_template_database#landscape-gloss-from-spec-mat0-mat0-blend-world-mask-mat0-nm-mat0-w-uv-b-mat1-mat1-blend-world-mask-mat1-nm-mat1-w-uv-b-mat2-mat2-blend-world-mask-mat2-nm-mat2-w-uv-b-mat3-mat3-blend-world-mask-mat3-nm-mat3-w-uv-b-overlay-over-detail-world-mask-a-wetness-world-nm-world-overlay-mask-texture-world-overlay-texture).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|world_overlay_texture|World Overlay Texture|texture|
+|world_overlay_mask_texture|World Mask Texture|texture|
+|bump_normal_texture|World Normal Map|texture|
+|diffuse_layer0_texture|Diffuse Texture Layer 0 [mask.r] (UV2 else UV1)|texture|
+|normal_layer0_texture|Normal Map Layer 0 [mask.r] (UV2 else UV1)|texture|
+|diffuse_layer1_texture|Diffuse Texture Layer 1 [mask.g] (UV2 else UV1)|texture|
+|normal_layer1_texture|Normal Map Layer 1 [mask.g] (UV2 else UV1)|texture|
+|diffuse_layer2_texture|Diffuse Texture Layer 2 [mask.b] (UV2 else UV1)|texture|
+|normal_layer2_texture|Normal Map Layer 2 [mask.b] (UV2 else UV1)|texture|
+|diffuse_layer3_texture|Diffuse Texture Layer 3 [mask.a] (UV2 else UV1)|texture|
+|normal_layer3_texture|Normal Map Layer 3 [mask.a] (UV2 else UV1)|texture|
+|detail_fadeout|Detail Fade Out (start, end)|vector3|
+|detail_scale|Detail Texture Scale A and B|vector3|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +58,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

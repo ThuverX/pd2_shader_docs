@@ -6,8 +6,20 @@ title: "Generic Default Align Normal World Z Alpha Masked Diffuse Texture Double
 # Generic Default Align Normal World Z Alpha Masked Diffuse Texture Double Sided External Alpha Ref Opacity Texture Vegetation Bending
 (`generic:default:ALIGN_NORMAL_WORLD_Z:ALPHA_MASKED:DIFFUSE_TEXTURE:DOUBLE_SIDED:EXTERNAL_ALPHA_REF:OPACITY_TEXTURE:VEGETATION_BENDING`, `0x8110d811da4fd31d`)
 
+This template is referenced 1 time by [generic:ALIGN_NORMAL_WORLD_Z:ALPHA_MASKED:DIFFUSE_TEXTURE:DOUBLE_SIDED:EXTERNAL_ALPHA_REF:OPACITY_TEXTURE:VEGETATION_BENDING](/docs/Generated/Render%20Templates/base.render_template_database#generic-align-normal-world-z-alpha-masked-diffuse-texture-double-sided-external-alpha-ref-opacity-texture-vegetation-bending).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|opacity_texture|Alpha Mask (UV5)|texture|
+|speed|Speed|scalar|
+|detail_settings|Detail Bending Amplitude / Frequency|vector3|
+|branch_settings|Branch Bending Amplitude / Frequency|vector3|
+|alpha_ref|Alpha Mask Reference|scalar|.
+
 ### Technique `deferred_ambient_alpha_masked`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +51,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

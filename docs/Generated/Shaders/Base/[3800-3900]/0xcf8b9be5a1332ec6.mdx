@@ -6,8 +6,18 @@ title: "Generic Default Diffuse Texture Gloss Control Value Self Illumination"
 # Generic Default Diffuse Texture Gloss Control Value Self Illumination
 (`generic:default:DIFFUSE_TEXTURE:GLOSS_CONTROL_VALUE:SELF_ILLUMINATION`, `0xcf8b9be5a1332ec6`)
 
+This template is referenced 1 time by [generic:DIFFUSE_TEXTURE:GLOSS_CONTROL_VALUE:SELF_ILLUMINATION](/docs/Generated/Render%20Templates/base.render_template_database#generic-diffuse-texture-gloss-control-value-self-illumination).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|glossiness_control|Glossiness value|scalar|
+|self_illumination_texture|Self Illumination Texture (UV4)|texture|
+|il_multiplier|Self Illumination Intensity Multiplier|scalar|.
+
 ### Technique `deferred_ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +49,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {
@@ -161,6 +172,7 @@ PixelMain_Output PixelMain(PixelMain_Input i)
 Decompiled by DXDecompiler.
 ### Technique `self_illumination`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -195,6 +207,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

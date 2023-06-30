@@ -6,8 +6,17 @@ title: "Effect Default Diffuse0 Texture Diffuse0 Uvanim Vertex Color"
 # Effect Default Diffuse0 Texture Diffuse0 Uvanim Vertex Color
 (`effect:default:DIFFUSE0_TEXTURE:DIFFUSE0_UVANIM:VERTEX_COLOR`, `0xffea6dc46d8ba36b`)
 
+This template is referenced 1 time by [effect:DIFFUSE0_TEXTURE:DIFFUSE0_UVANIM:VERTEX_COLOR](/docs/Generated/Render%20Templates/base.render_template_database#effect-diffuse0-texture-diffuse0-uvanim-vertex-color).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse0 Texture|texture|
+|uv0_speed|Diffuse0 UV Speed|vector3|
+|intensity|Intensity|scalar|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +51,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

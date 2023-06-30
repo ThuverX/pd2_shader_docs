@@ -6,8 +6,20 @@ title: "Effect Default Diffuse0 Texture Threshold Reveal Threshold Reveal Detail
 # Effect Default Diffuse0 Texture Threshold Reveal Threshold Reveal Detail
 (`effect:default:DIFFUSE0_TEXTURE:THRESHOLD_REVEAL:THRESHOLD_REVEAL_DETAIL`, `0x3fb2a0ec1a112452`)
 
+This template is referenced 1 time by [effect:DIFFUSE0_TEXTURE:THRESHOLD_REVEAL:THRESHOLD_REVEAL_DETAIL](/docs/Generated/Render%20Templates/base.render_template_database#effect-diffuse0-texture-threshold-reveal-threshold-reveal-detail).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse0 Texture|texture|
+|detail_diffuse_texture|Reveal Map|texture|
+|reveal_start|Reveal Start|scalar|
+|reveal_end|Reveal End|scalar|
+|reveal_fuzz|Reveal Threshold Fuzz|scalar|
+|intensity|Intensity|scalar|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +54,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

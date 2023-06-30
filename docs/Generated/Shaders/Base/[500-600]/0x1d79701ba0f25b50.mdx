@@ -6,8 +6,28 @@ title: "Effect Default Diffuse0 Texture Diffuse0 Threshold Sweep Diffuse0 Uvanim
 # Effect Default Diffuse0 Texture Diffuse0 Threshold Sweep Diffuse0 Uvanim Diffuse1 Blend Op Rgb Add Diffuse1 Texture Diffuse1 Uvanim Intersection Fadeout
 (`effect:default:DIFFUSE0_TEXTURE:DIFFUSE0_THRESHOLD_SWEEP:DIFFUSE0_UVANIM:DIFFUSE1_BLEND_OP_RGB_ADD:DIFFUSE1_TEXTURE:DIFFUSE1_UVANIM:INTERSECTION_FADEOUT`, `0x1d79701ba0f25b50`)
 
+This template is referenced 1 time by [effect:DIFFUSE0_TEXTURE:DIFFUSE0_THRESHOLD_SWEEP:DIFFUSE0_UVANIM:DIFFUSE1_BLEND_OP_RGB_ADD:DIFFUSE1_TEXTURE:DIFFUSE1_UVANIM:INTERSECTION_FADEOUT](/docs/Generated/Render%20Templates/base.render_template_database#effect-diffuse0-texture-diffuse0-threshold-sweep-diffuse0-uvanim-diffuse1-blend-op-rgb-add-diffuse1-texture-diffuse1-uvanim-intersection-fadeout).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse0 Texture|texture|
+|detail_diffuse_texture|Diffuse1 Texture|texture|
+|threshold_sweep_color_s|Threshold Sweep Color Start|vector3|
+|threshold_sweep_color_e|Threshold Sweep Color End|vector3|
+|threshold_sweep_op_s|Threshold Sweep Opacity Start|scalar|
+|threshold_sweep_op_e|Threshold Sweep Opacity End|scalar|
+|threshold_sweep_fuzziness_s|Threshold Sweep Fuzziness Start|scalar|
+|threshold_sweep_fuzziness_e|Threshold Sweep Fuzziness End|scalar|
+|threshold_sweep_speed|Threshold Sweep Speed|scalar|
+|threshold_sweep_time_exp|Threshold Sweep Fuzziness Time Exponent|scalar|
+|uv0_speed|Diffuse0 UV Speed|vector3|
+|uv1_speed|Diffuse1 UV Speed|vector3|
+|fadeout_distance|Intersection Fade-out Distance|scalar|
+|intensity|Intensity|scalar|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +62,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

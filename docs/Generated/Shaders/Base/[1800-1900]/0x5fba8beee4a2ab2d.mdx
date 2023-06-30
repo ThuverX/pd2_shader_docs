@@ -6,8 +6,20 @@ title: "Opacity Default Diffuse Texture Diffuse Uvanim Nvidia Opacity Uvanim Sel
 # Opacity Default Diffuse Texture Diffuse Uvanim Nvidia Opacity Uvanim Self Illumination Self Illumination Tint Self Illumination Uvanim Take Fog
 (`opacity:default:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:NVIDIA:OPACITY_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_TINT:SELF_ILLUMINATION_UVANIM:TAKE_FOG`, `0x5fba8beee4a2ab2d`)
 
+This template is referenced 1 time by [opacity:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:OPACITY_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_TINT:SELF_ILLUMINATION_UVANIM:TAKE_FOG](/docs/Generated/Render%20Templates/base.render_template_database#opacity-diffuse-texture-diffuse-uvanim-opacity-uvanim-self-illumination-self-illumination-tint-self-illumination-uvanim-take-fog).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|self_illumination_texture|Self Illumination Texture (UV4)|texture|
+|opacity_texture|Opacity Texture (UV5)|texture|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|uv_speed|UV Speed|vector3|
+|il_multiplier|Self Illumination Intensity Multiplier|scalar|
+|il_tint|Self Illumination Tint|vector3|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +54,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

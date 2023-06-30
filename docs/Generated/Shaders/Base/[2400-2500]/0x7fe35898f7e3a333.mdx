@@ -6,8 +6,19 @@ title: "Generic Default Blend Diffuse Blend Mask Seperate Blend Normal Blend Smo
 # Generic Default Blend Diffuse Blend Mask Seperate Blend Normal Blend Smooth Diffuse Texture Global Environment Mapping Normalmap
 (`generic:default:BLEND_DIFFUSE:BLEND_MASK_SEPERATE:BLEND_NORMAL:BLEND_SMOOTH:DIFFUSE_TEXTURE:GLOBAL_ENVIRONMENT_MAPPING:NORMALMAP`, `0x7fe35898f7e3a333`)
 
+This template is referenced 1 time by [generic:BLEND_DIFFUSE:BLEND_MASK_SEPERATE:BLEND_NORMAL:BLEND_SMOOTH:DIFFUSE_TEXTURE:GLOBAL_ENVIRONMENT_MAPPING:NORMALMAP](/docs/Generated/Render%20Templates/base.render_template_database#generic-blend-diffuse-blend-mask-seperate-blend-normal-blend-smooth-diffuse-texture-global-environment-mapping-normalmap).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|diffuse_layer0_texture|Second diffuse (Shifted UV1)|texture|
+|diffuse_layer1_texture|Seperate blend mask (UV1)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|normal_layer0_texture|Second normal map (UV1)|texture|.
+
 ### Technique `deferred_ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +50,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

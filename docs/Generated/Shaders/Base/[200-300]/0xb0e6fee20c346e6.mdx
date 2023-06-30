@@ -6,8 +6,18 @@ title: "Generic Shadow Caster Diffuse Texture Diffuse Uvanim Self Illumination"
 # Generic Shadow Caster Diffuse Texture Diffuse Uvanim Self Illumination
 (`generic:shadow_caster:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION`, `0xb0e6fee20c346e6`)
 
+This template is referenced 1 time by [generic:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION](/docs/Generated/Render%20Templates/base.render_template_database#generic-diffuse-texture-diffuse-uvanim-self-illumination).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|uv_speed|UV Speed|vector3|
+|self_illumination_texture|Self Illumination Texture (UV4)|texture|
+|il_multiplier|Self Illumination Intensity Multiplier|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +49,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

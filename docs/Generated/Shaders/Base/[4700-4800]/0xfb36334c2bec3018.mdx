@@ -6,8 +6,16 @@ title: "Generic Shadow Caster Alpha Masked Ati Diffuse Texture External Alpha Re
 # Generic Shadow Caster Alpha Masked Ati Diffuse Texture External Alpha Ref Rl Backdrop
 (`generic:shadow_caster:ALPHA_MASKED:ATI:DIFFUSE_TEXTURE:EXTERNAL_ALPHA_REF:RL_BACKDROP`, `0xfb36334c2bec3018`)
 
+This template is referenced 1 time by [generic:ALPHA_MASKED:DIFFUSE_TEXTURE:EXTERNAL_ALPHA_REF:RL_BACKDROP](/docs/Generated/Render%20Templates/base.render_template_database#generic-alpha-masked-diffuse-texture-external-alpha-ref-rl-backdrop).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|alpha_ref|Alpha Mask Reference|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +47,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

@@ -6,8 +6,23 @@ title: "Opacity Default Cube Environment Mapping Cube Fresnel Diffuse Texture Di
 # Opacity Default Cube Environment Mapping Cube Fresnel Diffuse Texture Diffuse Uvanim Normalmap Normal Uvanim Skinned 3weights Vegetation Bending
 (`opacity:default:CUBE_ENVIRONMENT_MAPPING:CUBE_FRESNEL:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:NORMALMAP:NORMAL_UVANIM:SKINNED_3WEIGHTS:VEGETATION_BENDING`, `0x1183bc29c197b6a1`)
 
+This template is referenced 1 time by [opacity:CUBE_ENVIRONMENT_MAPPING:CUBE_FRESNEL:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:NORMALMAP:NORMAL_UVANIM:SKINNED_3WEIGHTS:VEGETATION_BENDING](/docs/Generated/Render%20Templates/base.render_template_database#opacity-cube-environment-mapping-cube-fresnel-diffuse-texture-diffuse-uvanim-normalmap-normal-uvanim-skinned-3weights-vegetation-bending).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|reflection_texture|Reflection Cube|texture|
+|opacity_texture|Opacity Texture (UV5)|texture|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|bump_normal_texture|Normal Map (UV2 else UV1)|texture|
+|uv_speed|UV Speed|vector3|
+|speed|Speed|scalar|
+|detail_settings|Detail Bending Amplitude / Frequency|vector3|
+|branch_settings|Branch Bending Amplitude / Frequency|vector3|
+|fresnel_settings|Falloff Settings (Falloff curve, Falloff multiplier, Opacity dimmer)|vector3|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +57,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

@@ -6,8 +6,17 @@ title: "Generic Default Blue Mask Tint Diffuse Texture Instanced Normalmap Rl Bi
 # Generic Default Blue Mask Tint Diffuse Texture Instanced Normalmap Rl Bigprops
 (`generic:default:BLUE_MASK_TINT:DIFFUSE_TEXTURE:INSTANCED:NORMALMAP:RL_BIGPROPS`, `0xd42a95340737dd6a`)
 
+This template is referenced 1 time by [generic:BLUE_MASK_TINT:DIFFUSE_TEXTURE:INSTANCED:NORMALMAP:RL_BIGPROPS](/docs/Generated/Render%20Templates/base.render_template_database#generic-blue-mask-tint-diffuse-texture-instanced-normalmap-rl-bigprops).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|tint_color|Diffuse Tint Color (x2)|vector3|.
+
 ### Technique `deferred_bigprops`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +48,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

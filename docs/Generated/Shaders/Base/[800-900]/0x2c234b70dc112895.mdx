@@ -6,8 +6,20 @@ title: "Generic Default Diffuse Texture Gsma Texture Normalmap Self Illumination
 # Generic Default Diffuse Texture Gsma Texture Normalmap Self Illumination Simple Tint
 (`generic:default:DIFFUSE_TEXTURE:GSMA_TEXTURE:NORMALMAP:SELF_ILLUMINATION:SIMPLE_TINT`, `0x2c234b70dc112895`)
 
+This template is referenced 1 time by [generic:DIFFUSE_TEXTURE:GSMA_TEXTURE:NORMALMAP:SELF_ILLUMINATION:SIMPLE_TINT](/docs/Generated/Render%20Templates/base.render_template_database#generic-diffuse-texture-gsma-texture-normalmap-self-illumination-simple-tint).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|material_texture|Gloss-Spec-Material-Alpha Texture (GSMA)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|tint_color|Diffuse Tint Color (x2)|vector3|
+|self_illumination_texture|Self Illumination Texture (UV4)|texture|
+|il_multiplier|Self Illumination Intensity Multiplier|scalar|.
+
 ### Technique `deferred_ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +51,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {
@@ -248,6 +261,7 @@ PixelMain_Output PixelMain(PixelMain_Input i)
 Decompiled by DXDecompiler.
 ### Technique `self_illumination`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -282,6 +296,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

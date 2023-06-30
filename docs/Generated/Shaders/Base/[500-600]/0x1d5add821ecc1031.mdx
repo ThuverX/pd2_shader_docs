@@ -6,8 +6,18 @@ title: "Effect Default Blend Add Diffuse0 Texture Diffuse0 Uvanim Skinned 2weigh
 # Effect Default Blend Add Diffuse0 Texture Diffuse0 Uvanim Skinned 2weights View Angle Falloff Op
 (`effect:default:BLEND_ADD:DIFFUSE0_TEXTURE:DIFFUSE0_UVANIM:SKINNED_2WEIGHTS:VIEW_ANGLE_FALLOFF_OP`, `0x1d5add821ecc1031`)
 
+This template is referenced 1 time by [effect:BLEND_ADD:DIFFUSE0_TEXTURE:DIFFUSE0_UVANIM:SKINNED_2WEIGHTS:VIEW_ANGLE_FALLOFF_OP](/docs/Generated/Render%20Templates/base.render_template_database#effect-blend-add-diffuse0-texture-diffuse0-uvanim-skinned-2weights-view-angle-falloff-op).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse0 Texture|texture|
+|falloff_exp|Opacity View Angle Falloff|scalar|
+|uv0_speed|Diffuse0 UV Speed|vector3|
+|intensity|Intensity|scalar|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +52,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

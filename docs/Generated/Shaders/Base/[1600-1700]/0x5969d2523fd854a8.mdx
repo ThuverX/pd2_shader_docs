@@ -6,8 +6,21 @@ title: "Generic Shadow Caster Cube Environment Mapping Diffuse Texture Gsma Text
 # Generic Shadow Caster Cube Environment Mapping Diffuse Texture Gsma Texture Normalmap Nvidia Self Illumination Self Illumination Bloom
 (`generic:shadow_caster:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:GSMA_TEXTURE:NORMALMAP:NVIDIA:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM`, `0x5969d2523fd854a8`)
 
+This template is referenced 1 time by [generic:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:GSMA_TEXTURE:NORMALMAP:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM](/docs/Generated/Render%20Templates/base.render_template_database#generic-cube-environment-mapping-diffuse-texture-gsma-texture-normalmap-self-illumination-self-illumination-bloom).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|material_texture|Gloss-Spec-Material-Alpha Texture (GSMA)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|reflection_texture|Reflection Cube|texture|
+|self_illumination_texture|Self Illumination Texture (UV4)|texture|
+|il_bloom|Self Illumination Bloom|scalar|
+|il_multiplier|Self Illumination Intensity Multiplier|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +52,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

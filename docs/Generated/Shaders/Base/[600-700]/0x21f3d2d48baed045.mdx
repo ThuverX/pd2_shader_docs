@@ -6,8 +6,18 @@ title: "Generic Shadow Caster Cube Environment Mapping Diffuse Texture Distance 
 # Generic Shadow Caster Cube Environment Mapping Diffuse Texture Distance Fade 2 Gloss Blurs Cubemap Gsma Texture Normalmap
 (`generic:shadow_caster:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:DISTANCE_FADE_2:GLOSS_BLURS_CUBEMAP:GSMA_TEXTURE:NORMALMAP`, `0x21f3d2d48baed045`)
 
+This template is referenced 1 time by [generic:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:DISTANCE_FADE_2:GLOSS_BLURS_CUBEMAP:GSMA_TEXTURE:NORMALMAP](/docs/Generated/Render%20Templates/base.render_template_database#generic-cube-environment-mapping-diffuse-texture-distance-fade-2-gloss-blurs-cubemap-gsma-texture-normalmap).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|material_texture|Gloss-Spec-Material-Alpha Texture (GSMA)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|reflection_texture|Reflection Cube|texture|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +49,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

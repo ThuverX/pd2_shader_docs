@@ -6,8 +6,22 @@ title: "Generic Default Cube Environment Mapping Cube Environment Mapping Water 
 # Generic Default Cube Environment Mapping Cube Environment Mapping Water Diffuse Texture Normalmap Rl Backdrop Water Big
 (`generic:default:CUBE_ENVIRONMENT_MAPPING:CUBE_ENVIRONMENT_MAPPING_WATER:DIFFUSE_TEXTURE:NORMALMAP:RL_BACKDROP:WATER_BIG`, `0xbb12713ab6e51a68`)
 
+This template is referenced 1 time by [generic:CUBE_ENVIRONMENT_MAPPING:CUBE_ENVIRONMENT_MAPPING_WATER:DIFFUSE_TEXTURE:NORMALMAP:RL_BACKDROP:WATER_BIG](/docs/Generated/Render%20Templates/base.render_template_database#generic-cube-environment-mapping-cube-environment-mapping-water-diffuse-texture-normalmap-rl-backdrop-water-big).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Foam map|texture|
+|bump_normal_texture|Wave normal map|texture|
+|reflection_texture|Reflection Cube|texture|
+|water_color_a|Water color A|vector3|
+|water_color_b|Water color B|vector3|
+|water_settings|Water settings : Cube amount, Spec amount, Spec distance|vector3|
+|water_settings_b|Water settings, Dist A, Dist B, Distortion size|vector3|
+|water_settings_c|Water settings, Speed A, Speed B, Meh|vector3|.
+
 ### Technique `deferred_backdrop`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +53,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

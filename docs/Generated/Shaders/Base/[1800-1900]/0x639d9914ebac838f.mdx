@@ -6,8 +6,17 @@ title: "Opacity Default Diffuse Texture Diffuse Uvanim Opacity Controller Opacit
 # Opacity Default Diffuse Texture Diffuse Uvanim Opacity Controller Opacity Uvanim
 (`opacity:default:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:OPACITY_CONTROLLER:OPACITY_UVANIM`, `0x639d9914ebac838f`)
 
+This template is referenced 1 time by [opacity:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:OPACITY_CONTROLLER:OPACITY_UVANIM](/docs/Generated/Render%20Templates/base.render_template_database#opacity-diffuse-texture-diffuse-uvanim-opacity-controller-opacity-uvanim).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|opacity_texture|Opacity Texture (UV5)|texture|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|uv_speed|UV Speed|vector3|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +51,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

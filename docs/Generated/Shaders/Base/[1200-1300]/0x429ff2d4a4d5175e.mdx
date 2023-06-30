@@ -6,8 +6,16 @@ title: "Generic Shadow Caster Cube Environment Mapping Diffuse Texture Skinned 3
 # Generic Shadow Caster Cube Environment Mapping Diffuse Texture Skinned 3weights
 (`generic:shadow_caster:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:SKINNED_3WEIGHTS`, `0x429ff2d4a4d5175e`)
 
+This template is referenced 1 time by [generic:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:SKINNED_3WEIGHTS](/docs/Generated/Render%20Templates/base.render_template_database#generic-cube-environment-mapping-diffuse-texture-skinned-3weights).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|reflection_texture|Reflection Cube|texture|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +47,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

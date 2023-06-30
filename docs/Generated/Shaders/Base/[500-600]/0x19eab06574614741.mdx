@@ -6,8 +6,16 @@ title: "Generic Shadow Caster Instanced Self Illumination Vertex Color"
 # Generic Shadow Caster Instanced Self Illumination Vertex Color
 (`generic:shadow_caster:INSTANCED:SELF_ILLUMINATION:VERTEX_COLOR`, `0x19eab06574614741`)
 
+This template is referenced 1 time by [generic:INSTANCED:SELF_ILLUMINATION:VERTEX_COLOR](/docs/Generated/Render%20Templates/base.render_template_database#generic-instanced-self-illumination-vertex-color).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|self_illumination_texture|Self Illumination Texture (UV4)|texture|
+|il_multiplier|Self Illumination Intensity Multiplier|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +47,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

@@ -6,8 +6,17 @@ title: "Generic Shadow Caster Billboard Center Offset Billboard Up Axis Camera F
 # Generic Shadow Caster Billboard Center Offset Billboard Up Axis Camera Facing Billboard Diffuse Texture Double Sided
 (`generic:shadow_caster:BILLBOARD_CENTER_OFFSET:BILLBOARD_UP_AXIS:CAMERA_FACING_BILLBOARD:DIFFUSE_TEXTURE:DOUBLE_SIDED`, `0xe800ed5e7f3ea80c`)
 
+This template is referenced 1 time by [generic:BILLBOARD_CENTER_OFFSET:BILLBOARD_UP_AXIS:CAMERA_FACING_BILLBOARD:DIFFUSE_TEXTURE:DOUBLE_SIDED](/docs/Generated/Render%20Templates/base.render_template_database#generic-billboard-center-offset-billboard-up-axis-camera-facing-billboard-diffuse-texture-double-sided).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|billboard_up_axis|Billboard up axis|vector3|
+|billboard_center_offset|Billboard center offset|vector3|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +48,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

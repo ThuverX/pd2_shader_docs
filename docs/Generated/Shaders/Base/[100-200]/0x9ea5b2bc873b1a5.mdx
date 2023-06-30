@@ -6,8 +6,18 @@ title: "Generic Shadow Caster Blend Diffuse Blend Mask D A Blend Normal Blend Sm
 # Generic Shadow Caster Blend Diffuse Blend Mask D A Blend Normal Blend Smooth Blend Tint Second Diffuse Texture Normalmap
 (`generic:shadow_caster:BLEND_DIFFUSE:BLEND_MASK_D_A:BLEND_NORMAL:BLEND_SMOOTH:BLEND_TINT_SECOND:DIFFUSE_TEXTURE:NORMALMAP`, `0x9ea5b2bc873b1a5`)
 
+This template is referenced 1 time by [generic:BLEND_DIFFUSE:BLEND_MASK_D_A:BLEND_NORMAL:BLEND_SMOOTH:BLEND_TINT_SECOND:DIFFUSE_TEXTURE:NORMALMAP](/docs/Generated/Render%20Templates/base.render_template_database#generic-blend-diffuse-blend-mask-d-a-blend-normal-blend-smooth-blend-tint-second-diffuse-texture-normalmap).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|diffuse_layer0_texture|Second diffuse (Shifted UV1)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|normal_layer0_texture|Second normal map (UV1)|texture|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +49,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

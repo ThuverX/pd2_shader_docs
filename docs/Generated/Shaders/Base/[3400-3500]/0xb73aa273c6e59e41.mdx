@@ -6,8 +6,20 @@ title: "Generic Shadow Caster Blend Diffuse Blend Diffuse Uv2 Blend Fade Blend M
 # Generic Shadow Caster Blend Diffuse Blend Diffuse Uv2 Blend Fade Blend Mask D A Cube Environment Mapping Diffuse Texture Gloss Blurs Cubemap Gsma Texture Normalmap Nvidia Vertex Color
 (`generic:shadow_caster:BLEND_DIFFUSE:BLEND_DIFFUSE_UV2:BLEND_FADE:BLEND_MASK_D_A:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:GLOSS_BLURS_CUBEMAP:GSMA_TEXTURE:NORMALMAP:NVIDIA:VERTEX_COLOR`, `0xb73aa273c6e59e41`)
 
+This template is referenced 1 time by [generic:BLEND_DIFFUSE:BLEND_DIFFUSE_UV2:BLEND_FADE:BLEND_MASK_D_A:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:GLOSS_BLURS_CUBEMAP:GSMA_TEXTURE:NORMALMAP:VERTEX_COLOR](/docs/Generated/Render%20Templates/base.render_template_database#generic-blend-diffuse-blend-diffuse-uv2-blend-fade-blend-mask-d-a-cube-environment-mapping-diffuse-texture-gloss-blurs-cubemap-gsma-texture-normalmap-vertex-color).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|diffuse_layer0_texture|Second diffuse (Shifted UV1)|texture|
+|material_texture|Gloss-Spec-Material-Alpha Texture (GSMA)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|reflection_texture|Reflection Cube|texture|
+|blend_fade_value|Blend fade value|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +51,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

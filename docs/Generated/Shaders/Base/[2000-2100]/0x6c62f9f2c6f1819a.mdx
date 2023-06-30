@@ -6,8 +6,17 @@ title: "Opacity Default Diffuse Texture Instanced Normalmap Nvidia"
 # Opacity Default Diffuse Texture Instanced Normalmap Nvidia
 (`opacity:default:DIFFUSE_TEXTURE:INSTANCED:NORMALMAP:NVIDIA`, `0x6c62f9f2c6f1819a`)
 
+This template is referenced 1 time by [opacity:DIFFUSE_TEXTURE:INSTANCED:NORMALMAP](/docs/Generated/Render%20Templates/base.render_template_database#opacity-diffuse-texture-instanced-normalmap).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|opacity_texture|Opacity Texture (UV5)|texture|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|bump_normal_texture|Normal Map (UV2 else UV1)|texture|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +51,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

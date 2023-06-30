@@ -6,8 +6,19 @@ title: "Generic Default Detail Texture Diffuse Texture Instanced Normalmap"
 # Generic Default Detail Texture Diffuse Texture Instanced Normalmap
 (`generic:default:DETAIL_TEXTURE:DIFFUSE_TEXTURE:INSTANCED:NORMALMAP`, `0xb8c82d71c0f6ea5e`)
 
+This template is referenced 1 time by [generic:DETAIL_TEXTURE:DIFFUSE_TEXTURE:INSTANCED:NORMALMAP](/docs/Generated/Render%20Templates/base.render_template_database#generic-detail-texture-diffuse-texture-instanced-normalmap).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|detail_diffuse_texture|Detail Diffuse Texture|texture|
+|detail_normal_map|Detail Normal Map|texture|
+|detail_scale|Detail Texture Scale|vector3|.
+
 ### Technique `deferred_ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +50,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

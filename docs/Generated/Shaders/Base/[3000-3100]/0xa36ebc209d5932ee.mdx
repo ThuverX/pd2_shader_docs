@@ -6,8 +6,24 @@ title: "Generic Default Blend Diffuse Blend Fade Blend Fade Time Blend Gsma Blen
 # Generic Default Blend Diffuse Blend Fade Blend Fade Time Blend Gsma Blend Mask Seperate Blend Normal Diffuse Texture Gsma Texture Normalmap
 (`generic:default:BLEND_DIFFUSE:BLEND_FADE:BLEND_FADE_TIME:BLEND_GSMA:BLEND_MASK_SEPERATE:BLEND_NORMAL:DIFFUSE_TEXTURE:GSMA_TEXTURE:NORMALMAP`, `0xa36ebc209d5932ee`)
 
+This template is referenced 1 time by [generic:BLEND_DIFFUSE:BLEND_FADE:BLEND_FADE_TIME:BLEND_GSMA:BLEND_MASK_SEPERATE:BLEND_NORMAL:DIFFUSE_TEXTURE:GSMA_TEXTURE:NORMALMAP](/docs/Generated/Render%20Templates/base.render_template_database#generic-blend-diffuse-blend-fade-blend-fade-time-blend-gsma-blend-mask-seperate-blend-normal-diffuse-texture-gsma-texture-normalmap).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|diffuse_layer0_texture|Second diffuse (Shifted UV1)|texture|
+|diffuse_layer1_texture|Seperate blend mask (UV1)|texture|
+|material_texture|Gloss-Spec-Material-Alpha Texture (GSMA)|texture|
+|diffuse_layer2_texture|Second Gloss-Spec-Material-Alpha Texture (GSMA)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|normal_layer0_texture|Second normal map (UV1)|texture|
+|blend_fade_start|Blend fade start|scalar|
+|blend_fade_end|Blend fade end|scalar|
+|blend_fade_mask_fuzziness|Blend fade mask fuzziness|scalar|.
+
 ### Technique `deferred_ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +55,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

@@ -6,8 +6,20 @@ title: "Generic Shadow Caster Cube Environment Mapping Diffuse Texture Normalmap
 # Generic Shadow Caster Cube Environment Mapping Diffuse Texture Normalmap Normalmap Depth Texture Normalmap Uv1 Nvidia Parallax Parallax Lod Parallax Relief
 (`generic:shadow_caster:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:NORMALMAP:NORMALMAP_DEPTH_TEXTURE:NORMALMAP_UV1:NVIDIA:PARALLAX:PARALLAX_LOD:PARALLAX_RELIEF`, `0x5d082d08cb3b2782`)
 
+This template is referenced 1 time by [generic:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:NORMALMAP:NORMALMAP_DEPTH_TEXTURE:NORMALMAP_UV1:PARALLAX:PARALLAX_LOD:PARALLAX_RELIEF](/docs/Generated/Render%20Templates/base.render_template_database#generic-cube-environment-mapping-diffuse-texture-normalmap-normalmap-depth-texture-normalmap-uv1-parallax-parallax-lod-parallax-relief).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|reflection_texture|Reflection Cube|texture|
+|parallax_scale|Parallax scale|scalar|
+|parallax_layers|Number of parallax layers|scalar|
+|parallax_lod|Lod distance|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +51,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

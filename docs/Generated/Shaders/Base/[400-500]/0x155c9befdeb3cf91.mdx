@@ -6,8 +6,24 @@ title: "Effect Default Blend Add Scope Scope Inner Reticle"
 # Effect Default Blend Add Scope Scope Inner Reticle
 (`effect:default:BLEND_ADD:SCOPE:SCOPE_INNER_RETICLE`, `0x155c9befdeb3cf91`)
 
+This template is referenced 1 time by [effect:BLEND_ADD:SCOPE:SCOPE_INNER_RETICLE](/docs/Generated/Render%20Templates/base.render_template_database#effect-blend-add-scope-scope-inner-reticle).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Reticle0 Texture|texture|
+|detail_diffuse_texture|Reticle1 Texture|texture|
+|macrodetail_diffuse_texture|Background Texture|texture|
+|scope_zoom|Scope zoom|scalar|
+|scope_params|Distance, Length, Scale|vector3|
+|scope_inner_vignett|Inner vignett (Radius, Edge%)|vector3|
+|scope_outer_vignett|Outer vignett (Max radius, Min Radius, Edge%)|vector3|
+|scope_fadeout_params|Fadeout (Eye distance, Length)|vector3|
+|scope_fadeout|Scope fadeout|scalar|
+|scope_inner_reticle_scale|Reticle scale|scalar|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +58,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {
@@ -358,6 +375,7 @@ float4 PixelMain(PixelMain_Input i) : COLOR
 Decompiled by DXDecompiler.
 ### Technique `contours`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 0,
@@ -392,6 +410,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

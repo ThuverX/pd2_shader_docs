@@ -6,8 +6,23 @@ title: "Generic Shadow Caster Alpha Masked Diffuse Texture Diffuse Uvanim Double
 # Generic Shadow Caster Alpha Masked Diffuse Texture Diffuse Uvanim Double Sided Nvidia Self Illumination Self Illumination Tint Simple Tint Vegetation Bending
 (`generic:shadow_caster:ALPHA_MASKED:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:DOUBLE_SIDED:NVIDIA:SELF_ILLUMINATION:SELF_ILLUMINATION_TINT:SIMPLE_TINT:VEGETATION_BENDING`, `0x1579197f12a18ee2`)
 
+This template is referenced 1 time by [generic:ALPHA_MASKED:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:DOUBLE_SIDED:SELF_ILLUMINATION:SELF_ILLUMINATION_TINT:SIMPLE_TINT:VEGETATION_BENDING](/docs/Generated/Render%20Templates/base.render_template_database#generic-alpha-masked-diffuse-texture-diffuse-uvanim-double-sided-self-illumination-self-illumination-tint-simple-tint-vegetation-bending).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|uv_speed|UV Speed|vector3|
+|speed|Speed|scalar|
+|detail_settings|Detail Bending Amplitude / Frequency|vector3|
+|branch_settings|Branch Bending Amplitude / Frequency|vector3|
+|tint_color|Diffuse Tint Color (x2)|vector3|
+|self_illumination_texture|Self Illumination Texture (UV4)|texture|
+|il_multiplier|Self Illumination Intensity Multiplier|scalar|
+|il_tint|Self Illumination Tint|vector3|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +54,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

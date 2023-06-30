@@ -6,8 +6,15 @@ title: "Generic Default Depth Scaling Diffuse Texture Vertex Color Vertex Color 
 # Generic Default Depth Scaling Diffuse Texture Vertex Color Vertex Color Alpha Vertex Color Character
 (`generic:default:DEPTH_SCALING:DIFFUSE_TEXTURE:VERTEX_COLOR:VERTEX_COLOR_ALPHA:VERTEX_COLOR_CHARACTER`, `0xf936b2e6a7daa390`)
 
+This template is referenced 1 time by [generic:DEPTH_SCALING:DIFFUSE_TEXTURE:VERTEX_COLOR:VERTEX_COLOR_ALPHA:VERTEX_COLOR_CHARACTER](/docs/Generated/Render%20Templates/base.render_template_database#generic-depth-scaling-diffuse-texture-vertex-color-vertex-color-alpha-vertex-color-character).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|.
+
 ### Technique `deferred_ambient_fps_depth`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +46,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl
@@ -133,6 +141,7 @@ PixelMain_Output PixelMain()
 Decompiled by DXDecompiler.
 ### Technique `deferred_ambient_fps`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -164,6 +173,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

@@ -6,8 +6,24 @@ title: "Generic Shadow Caster Diffuse Texture Normalmap Normalmap Depth Texture 
 # Generic Shadow Caster Diffuse Texture Normalmap Normalmap Depth Texture Normalmap Uv1 Nvidia Parallax Parallax Animation Parallax Animation Uv2 Parallax Animation Vertex Alpha Mask Parallax Relief Vertex Color
 (`generic:shadow_caster:DIFFUSE_TEXTURE:NORMALMAP:NORMALMAP_DEPTH_TEXTURE:NORMALMAP_UV1:NVIDIA:PARALLAX:PARALLAX_ANIMATION:PARALLAX_ANIMATION_UV2:PARALLAX_ANIMATION_VERTEX_ALPHA_MASK:PARALLAX_RELIEF:VERTEX_COLOR`, `0x5e241fb70d9488a6`)
 
+This template is referenced 1 time by [generic:DIFFUSE_TEXTURE:NORMALMAP:NORMALMAP_DEPTH_TEXTURE:NORMALMAP_UV1:PARALLAX:PARALLAX_ANIMATION:PARALLAX_ANIMATION_UV2:PARALLAX_ANIMATION_VERTEX_ALPHA_MASK:PARALLAX_RELIEF:VERTEX_COLOR](/docs/Generated/Render%20Templates/base.render_template_database#generic-diffuse-texture-normalmap-normalmap-depth-texture-normalmap-uv1-parallax-parallax-animation-parallax-animation-uv2-parallax-animation-vertex-alpha-mask-parallax-relief-vertex-color).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|parallax_animation_texture|Parallax animation texture|texture|
+|uv_speed|UV Speed|vector3|
+|parallax_scale|Parallax scale|scalar|
+|parallax_layers|Number of parallax layers|scalar|
+|parallax_animation_scale|Parallax animation scale|scalar|
+|parallax_animation_uv_offset|Parallax animation uv offset|vector3|
+|parallax_animation_uv_scale|Parallax animation uv scale|vector3|
+|parallax_animation_normal_settings|Parallax normal animation (X=height threshold, Y=scale)|vector3|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +55,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

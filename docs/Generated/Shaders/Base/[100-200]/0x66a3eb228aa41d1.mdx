@@ -6,8 +6,22 @@ title: "Generic Shadow Caster Alpha Masked Contour Diffuse Texture Double Sided 
 # Generic Shadow Caster Alpha Masked Contour Diffuse Texture Double Sided External Alpha Ref Global Environment Mapping Gloss Blurs Cubemap Gsma Texture Normalmap Opacity Texture Rl Civilians Skinned 3weights
 (`generic:shadow_caster:ALPHA_MASKED:CONTOUR:DIFFUSE_TEXTURE:DOUBLE_SIDED:EXTERNAL_ALPHA_REF:GLOBAL_ENVIRONMENT_MAPPING:GLOSS_BLURS_CUBEMAP:GSMA_TEXTURE:NORMALMAP:OPACITY_TEXTURE:RL_CIVILIANS:SKINNED_3WEIGHTS`, `0x66a3eb228aa41d1`)
 
+This template is referenced 1 time by [generic:ALPHA_MASKED:CONTOUR:DIFFUSE_TEXTURE:DOUBLE_SIDED:EXTERNAL_ALPHA_REF:GLOBAL_ENVIRONMENT_MAPPING:GLOSS_BLURS_CUBEMAP:GSMA_TEXTURE:NORMALMAP:OPACITY_TEXTURE:RL_CIVILIANS:SKINNED_3WEIGHTS](/docs/Generated/Render%20Templates/base.render_template_database#generic-alpha-masked-contour-diffuse-texture-double-sided-external-alpha-ref-global-environment-mapping-gloss-blurs-cubemap-gsma-texture-normalmap-opacity-texture-rl-civilians-skinned-3weights).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|material_texture|Gloss-Spec-Material-Alpha Texture (GSMA)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|opacity_texture|Alpha Mask (UV5)|texture|
+|alpha_ref|Alpha Mask Reference|scalar|
+|contour_color|Contour color|vector3|
+|contour_opacity|Contour opacity|scalar|
+|contour_distance|Contour distance|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +53,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

@@ -6,8 +6,18 @@ title: "Effect Default Blend Add Diffuse0 Texture Intersection Fadeout Skinned 1
 # Effect Default Blend Add Diffuse0 Texture Intersection Fadeout Skinned 1weight View Angle Falloff Op
 (`effect:default:BLEND_ADD:DIFFUSE0_TEXTURE:INTERSECTION_FADEOUT:SKINNED_1WEIGHT:VIEW_ANGLE_FALLOFF_OP`, `0x2ae6baec872d6927`)
 
+This template is referenced 1 time by [effect:BLEND_ADD:DIFFUSE0_TEXTURE:INTERSECTION_FADEOUT:SKINNED_1WEIGHT:VIEW_ANGLE_FALLOFF_OP](/docs/Generated/Render%20Templates/base.render_template_database#effect-blend-add-diffuse0-texture-intersection-fadeout-skinned-1weight-view-angle-falloff-op).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse0 Texture|texture|
+|falloff_exp|Opacity View Angle Falloff|scalar|
+|fadeout_distance|Intersection Fade-out Distance|scalar|
+|intensity|Intensity|scalar|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +52,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

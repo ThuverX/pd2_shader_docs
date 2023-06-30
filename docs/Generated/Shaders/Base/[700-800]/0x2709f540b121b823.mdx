@@ -6,8 +6,21 @@ title: "Generic Shadow Caster Ati Detail Normal Texture Red Detail Rgb Mask Diff
 # Generic Shadow Caster Ati Detail Normal Texture Red Detail Rgb Mask Diffuse Texture Gsma Texture Normalmap
 (`generic:shadow_caster:ATI:DETAIL_NORMAL_TEXTURE_RED:DETAIL_RGB_MASK:DIFFUSE_TEXTURE:GSMA_TEXTURE:NORMALMAP`, `0x2709f540b121b823`)
 
+This template is referenced 1 time by [generic:DETAIL_NORMAL_TEXTURE_RED:DETAIL_RGB_MASK:DIFFUSE_TEXTURE:GSMA_TEXTURE:NORMALMAP](/docs/Generated/Render%20Templates/base.render_template_database#generic-detail-normal-texture-red-detail-rgb-mask-diffuse-texture-gsma-texture-normalmap).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|material_texture|Gloss-Spec-Material-Alpha Texture (GSMA)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|diffuse_layer0_texture|Mask Texture|texture|
+|normal_layer0_texture|Detail Normal Map(Red)|texture|
+|red_detail_scale|Detail Texture Scale(Red)|vector3|
+|red_detail_intensity|Detail Texture Intensity(Red)|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +52,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

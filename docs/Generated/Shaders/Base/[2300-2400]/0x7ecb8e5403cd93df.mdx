@@ -6,8 +6,19 @@ title: "Generic Shadow Caster Alpha Masked Diffuse Texture Diffuse Uvanim Extern
 # Generic Shadow Caster Alpha Masked Diffuse Texture Diffuse Uvanim External Alpha Ref Instanced Self Illumination
 (`generic:shadow_caster:ALPHA_MASKED:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:EXTERNAL_ALPHA_REF:INSTANCED:SELF_ILLUMINATION`, `0x7ecb8e5403cd93df`)
 
+This template is referenced 1 time by [generic:ALPHA_MASKED:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:EXTERNAL_ALPHA_REF:INSTANCED:SELF_ILLUMINATION](/docs/Generated/Render%20Templates/base.render_template_database#generic-alpha-masked-diffuse-texture-diffuse-uvanim-external-alpha-ref-instanced-self-illumination).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|uv_speed|UV Speed|vector3|
+|alpha_ref|Alpha Mask Reference|scalar|
+|self_illumination_texture|Self Illumination Texture (UV4)|texture|
+|il_multiplier|Self Illumination Intensity Multiplier|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +50,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

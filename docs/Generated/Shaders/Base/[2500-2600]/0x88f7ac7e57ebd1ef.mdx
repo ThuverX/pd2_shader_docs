@@ -6,8 +6,17 @@ title: "Shadow Caster Only Shadow Caster Ati Double Sided Shadow Caster Only Veg
 # Shadow Caster Only Shadow Caster Ati Double Sided Shadow Caster Only Vegetation Bending
 (`shadow_caster_only:shadow_caster:ATI:DOUBLE_SIDED:SHADOW_CASTER_ONLY:VEGETATION_BENDING`, `0x88f7ac7e57ebd1ef`)
 
+This template is referenced 1 time by [shadow_caster_only:DOUBLE_SIDED:VEGETATION_BENDING](/docs/Generated/Render%20Templates/base.render_template_database#shadow-caster-only-double-sided-vegetation-bending).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|speed|Speed|scalar|
+|detail_settings|Detail Bending Amplitude / Frequency|vector3|
+|branch_settings|Branch Bending Amplitude / Frequency|vector3|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +48,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

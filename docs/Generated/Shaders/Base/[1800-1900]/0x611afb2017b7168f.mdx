@@ -6,8 +6,30 @@ title: "Generic Customizable Default Contour Cube Environment Mapping Decal Stic
 # Generic Customizable Default Contour Cube Environment Mapping Decal Sticker Uv2 Diffuse Texture Gradientmap Normalmap Pattern Gradientmap Pattern Gradientmap Angle Offset Pattern Uv2 Rl Players Skinned 3weights Wear Tear Masking
 (`generic_customizable:default:CONTOUR:CUBE_ENVIRONMENT_MAPPING:DECAL_STICKER_UV2:DIFFUSE_TEXTURE:GRADIENTMAP:NORMALMAP:PATTERN_GRADIENTMAP:PATTERN_GRADIENTMAP_ANGLE_OFFSET:PATTERN_UV2:RL_PLAYERS:SKINNED_3WEIGHTS:WEAR_TEAR_MASKING`, `0x611afb2017b7168f`)
 
+This template is referenced 1 time by [generic_customizable:CONTOUR:CUBE_ENVIRONMENT_MAPPING:DECAL_STICKER_UV2:DIFFUSE_TEXTURE:GRADIENTMAP:NORMALMAP:PATTERN_GRADIENTMAP:PATTERN_GRADIENTMAP_ANGLE_OFFSET:PATTERN_UV2:RL_PLAYERS:SKINNED_3WEIGHTS:WEAR_TEAR_MASKING](/docs/Generated/Render%20Templates/base.render_template_database#generic-customizable-contour-cube-environment-mapping-decal-sticker-uv2-diffuse-texture-gradientmap-normalmap-pattern-gradientmap-pattern-gradientmap-angle-offset-pattern-uv2-rl-players-skinned-3weights-wear-tear-masking).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_layer3_texture|Decal (UV2)|texture|
+|diffuse_layer1_texture|Base color gradient map|texture|
+|diffuse_layer2_texture|Pattern gradient texture|texture|
+|diffuse_layer0_texture|Pattern on second UV|texture|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|reflection_texture|Reflection Cube|texture|
+|pattern_tweak|Pattern Tiling, Pattern Rotation, Pattern Spec Opacity|vector3|
+|pattern_pos|Pattern offset|vector3|
+|uv_scale|Sticker Scale x y, Sticker Spec Influence|vector3|
+|uv_offset_rot|Sticker Position Offset x y, Sticker Rotation|vector3|
+|wear_tear_value|Wear and Tear Mask Reference|scalar|
+|cubemap_pattern_control|Pattern Cubemap Intesity, Pattern Cubemap influence|vector3|
+|contour_color|Contour color|vector3|
+|contour_opacity|Contour opacity|scalar|
+|contour_distance|Contour distance|scalar|.
+
 ### Technique `deferred_players`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +61,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {
@@ -662,6 +685,7 @@ PixelMain_Output PixelMain(PixelMain_Input i)
 Decompiled by DXDecompiler.
 ### Technique `contours`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 0,
@@ -696,6 +720,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

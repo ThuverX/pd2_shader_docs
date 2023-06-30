@@ -6,8 +6,18 @@ title: "Opacity Default Ati Diffuse Texture Instanced Self Illumination"
 # Opacity Default Ati Diffuse Texture Instanced Self Illumination
 (`opacity:default:ATI:DIFFUSE_TEXTURE:INSTANCED:SELF_ILLUMINATION`, `0x6c2339e022c45a6f`)
 
+This template is referenced 1 time by [opacity:DIFFUSE_TEXTURE:INSTANCED:SELF_ILLUMINATION](/docs/Generated/Render%20Templates/base.render_template_database#opacity-diffuse-texture-instanced-self-illumination).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|self_illumination_texture|Self Illumination Texture (UV4)|texture|
+|opacity_texture|Opacity Texture (UV5)|texture|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|il_multiplier|Self Illumination Intensity Multiplier|scalar|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +52,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

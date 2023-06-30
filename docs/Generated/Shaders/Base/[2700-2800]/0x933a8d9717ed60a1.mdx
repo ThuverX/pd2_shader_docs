@@ -6,8 +6,16 @@ title: "Generic Shadow Caster Ati Self Illumination"
 # Generic Shadow Caster Ati Self Illumination
 (`generic:shadow_caster:ATI:SELF_ILLUMINATION`, `0x933a8d9717ed60a1`)
 
+This template is referenced 1 time by [generic:SELF_ILLUMINATION](/docs/Generated/Render%20Templates/base.render_template_database#generic-self-illumination).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|self_illumination_texture|Self Illumination Texture (UV4)|texture|
+|il_multiplier|Self Illumination Intensity Multiplier|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +47,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

@@ -6,8 +6,17 @@ title: "Effect Default Blend Add Diffuse0 Texture Instanced View Angle Falloff O
 # Effect Default Blend Add Diffuse0 Texture Instanced View Angle Falloff Op
 (`effect:default:BLEND_ADD:DIFFUSE0_TEXTURE:INSTANCED:VIEW_ANGLE_FALLOFF_OP`, `0x3f0d4c4a387da0e8`)
 
+This template is referenced 1 time by [effect:BLEND_ADD:DIFFUSE0_TEXTURE:INSTANCED:VIEW_ANGLE_FALLOFF_OP](/docs/Generated/Render%20Templates/base.render_template_database#effect-blend-add-diffuse0-texture-instanced-view-angle-falloff-op).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse0 Texture|texture|
+|falloff_exp|Opacity View Angle Falloff|scalar|
+|intensity|Intensity|scalar|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +51,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

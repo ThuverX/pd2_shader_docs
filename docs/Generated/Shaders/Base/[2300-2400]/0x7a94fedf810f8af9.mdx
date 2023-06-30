@@ -6,8 +6,21 @@ title: "Solid Mask Default Depth Scaling"
 # Solid Mask Default Depth Scaling
 (`solid_mask:default:DEPTH_SCALING`, `0x7a94fedf810f8af9`)
 
+This template is referenced 1 time by [solid_mask:DEPTH_SCALING](/docs/Generated/Render%20Templates/base.render_template_database#solid-mask-depth-scaling).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse|texture|
+|bump_normal_texture|Normalmap|texture|
+|reflection_texture|MATCAP Texture|texture|
+|material_texture|Pattern texture|texture|
+|tint_color_a|Tint Color A|vector3|
+|tint_color_b|Tint Color B|vector3|
+|material_amount|Material apply amount|scalar|.
+
 ### Technique `deferred_ambient_fps_depth`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +52,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl
@@ -108,6 +122,7 @@ PixelMain_Output PixelMain()
 Decompiled by DXDecompiler.
 ### Technique `deferred_ambient_fps`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -139,6 +154,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

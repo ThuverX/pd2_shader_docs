@@ -6,8 +6,18 @@ title: "Effect Default Blend Mul Diffuse0 Texture Diffuse1 Blend Op Rgb Add Diff
 # Effect Default Blend Mul Diffuse0 Texture Diffuse1 Blend Op Rgb Add Diffuse1 Texture Diffuse1 Uvanim
 (`effect:default:BLEND_MUL:DIFFUSE0_TEXTURE:DIFFUSE1_BLEND_OP_RGB_ADD:DIFFUSE1_TEXTURE:DIFFUSE1_UVANIM`, `0xeba2b0cf3e87f8c8`)
 
+This template is referenced 1 time by [effect:BLEND_MUL:DIFFUSE0_TEXTURE:DIFFUSE1_BLEND_OP_RGB_ADD:DIFFUSE1_TEXTURE:DIFFUSE1_UVANIM](/docs/Generated/Render%20Templates/base.render_template_database#effect-blend-mul-diffuse0-texture-diffuse1-blend-op-rgb-add-diffuse1-texture-diffuse1-uvanim).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse0 Texture|texture|
+|detail_diffuse_texture|Diffuse1 Texture|texture|
+|uv1_speed|Diffuse1 UV Speed|vector3|
+|intensity|Intensity|scalar|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +52,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

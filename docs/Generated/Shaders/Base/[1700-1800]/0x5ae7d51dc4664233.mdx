@@ -6,8 +6,20 @@ title: "Generic Default Alpha Masked Contour Diffuse Texture External Alpha Ref 
 # Generic Default Alpha Masked Contour Diffuse Texture External Alpha Ref Opacity Texture Rl Players Skinned 3weights
 (`generic:default:ALPHA_MASKED:CONTOUR:DIFFUSE_TEXTURE:EXTERNAL_ALPHA_REF:OPACITY_TEXTURE:RL_PLAYERS:SKINNED_3WEIGHTS`, `0x5ae7d51dc4664233`)
 
+This template is referenced 1 time by [generic:ALPHA_MASKED:CONTOUR:DIFFUSE_TEXTURE:EXTERNAL_ALPHA_REF:OPACITY_TEXTURE:RL_PLAYERS:SKINNED_3WEIGHTS](/docs/Generated/Render%20Templates/base.render_template_database#generic-alpha-masked-contour-diffuse-texture-external-alpha-ref-opacity-texture-rl-players-skinned-3weights).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|opacity_texture|Alpha Mask (UV5)|texture|
+|alpha_ref|Alpha Mask Reference|scalar|
+|contour_color|Contour color|vector3|
+|contour_opacity|Contour opacity|scalar|
+|contour_distance|Contour distance|scalar|.
+
 ### Technique `deferred_ambient_alpha_masked`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +51,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {
@@ -253,6 +266,7 @@ PixelMain_Output PixelMain(PixelMain_Input i)
 Decompiled by DXDecompiler.
 ### Technique `contours`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 0,
@@ -287,6 +301,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

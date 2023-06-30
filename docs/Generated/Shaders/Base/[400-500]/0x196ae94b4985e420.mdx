@@ -6,8 +6,16 @@ title: "Shadow Caster Only Shadow Caster Alpha Masked External Alpha Ref Nvidia 
 # Shadow Caster Only Shadow Caster Alpha Masked External Alpha Ref Nvidia Shadow Caster Only Skinned 1weight
 (`shadow_caster_only:shadow_caster:ALPHA_MASKED:EXTERNAL_ALPHA_REF:NVIDIA:SHADOW_CASTER_ONLY:SKINNED_1WEIGHT`, `0x196ae94b4985e420`)
 
+This template is referenced 1 time by [shadow_caster_only:ALPHA_MASKED:EXTERNAL_ALPHA_REF:SKINNED_1WEIGHT](/docs/Generated/Render%20Templates/base.render_template_database#shadow-caster-only-alpha-masked-external-alpha-ref-skinned-1weight).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Alpha Mask Texture [green] (UV1)|texture|
+|alpha_ref|Alpha Mask Reference|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +47,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

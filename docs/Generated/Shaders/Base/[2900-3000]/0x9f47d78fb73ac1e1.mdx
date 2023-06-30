@@ -6,8 +6,20 @@ title: "Generic Default Blend Diffuse Blend Mask Seperate Blend Smooth Cube Envi
 # Generic Default Blend Diffuse Blend Mask Seperate Blend Smooth Cube Environment Mapping Diffuse Texture Gloss Control Value Normalmap Rl Core Environment Vertex Color
 (`generic:default:BLEND_DIFFUSE:BLEND_MASK_SEPERATE:BLEND_SMOOTH:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:GLOSS_CONTROL_VALUE:NORMALMAP:RL_CORE_ENVIRONMENT:VERTEX_COLOR`, `0x9f47d78fb73ac1e1`)
 
+This template is referenced 1 time by [generic:BLEND_DIFFUSE:BLEND_MASK_SEPERATE:BLEND_SMOOTH:CUBE_ENVIRONMENT_MAPPING:DIFFUSE_TEXTURE:GLOSS_CONTROL_VALUE:NORMALMAP:RL_CORE_ENVIRONMENT:VERTEX_COLOR](/docs/Generated/Render%20Templates/base.render_template_database#generic-blend-diffuse-blend-mask-seperate-blend-smooth-cube-environment-mapping-diffuse-texture-gloss-control-value-normalmap-rl-core-environment-vertex-color).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|diffuse_layer0_texture|Second diffuse (Shifted UV1)|texture|
+|diffuse_layer1_texture|Seperate blend mask (UV1)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|reflection_texture|Reflection Cube|texture|
+|glossiness_control|Glossiness value|scalar|.
+
 ### Technique `deferred_core_environment`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +51,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

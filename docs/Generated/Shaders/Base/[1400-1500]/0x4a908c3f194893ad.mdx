@@ -6,8 +6,20 @@ title: "Generic Shadow Caster Depth Scaling Diffuse Texture Global Environment M
 # Generic Shadow Caster Depth Scaling Diffuse Texture Global Environment Mapping Gsma Texture Normalmap Nvidia Self Illumination Self Illumination Bloom
 (`generic:shadow_caster:DEPTH_SCALING:DIFFUSE_TEXTURE:GLOBAL_ENVIRONMENT_MAPPING:GSMA_TEXTURE:NORMALMAP:NVIDIA:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM`, `0x4a908c3f194893ad`)
 
+This template is referenced 1 time by [generic:DEPTH_SCALING:DIFFUSE_TEXTURE:GLOBAL_ENVIRONMENT_MAPPING:GSMA_TEXTURE:NORMALMAP:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM](/docs/Generated/Render%20Templates/base.render_template_database#generic-depth-scaling-diffuse-texture-global-environment-mapping-gsma-texture-normalmap-self-illumination-self-illumination-bloom).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse Texture (UV1)|texture|
+|material_texture|Gloss-Spec-Material-Alpha Texture (GSMA)|texture|
+|bump_normal_texture|Normal map (UV2 else UV1)|texture|
+|self_illumination_texture|Self Illumination Texture (UV4)|texture|
+|il_bloom|Self Illumination Bloom|scalar|
+|il_multiplier|Self Illumination Intensity Multiplier|scalar|.
+
 ### Technique `ambient`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -39,6 +51,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 ### Shaders
 #### Vertex Shader
 ```hlsl

@@ -6,8 +6,19 @@ title: "Effect Default Lazer"
 # Effect Default Lazer
 (`effect:default:LAZER`, `0xdbd9f0f1137197ea`)
 
+This template is referenced 1 time by [effect:LAZER](/docs/Generated/Render%20Templates/base.render_template_database#effect-lazer).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|diffuse_texture|Diffuse|texture|
+|lazer_color|Lazer color|vector3|
+|lazer_length|Lazer length|scalar|
+|lazer_smoke_scale|lazer_smoke_scale|scalar|
+|lazer_time_scale|lazer_time_scale|scalar|.
+
 ### Technique `additive`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +53,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {
@@ -196,6 +208,7 @@ float4 PixelMain(PixelMain_Input i) : COLOR
 Decompiled by DXDecompiler.
 ### Technique `effect_glow`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -230,6 +243,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {

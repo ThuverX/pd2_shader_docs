@@ -6,8 +6,15 @@ title: "Opacity Default Ati Instanced"
 # Opacity Default Ati Instanced
 (`opacity:default:ATI:INSTANCED`, `0xb5551fd34253ec4a`)
 
+This template is referenced 1 time by [opacity:INSTANCED](/docs/Generated/Render%20Templates/base.render_template_database#opacity-instanced).
+This template uses the following inputs:
+ |Name|UI Name|Type|
+|---|---|---|
+|opacity_texture|Opacity Texture (UV5)|texture|.
+
 ### Technique `transparent`
 ### Render States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)
 ```cpp
 enum D3DRENDERSTATETYPE {
 	D3DRS_ZENABLE = 1,
@@ -42,6 +49,7 @@ enum D3DRENDERSTATETYPE {
 };
 ```
 ### Sampler States
+More info can be found on the [Direct3D Docs](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)
 #### Sampler 0
 ```cpp
 enum D3DSAMPLERSTATETYPE {
