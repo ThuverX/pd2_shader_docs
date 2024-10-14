@@ -92,3 +92,102 @@ It is structured as follows:
         * `value4`, the value of the render state (4 bytes)
     * else if `b` is not equal to `0`
         * `value8`, the value of the render state (8 bytes)
+
+# ImHex Pattern
+```cpp
+import std.sys;
+import std.string;
+
+enum ObjectType: u32 {
+    Shader = 0x7F3552D1,
+    ShaderPass = 0x214b1aaf,
+    ShaderLibrary = 0x12812C1A
+};
+
+struct Header {
+    ObjectType type;
+    u32 ref_id;
+    u32 size;
+};
+
+struct Technique {
+    u64 hash;
+    u32 pass_count;
+    u32 passes[pass_count];
+};
+
+struct ShaderRef {
+    u64 hash;
+    u32 ref_id;
+};
+
+struct StateVar {
+    u32 id;
+    u8 b;
+    if(b == 0) {
+        u32 value4;
+    } else {
+        u64 value8;
+    }
+};
+
+struct SamplerState {
+    u32 id;
+    u32 state_count;
+    StateVar states[state_count];
+};
+
+struct ObjectShader {
+    u32 technique_count;
+    Technique techniques[technique_count];
+};
+
+struct ObjectShaderLibrary {
+    u32 template_count;
+    ShaderRef templates[template_count];
+};
+
+struct ObjectShaderPass {
+    u32 render_state_count;
+    StateVar render_states[render_state_count];
+    u32 sampler_state_count;
+    SamplerState sampler_states[sampler_state_count];
+    u32 vertex_shader_size;
+    char vertex_shader_bytes[vertex_shader_size];
+    u32 pixel_shader_size;
+    char pixel_shader_bytes[pixel_shader_size];
+};
+
+struct Object {
+    Header header;
+    u32 start = $;
+
+    if(header.type == ObjectType::Shader) {
+        ObjectShader object_shader [[inline]];
+    } else if(header.type == ObjectType::ShaderLibrary) {
+        ObjectShaderLibrary object_shader_library [[inline]];
+    }
+    else {
+        ObjectShaderPass object_shader_pass [[inline]];
+    }
+    
+    u32 remaining = header.size - ($ - start);
+    
+    std::assert(remaining == 0,
+        "Object has invalid size, " + std::string::to_string(remaining) + " remaining");
+};
+
+struct FileHeader {
+    s32 value [[hidden]];
+    if(value == -1) {
+        padding[4];
+        u32 object_count;
+    } else {
+        u32 object_count = value;
+    }
+    
+    Object objects[object_count];
+};
+
+FileHeader header @ 0;
+```
